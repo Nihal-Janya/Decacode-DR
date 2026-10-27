@@ -1,11 +1,7 @@
-
-import streamlit as st
 import numpy as np
+import streamlit as st
 from PIL import Image, UnidentifiedImageError
-import tempfile
-from pathlib import Path
 from gradio_client import Client
-
 
 # 1. Configure the webpage
 st.set_page_config(
