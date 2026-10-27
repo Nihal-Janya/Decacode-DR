@@ -9,7 +9,8 @@ from flask import Flask, request, jsonify, send_from_directory
 from check_demo_api import get_remote_api_info
 from test_prediction import run_retinal_prediction
 
-app = Flask(__name__, static_folder=".")
+BASE_DIR = Path(__file__).resolve().parent
+app = Flask(__name__, static_folder=str(BASE_DIR))
 
 MAX_PIXELS = 20_000_000
 
@@ -17,7 +18,7 @@ MAX_PIXELS = 20_000_000
 @app.route("/")
 def serve_ui():
     """Serves the single-page Luxury Glassmorphism HTML interface."""
-    return send_from_directory(".", "index.html")
+    return send_from_directory(str(BASE_DIR), "index.html")
 
 
 @app.route("/api/health", methods=["GET"])
@@ -39,16 +40,13 @@ def inspect_retinal_image():
         return jsonify({"error": "No selected file."}), 400
 
     try:
-        # Read file size in bytes
         uploaded_file.seek(0, os.SEEK_END)
         file_size = uploaded_file.tell()
         uploaded_file.seek(0)
 
-        # Open and decode the uploaded image
         image = Image.open(uploaded_file)
         image.load()
 
-        # Reject unexpectedly large images (> 20,000,000 pixels)
         if image.width * image.height > MAX_PIXELS:
             return jsonify({
                 "error": "The image is too large for this prototype (exceeds 20,000,000 pixels)."
@@ -58,11 +56,9 @@ def inspect_retinal_image():
         img_size = list(image.size)
         img_mode = image.mode
 
-        # Convert the image to RGB and NumPy array
         rgb_image = image.convert("RGB")
         pixels = np.array(rgb_image)
 
-        # Calculate basic image statistics
         brightness = float(np.mean(pixels))
         contrast = float(np.std(pixels))
 
@@ -89,7 +85,7 @@ def inspect_retinal_image():
             "shape": list(pixels.shape),
             "low_brightness": low_brightness,
             "quality_message": quality_message,
-            "disclaimer": "No AI model has been run in this step. No disease prediction has been made."
+            "disclaimer": "Local Pillow/NumPy inspection complete. Running remote AI screening below..."
         })
 
     except (UnidentifiedImageError, OSError, ValueError):

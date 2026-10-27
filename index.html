@@ -46,7 +46,6 @@
       position: relative;
     }
 
-    /* Ambient Atmospheric Orbs */
     .ambient-canvas {
       position: fixed;
       inset: 0;
@@ -94,7 +93,6 @@
       100% { transform: translate(40px, -35px) scale(1.08); }
     }
 
-    /* Layout Container */
     .container {
       position: relative;
       z-index: 1;
@@ -103,7 +101,6 @@
       padding: 0 32px;
     }
 
-    /* Floating Luxury Glass Navigation */
     header.nav-bar {
       position: sticky;
       top: 24px;
@@ -201,9 +198,8 @@
       box-shadow: 0 0 12px var(--accent-cyan);
     }
 
-    /* Hero Section */
     .hero {
-      padding: 110px 0 80px;
+      padding: 90px 0 65px;
       text-align: center;
       max-width: 900px;
       margin: 0 auto;
@@ -219,15 +215,15 @@
       letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--accent-cyan);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .hero h1 {
       font-weight: 200;
-      font-size: clamp(2.5rem, 5vw, 4.3rem);
+      font-size: clamp(2.4rem, 5vw, 4.1rem);
       line-height: 1.12;
       letter-spacing: -0.02em;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 55%, #64748b 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -235,11 +231,11 @@
 
     .hero p {
       font-weight: 300;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       line-height: 1.75;
       color: var(--text-secondary);
       max-width: 680px;
-      margin: 0 auto 38px;
+      margin: 0 auto 32px;
     }
 
     .disclaimer-banner {
@@ -256,7 +252,6 @@
       letter-spacing: 0.03em;
     }
 
-    /* Glass & Neumorphic Card System */
     .glass-panel {
       background: var(--glass-bg);
       backdrop-filter: blur(28px) saturate(165%);
@@ -270,11 +265,6 @@
       padding: 38px;
       margin-bottom: 44px;
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
-    }
-
-    .glass-panel:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 34px 75px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.14);
     }
 
     .panel-header {
@@ -313,18 +303,23 @@
       margin-top: 4px;
     }
 
-    /* Neumorphic Extruded Buttons */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
     .btn-neu {
       appearance: none;
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: linear-gradient(145deg, #141b29, #0c1018);
       color: var(--text-primary);
       font-family: 'Inter', sans-serif;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 14px 26px;
+      padding: 14px 22px;
       border-radius: 16px;
       cursor: pointer;
       box-shadow: 7px 7px 16px rgba(0, 0, 0, 0.8), -4px -4px 12px rgba(255, 255, 255, 0.03);
@@ -334,13 +329,13 @@
       gap: 10px;
     }
 
-    .btn-neu:hover {
+    .btn-neu:hover:not(:disabled) {
       border-color: rgba(94, 234, 212, 0.45);
       color: var(--accent-cyan);
       transform: translateY(-1px);
     }
 
-    .btn-neu:active {
+    .btn-neu:active:not(:disabled) {
       transform: translateY(1px);
       box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.9), inset -2px -2px 6px rgba(255, 255, 255, 0.03);
     }
@@ -350,7 +345,6 @@
       cursor: not-allowed;
     }
 
-    /* Neumorphic Recessed Well */
     .neu-well {
       background: #080b12;
       border-radius: 20px;
@@ -359,7 +353,6 @@
       border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
-    /* Grid Layouts */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1.15fr;
@@ -376,11 +369,11 @@
       }
     }
 
-    /* Dropzone */
     .upload-zone {
+      display: block;
       border: 1px dashed rgba(94, 234, 212, 0.3);
       border-radius: 18px;
-      padding: 36px 24px;
+      padding: 32px 24px;
       text-align: center;
       cursor: pointer;
       transition: all 0.25s ease;
@@ -410,7 +403,6 @@
       box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
     }
 
-    /* Telemetry Metrics Grid */
     .metrics-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -435,17 +427,17 @@
 
     .metric-value {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: var(--text-primary);
       word-break: break-all;
     }
 
     .status-alert {
-      margin-top: 18px;
+      margin-top: 16px;
       padding: 14px 18px;
       border-radius: 12px;
       font-size: 0.85rem;
-      line-height: 1.5;
+      line-height: 1.55;
       background: rgba(56, 189, 248, 0.08);
       border: 1px solid rgba(56, 189, 248, 0.25);
       color: #bae6fd;
@@ -457,24 +449,28 @@
       color: #fde68a;
     }
 
+    .status-alert.success {
+      background: rgba(94, 234, 212, 0.09);
+      border-color: rgba(94, 234, 212, 0.35);
+      color: #a7f3d0;
+    }
+
     .status-alert.error {
       background: rgba(251, 113, 133, 0.1);
       border-color: rgba(251, 113, 133, 0.35);
       color: #fecdd3;
     }
 
-    /* Terminal Output */
     pre.terminal {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       line-height: 1.65;
       color: #a7f3d0;
       overflow-x: auto;
       white-space: pre-wrap;
-      max-height: 340px;
+      max-height: 360px;
     }
 
-    /* Embedded Hugging Face Space */
     .iframe-shell {
       border-radius: 20px;
       overflow: hidden;
@@ -490,7 +486,6 @@
       display: block;
     }
 
-    /* Footer CTA */
     footer.luxury-footer {
       text-align: center;
       padding: 60px 0 90px;
@@ -526,7 +521,6 @@
   </header>
 
   <main class="container">
-    <!-- Hero Section -->
     <section class="hero">
       <span class="eyebrow">Ophthalmic Precision Suite // Python Execution Hub</span>
       <h1>Diabetic Retinopathy Screening Prototype</h1>
@@ -539,17 +533,22 @@
       </div>
     </section>
 
-    <!-- STATION 01: app.py + test_prediction.py Unified Image Upload & Telemetry -->
+    <!-- STATION 01: Unified Image Upload, app.py Telemetry + Automatic AI Prediction -->
     <section id="station-inspect" class="glass-panel">
       <div class="panel-header">
         <div class="panel-title-group">
-          <span class="script-badge">MODULE 01 // app.py</span>
+          <span class="script-badge">MODULE 01 // app.py + test_prediction.py</span>
           <h2>Retinal Photograph Telemetry &amp; Quality Matrix</h2>
-          <p>Executes Pillow decoding, 20MP safety guard, RGB NumPy array conversion, and luminance thresholding.</p>
+          <p>Executes Pillow decoding, 20MP safety guard, RGB NumPy array conversion, luminance thresholding, and live AI screening.</p>
         </div>
-        <button id="runInspectBtn" class="btn-neu" disabled>
-          <span>⚡ Execute app.py Inspection</span>
-        </button>
+        <div class="btn-group">
+          <button id="runInspectBtn" class="btn-neu" disabled>
+            <span>⚡ Execute app.py Inspection</span>
+          </button>
+          <button id="runQuickPredictBtn" class="btn-neu" disabled>
+            <span>🧠 Run AI Prediction (test_prediction.py)</span>
+          </button>
+        </div>
       </div>
 
       <div class="grid-2">
@@ -571,7 +570,7 @@
           </div>
         </div>
 
-        <!-- Right: Live Telemetry Readout -->
+        <!-- Right: Live Telemetry + Live AI Prediction Readout -->
         <div class="neu-well">
           <div class="metrics-grid">
             <div class="metric-card">
@@ -600,8 +599,15 @@
             </div>
           </div>
 
-          <div id="qualityIndicatorBox" class="status-alert" style="margin-top: 20px;">
+          <!-- app.py Quality Box -->
+          <div id="qualityIndicatorBox" class="status-alert">
             Awaiting retinal image upload to run <code>app.py</code> quality analysis...
+          </div>
+
+          <!-- Live AI Prediction Box right inside Module 01 -->
+          <div id="inlinePredictionBox" class="status-alert success" style="display: none;">
+            <strong>AI Screening Result (test_prediction.py):</strong>
+            <div id="inlinePredictionText" style="margin-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; white-space: pre-wrap;"></div>
           </div>
         </div>
       </div>
@@ -639,11 +645,11 @@
       </div>
 
       <div class="neu-well">
-        <pre id="predictOutputTerminal" class="terminal">Upload a retinal image in Module 01 first, then click "Execute test_prediction.py" to run remote AI screening...</pre>
+        <pre id="predictOutputTerminal" class="terminal">Upload a retinal image in Module 01 to automatically run remote AI screening via test_prediction.py...</pre>
       </div>
     </section>
 
-    <!-- STATION 04: Embedded Hugging Face Space (from original app.py) -->
+    <!-- STATION 04: Embedded Hugging Face Space -->
     <section id="station-space" class="glass-panel">
       <div class="panel-header">
         <div class="panel-title-group">
@@ -673,10 +679,13 @@
     const previewContainer = document.getElementById('previewContainer');
     const retinalPreview = document.getElementById('retinalPreview');
     const runInspectBtn = document.getElementById('runInspectBtn');
+    const runQuickPredictBtn = document.getElementById('runQuickPredictBtn');
     const runCheckApiBtn = document.getElementById('runCheckApiBtn');
     const runPredictBtn = document.getElementById('runPredictBtn');
     const backendDot = document.getElementById('backendDot');
     const backendStatusText = document.getElementById('backendStatusText');
+    const inlinePredictionBox = document.getElementById('inlinePredictionBox');
+    const inlinePredictionText = document.getElementById('inlinePredictionText');
 
     let selectedFile = null;
 
@@ -707,10 +716,12 @@
       reader.readAsDataURL(file);
 
       runInspectBtn.disabled = false;
+      runQuickPredictBtn.disabled = false;
       runPredictBtn.disabled = false;
 
-      // Automatically trigger app.py inspection on upload
+      // Automatically trigger BOTH app.py inspection AND test_prediction.py AI inference
       runAppPyInspection();
+      runTestPrediction();
     }
 
     fileInput.addEventListener('change', (e) => {
@@ -765,7 +776,7 @@
         document.getElementById('valContrast').textContent = data.contrast;
 
         qualityBox.className = data.low_brightness ? 'status-alert warning' : 'status-alert';
-        qualityBox.innerHTML = `<strong>${data.quality_message}</strong><br/><span style="opacity:0.8">${data.disclaimer}</span>`;
+        qualityBox.innerHTML = `<strong>${data.quality_message}</strong><br/><span style="opacity:0.85">${data.disclaimer}</span>`;
       } catch (err) {
         qualityBox.className = 'status-alert error';
         qualityBox.textContent = 'Could not reach Python backend. Make sure you started the server with: python app.py';
@@ -774,7 +785,55 @@
 
     runInspectBtn.addEventListener('click', runAppPyInspection);
 
-    // 4. Execute check_demo_api.py
+    // 4. Execute test_prediction.py (Updates both Module 01 inline box & Module 03 terminal)
+    async function runTestPrediction() {
+      if (!selectedFile) return;
+      const term = document.getElementById('predictOutputTerminal');
+      term.textContent = 'Uploading image and running test_prediction.py against Hugging Face Space...';
+      inlinePredictionBox.style.display = 'block';
+      inlinePredictionBox.className = 'status-alert';
+      inlinePredictionText.textContent = 'Running remote AI model (bhimrazy/diabetic-retinopathy-detection)... Please wait 5–15 seconds.';
+
+      runPredictBtn.disabled = true;
+      runQuickPredictBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      try {
+        const response = await fetch('/api/predict', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+
+        if (!response.ok || data.error) {
+          const errMsg = data.error || 'Prediction failed.';
+          term.textContent = 'Error: ' + errMsg;
+          inlinePredictionBox.className = 'status-alert error';
+          inlinePredictionText.textContent = 'Error: ' + errMsg;
+        } else {
+          const formatted = typeof data.result === 'string'
+            ? data.result
+            : JSON.stringify(data.result, null, 2);
+          term.textContent = 'Prediction result:\n' + formatted;
+          inlinePredictionBox.className = 'status-alert success';
+          inlinePredictionText.textContent = formatted;
+        }
+      } catch (err) {
+        term.textContent = 'Connection error: Ensure python app.py is running.';
+        inlinePredictionBox.className = 'status-alert error';
+        inlinePredictionText.textContent = 'Connection error: Ensure python app.py is running.';
+      } finally {
+        runPredictBtn.disabled = false;
+        runQuickPredictBtn.disabled = false;
+      }
+    }
+
+    runPredictBtn.addEventListener('click', runTestPrediction);
+    runQuickPredictBtn.addEventListener('click', runTestPrediction);
+
+    // 5. Execute check_demo_api.py
     runCheckApiBtn.addEventListener('click', async () => {
       const term = document.getElementById('apiOutputTerminal');
       term.textContent = 'Connecting to bhimrazy/diabetic-retinopathy-detection via check_demo_api.py...';
@@ -792,34 +851,6 @@
         term.textContent = 'Connection error: Ensure python app.py is running.';
       } finally {
         runCheckApiBtn.disabled = false;
-      }
-    });
-
-    // 5. Execute test_prediction.py
-    runPredictBtn.addEventListener('click', async () => {
-      if (!selectedFile) return;
-      const term = document.getElementById('predictOutputTerminal');
-      term.textContent = 'Uploading image and running test_prediction.py against /predict endpoint...';
-      runPredictBtn.disabled = true;
-
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-
-      try {
-        const response = await fetch('/api/predict', {
-          method: 'POST',
-          body: formData
-        });
-        const data = await response.json();
-        if (!response.ok || data.error) {
-          term.textContent = 'Error: ' + (data.error || 'Prediction failed.');
-        } else {
-          term.textContent = 'Prediction result:\n' + JSON.stringify(data.result, null, 2);
-        }
-      } catch (err) {
-        term.textContent = 'Connection error: Ensure python app.py is running.';
-      } finally {
-        runPredictBtn.disabled = false;
       }
     });
   </script>
