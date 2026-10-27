@@ -1,133 +1,123 @@
+import os
+import tempfile
+from pathlib import Path
 import numpy as np
-import streamlit as st
 from PIL import Image, UnidentifiedImageError
-from gradio_client import Client
+from flask import Flask, request, jsonify, send_from_directory
 
-# 1. Configure the webpage
-st.set_page_config(
-    page_title="Retinal Image Prototype",
-    page_icon="👁️",
-    layout="centered"
-)
+from check_demo_api import get_remote_api_info
+from test_prediction import run_retinal_prediction
 
+BASE_DIR = Path(__file__).resolve().parent
+app = Flask(__name__, static_folder=str(BASE_DIR))
 
-# 2. Display the page introduction
-st.title("Diabetic Retinopathy Screening Prototype")
-
-st.write(
-    "Upload a retinal photograph to inspect its "
-    "basic image properties."
-)
-
-st.warning(
-    "Educational prototype only. This application "
-    "does not diagnose diabetic retinopathy."
-)
+MAX_PIXELS = 20_000_000
 
 
-# 3. Let the user upload an image
-uploaded_file = st.file_uploader(
-    "Choose a retinal image",
-    type=["jpg", "jpeg", "png"]
-)
+@app.route("/")
+def serve_ui():
+    return send_from_directory(str(BASE_DIR), "index.html")
 
 
-# 4. Process the image after upload
-if uploaded_file is not None:
+@app.route("/api/health", methods=["GET"])
+def health_check():
+    return jsonify({"status": "online"})
+
+
+@app.route("/api/inspect", methods=["POST"])
+def inspect_retinal_image():
+    if "file" not in request.files:
+        return jsonify({"error": "No image file uploaded."}), 400
+
+    uploaded_file = request.files["file"]
+    if uploaded_file.filename == "":
+        return jsonify({"error": "No selected file."}), 400
 
     try:
-        # Open and decode the uploaded image
+        uploaded_file.seek(0, os.SEEK_END)
+        file_size = uploaded_file.tell()
+        uploaded_file.seek(0)
+
         image = Image.open(uploaded_file)
         image.load()
 
-        # Reject unexpectedly large images
-        max_pixels = 20_000_000
+        if image.width * image.height > MAX_PIXELS:
+            return jsonify({
+                "error": "The image exceeds the 20-megapixel limit for this workstation."
+            }), 400
 
-        if image.width * image.height > max_pixels:
-            st.error(
-                "The image is too large for this prototype."
-            )
-            st.stop()
+        img_format = image.format or "IMAGE"
+        img_size = list(image.size)
+        img_mode = image.mode
 
-        # Display the image
-        st.success("Image opened successfully.")
-
-        st.image(
-            image,
-            caption="Uploaded retinal image"
-        )
-
-        # Display file and image information
-        st.write("File name:", uploaded_file.name)
-        st.write("File size:", uploaded_file.size, "bytes")
-        st.write("Image format:", image.format)
-        st.write("Image dimensions:", image.size)
-        st.write("Color mode:", image.mode)
-
-        # Convert the image to RGB
         rgb_image = image.convert("RGB")
-
-        # Convert pixels to a NumPy array
         pixels = np.array(rgb_image)
 
-        # Calculate basic image statistics
         brightness = float(np.mean(pixels))
         contrast = float(np.std(pixels))
 
-        st.subheader("Basic Image Statistics")
-
-        st.write(
-            "Mean pixel intensity:",
-            round(brightness, 2)
-        )
-
-        st.write(
-            "Pixel intensity standard deviation:",
-            round(contrast, 2)
-        )
-
-        st.write("Array shape:", pixels.shape)
-
-        # Demonstration brightness indicator
-        st.subheader("Experimental Quality Indicator")
-
-        if brightness < 50:
-            st.warning(
-                "Low average brightness. Inspect the image "
-                "manually; this is not a diagnostic result."
+        low_brightness = brightness < 50.0
+        if low_brightness:
+            quality_message = (
+                "Low average luminance detected (< 50). Inspect exposure manually; "
+                "underexposed regions may affect screening sensitivity."
             )
         else:
-            st.info(
-                "The average brightness is not below "
-                "the example threshold. This does not "
-                "establish clinical image quality."
+            quality_message = (
+                "Optical luminance is within standard operating range. "
+                "Proceeding with automated neural grading."
             )
 
-        # Explicitly avoid unsupported medical predictions
-        st.info(
-            "No AI model has been run. No disease "
-            "prediction has been made."
-        )
+        return jsonify({
+            "file_name": uploaded_file.filename,
+            "file_size": file_size,
+            "format": img_format,
+            "dimensions": img_size,
+            "mode": img_mode,
+            "brightness": round(brightness, 2),
+            "contrast": round(contrast, 2),
+            "shape": list(pixels.shape),
+            "low_brightness": low_brightness,
+            "quality_message": quality_message
+        })
 
-    except (
-        UnidentifiedImageError,
-        OSError,
-        ValueError
-    ):
-        st.error(
-            "The uploaded file could not be decoded "
-            "as a valid image. Please try another image."
-        )
+    except (UnidentifiedImageError, OSError, ValueError):
+        return jsonify({
+            "error": "The uploaded file could not be decoded as a valid retinal photograph."
+        }), 400
 
-st.subheader("AI Diabetic Retinopathy Screening")
 
-st.caption(
-    "Experimental demonstration only. "
-    "Not a medical diagnosis."
-)
+@app.route("/api/check-api", methods=["GET"])
+def check_api_route():
+    try:
+        info_text = get_remote_api_info()
+        return jsonify({"api_info": info_text})
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
 
-st.components.v1.iframe(
-    "https://bhimrazy-diabetic-retinopathy-detection.hf.space",
-    height=750,
-    scrolling=True
-)
+
+@app.route("/api/predict", methods=["POST"])
+def predict_route():
+    if "file" not in request.files:
+        return jsonify({"error": "No image file provided."}), 400
+
+    uploaded_file = request.files["file"]
+    suffix = Path(uploaded_file.filename).suffix or ".jpg"
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+        uploaded_file.save(tmp.name)
+        tmp_path = tmp.name
+
+    try:
+        prediction_result = run_retinal_prediction(tmp_path)
+        return jsonify({"result": prediction_result})
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
+    finally:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+
+
+if __name__ == "__main__":
+    print("Starting AETHER Retinal Workstation at http://127.0.0.1:5000")
+    app.run(host="127.0.0.1", port=5000, debug=True)
