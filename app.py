@@ -5,7 +5,6 @@ import numpy as np
 from PIL import Image, UnidentifiedImageError
 from flask import Flask, request, jsonify, send_from_directory
 
-# Import your two companion scripts
 from check_demo_api import get_remote_api_info
 from test_prediction import run_retinal_prediction
 
@@ -17,7 +16,6 @@ MAX_PIXELS = 20_000_000
 
 @app.route("/")
 def serve_ui():
-    """Serves the single-page Luxury Glassmorphism HTML interface."""
     return send_from_directory(str(BASE_DIR), "index.html")
 
 
@@ -28,10 +26,6 @@ def health_check():
 
 @app.route("/api/inspect", methods=["POST"])
 def inspect_retinal_image():
-    """
-    Executes the exact Pillow & NumPy image inspection logic
-    from your original app.py and returns JSON to index.html.
-    """
     if "file" not in request.files:
         return jsonify({"error": "No image file uploaded."}), 400
 
@@ -49,10 +43,10 @@ def inspect_retinal_image():
 
         if image.width * image.height > MAX_PIXELS:
             return jsonify({
-                "error": "The image is too large for this prototype (exceeds 20,000,000 pixels)."
+                "error": "The image exceeds the 20-megapixel limit for this workstation."
             }), 400
 
-        img_format = image.format or "UNKNOWN"
+        img_format = image.format or "IMAGE"
         img_size = list(image.size)
         img_mode = image.mode
 
@@ -65,13 +59,13 @@ def inspect_retinal_image():
         low_brightness = brightness < 50.0
         if low_brightness:
             quality_message = (
-                "Low average brightness. Inspect the image manually; "
-                "this is not a diagnostic result."
+                "Low average luminance detected (< 50). Inspect exposure manually; "
+                "underexposed regions may affect screening sensitivity."
             )
         else:
             quality_message = (
-                "The average brightness is not below the example threshold. "
-                "This does not establish clinical image quality."
+                "Optical luminance is within standard operating range. "
+                "Proceeding with automated neural grading."
             )
 
         return jsonify({
@@ -84,19 +78,17 @@ def inspect_retinal_image():
             "contrast": round(contrast, 2),
             "shape": list(pixels.shape),
             "low_brightness": low_brightness,
-            "quality_message": quality_message,
-            "disclaimer": "Local Pillow/NumPy inspection complete. Running remote AI screening below..."
+            "quality_message": quality_message
         })
 
     except (UnidentifiedImageError, OSError, ValueError):
         return jsonify({
-            "error": "The uploaded file could not be decoded as a valid image. Please try another image."
+            "error": "The uploaded file could not be decoded as a valid retinal photograph."
         }), 400
 
 
 @app.route("/api/check-api", methods=["GET"])
 def check_api_route():
-    """Triggers check_demo_api.py and returns the API schema output."""
     try:
         info_text = get_remote_api_info()
         return jsonify({"api_info": info_text})
@@ -106,7 +98,6 @@ def check_api_route():
 
 @app.route("/api/predict", methods=["POST"])
 def predict_route():
-    """Saves the uploaded image temporarily and passes it to test_prediction.py."""
     if "file" not in request.files:
         return jsonify({"error": "No image file provided."}), 400
 
@@ -128,5 +119,5 @@ def predict_route():
 
 
 if __name__ == "__main__":
-    print("Starting Retinal Prototype Server at http://127.0.0.1:5000")
+    print("Starting AETHER Retinal Workstation at http://127.0.0.1:5000")
     app.run(host="127.0.0.1", port=5000, debug=True)

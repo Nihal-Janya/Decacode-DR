@@ -10,11 +10,6 @@ SPACE_ID = "bhimrazy/diabetic-retinopathy-detection"
 
 
 def run_retinal_prediction(image_path: str):
-    """
-    Runs prediction on a retinal image file path using the remote
-    Hugging Face Space. Uses handle_file() for modern gradio_client
-    compatibility and falls back gracefully if needed.
-    """
     resolved_path = str(Path(image_path.strip('"')).resolve())
 
     if not Path(resolved_path).is_file():
@@ -29,7 +24,6 @@ def run_retinal_prediction(image_path: str):
             api_name="/predict"
         )
     except Exception:
-        # Fallback if the Space uses fn_index=0 instead of named '/predict'
         result = demo.predict(
             file_input,
             fn_index=0

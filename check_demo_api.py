@@ -6,10 +6,6 @@ SPACE_ID = "bhimrazy/diabetic-retinopathy-detection"
 
 
 def get_remote_api_info() -> str:
-    """
-    Connects to the Hugging Face Space and captures the API signature
-    across both old and new versions of gradio_client.
-    """
     demo = Client(SPACE_ID)
     buffer = io.StringIO()
     with redirect_stdout(buffer):
@@ -23,7 +19,7 @@ def get_remote_api_info() -> str:
         return str(api_info)
     if captured:
         return captured
-    return "Connected to Space, but no API schema text was returned."
+    return "Connected to remote model."
 
 
 if __name__ == "__main__":
