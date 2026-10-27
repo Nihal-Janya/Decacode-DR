@@ -2,3 +2,5 @@ streamlit
 pillow
 numpy
 gradio-client
+fastapi
+pydantic
