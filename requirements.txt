@@ -4,3 +4,4 @@ numpy
 gradio-client
 fastapi
 pydantic
+flask
