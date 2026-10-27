@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AETHER // Retinal Diagnostics & Execution Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #07090e;
+      --bg-surface: #0d111a;
+      --glass-bg: rgba(18, 24, 38, 0.55);
+      --glass-border-light: rgba(255, 255, 255, 0.16);
+      --glass-border-subtle: rgba(255, 255, 255, 0.05);
+      --neu-shadow-dark: rgba(0, 0, 0, 0.75);
+      --neu-shadow-light: rgba(255, 255, 255, 0.04);
+      --accent-cyan: #5eead4;
+      --accent-sapphire: #38bdf8;
+      --accent-violet: #818cf8;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 0%, #111827 0%, #07090e 70%);
+      position: relative;
+    }
+
+    /* Ambient Atmospheric Orbs */
+    .ambient-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.38;
+      animation: floatOrb 18s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 70%);
+      top: -120px;
+      left: -100px;
+    }
+
+    .orb-2 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.28), transparent 70%);
+      top: 35%;
+      right: -180px;
+      animation-delay: -6s;
+    }
+
+    .orb-3 {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.22), transparent 70%);
+      bottom: -100px;
+      left: 20%;
+      animation-delay: -11s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -35px) scale(1.08); }
+    }
+
+    /* Layout Container */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Floating Luxury Glass Navigation */
+    header.nav-bar {
+      position: sticky;
+      top: 24px;
+      z-index: 50;
+      margin: 24px auto 0;
+      max-width: 1180px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: rgba(13, 18, 30, 0.62);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-top: 1px solid var(--glass-border-light);
+      border-left: 1px solid var(--glass-border-light);
+      border-right: 1px solid var(--glass-border-subtle);
+      border-bottom: 1px solid var(--glass-border-subtle);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-gem {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(94,234,212,0.25), rgba(56,189,248,0.08));
+      border: 1px solid rgba(94, 234, 212, 0.4);
+      box-shadow: 4px 4px 10px var(--neu-shadow-dark), -2px -2px 8px var(--neu-shadow-light);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+
+    .brand-text {
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      background: #090d14;
+      box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.85), inset -2px -2px 5px rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 10px var(--accent-amber);
+      transition: all 0.3s ease;
+    }
+
+    .status-dot.online {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 110px 0 80px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-weight: 200;
+      font-size: clamp(2.5rem, 5vw, 4.3rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 55%, #64748b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-weight: 300;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin: 0 auto 38px;
+    }
+
+    .disclaimer-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 16px;
+      background: rgba(251, 191, 36, 0.06);
+      border: 1px solid rgba(251, 191, 36, 0.22);
+      color: #fde68a;
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+    }
+
+    /* Glass & Neumorphic Card System */
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(165%);
+      -webkit-backdrop-filter: blur(28px) saturate(165%);
+      border-radius: 28px;
+      border-top: 1px solid var(--glass-border-light);
+      border-left: 1px solid var(--glass-border-light);
+      border-right: 1px solid var(--glass-border-subtle);
+      border-bottom: 1px solid var(--glass-border-subtle);
+      box-shadow: 0 28px 65px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      padding: 38px;
+      margin-bottom: 44px;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+    }
+
+    .glass-panel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 34px 75px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    .panel-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .script-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-sapphire);
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #080b11;
+      box-shadow: inset 3px 3px 6px rgba(0,0,0,0.85), inset -2px -2px 5px rgba(255,255,255,0.03);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .panel-title-group h2 {
+      font-weight: 300;
+      font-size: 1.65rem;
+      letter-spacing: -0.01em;
+      margin-top: 6px;
+    }
+
+    .panel-title-group p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin-top: 4px;
+    }
+
+    /* Neumorphic Extruded Buttons */
+    .btn-neu {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(145deg, #141b29, #0c1018);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 26px;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 7px 7px 16px rgba(0, 0, 0, 0.8), -4px -4px 12px rgba(255, 255, 255, 0.03);
+      transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-neu:hover {
+      border-color: rgba(94, 234, 212, 0.45);
+      color: var(--accent-cyan);
+      transform: translateY(-1px);
+    }
+
+    .btn-neu:active {
+      transform: translateY(1px);
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.9), inset -2px -2px 6px rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-neu:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Neumorphic Recessed Well */
+    .neu-well {
+      background: #080b12;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: inset 6px 6px 14px rgba(0, 0, 0, 0.88), inset -4px -4px 10px rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Dropzone */
+    .upload-zone {
+      border: 1px dashed rgba(94, 234, 212, 0.3);
+      border-radius: 18px;
+      padding: 36px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(12, 17, 28, 0.55);
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--accent-cyan);
+      background: rgba(94, 234, 212, 0.05);
+    }
+
+    .upload-zone input {
+      display: none;
+    }
+
+    .preview-box {
+      margin-top: 20px;
+      display: none;
+      text-align: center;
+    }
+
+    .preview-box img {
+      max-width: 100%;
+      max-height: 260px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Telemetry Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .metric-card {
+      background: rgba(15, 21, 34, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .metric-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .status-alert {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: #bae6fd;
+    }
+
+    .status-alert.warning {
+      background: rgba(251, 191, 36, 0.08);
+      border-color: rgba(251, 191, 36, 0.35);
+      color: #fde68a;
+    }
+
+    .status-alert.error {
+      background: rgba(251, 113, 133, 0.1);
+      border-color: rgba(251, 113, 133, 0.35);
+      color: #fecdd3;
+    }
+
+    /* Terminal Output */
+    pre.terminal {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: #a7f3d0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      max-height: 340px;
+    }
+
+    /* Embedded Hugging Face Space */
+    .iframe-shell {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #06080d;
+      margin-top: 18px;
+    }
+
+    iframe.hf-frame {
+      width: 100%;
+      height: 750px;
+      border: none;
+      display: block;
+    }
+
+    /* Footer CTA */
+    footer.luxury-footer {
+      text-align: center;
+      padding: 60px 0 90px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <header class="nav-bar">
+    <a href="#" class="brand">
+      <div class="brand-gem">👁️</div>
+      <span class="brand-text">Aether // Retinal Hub</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#station-inspect">01. Image Telemetry (app.py)</a></li>
+      <li><a href="#station-api">02. Schema Probe (check_demo_api.py)</a></li>
+      <li><a href="#station-predict">03. Inference (test_prediction.py)</a></li>
+      <li><a href="#station-space">04. Live Space</a></li>
+    </ul>
+    <div class="status-pill">
+      <span id="backendDot" class="status-dot"></span>
+      <span id="backendStatusText">CHECKING PYTHON KERNEL...</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <span class="eyebrow">Ophthalmic Precision Suite // Python Execution Hub</span>
+      <h1>Diabetic Retinopathy Screening Prototype</h1>
+      <p>
+        An ultra-refined digital laboratory unifying local Pillow &amp; NumPy pixel telemetry with remote Hugging Face Gradio neural inference. Upload a fundus photograph below to execute your Python pipeline in real time.
+      </p>
+      <div class="disclaimer-banner">
+        <span>⚠️</span>
+        <span>Educational prototype only. This application does not diagnose diabetic retinopathy.</span>
+      </div>
+    </section>
+
+    <!-- STATION 01: app.py + test_prediction.py Unified Image Upload & Telemetry -->
+    <section id="station-inspect" class="glass-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <span class="script-badge">MODULE 01 // app.py</span>
+          <h2>Retinal Photograph Telemetry &amp; Quality Matrix</h2>
+          <p>Executes Pillow decoding, 20MP safety guard, RGB NumPy array conversion, and luminance thresholding.</p>
+        </div>
+        <button id="runInspectBtn" class="btn-neu" disabled>
+          <span>⚡ Execute app.py Inspection</span>
+        </button>
+      </div>
+
+      <div class="grid-2">
+        <!-- Left: Upload Well -->
+        <div class="neu-well">
+          <label for="retinalFileInput" id="dropZone" class="upload-zone">
+            <input type="file" id="retinalFileInput" accept=".jpg,.jpeg,.png" />
+            <div style="font-size: 2rem; margin-bottom: 10px;">🔬</div>
+            <div style="font-weight: 400; font-size: 0.95rem; margin-bottom: 6px;">
+              Drop a retinal photograph here or click to browse
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+              Supported: JPG, JPEG, PNG • Max 20,000,000 Pixels
+            </div>
+          </label>
+
+          <div id="previewContainer" class="preview-box">
+            <img id="retinalPreview" alt="Uploaded retinal image" />
+          </div>
+        </div>
+
+        <!-- Right: Live Telemetry Readout -->
+        <div class="neu-well">
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-label">File Name</div>
+              <div id="valFileName" class="metric-value">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">File Size</div>
+              <div id="valFileSize" class="metric-value">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Image Format &amp; Mode</div>
+              <div id="valFormatMode" class="metric-value">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Dimensions &amp; Shape</div>
+              <div id="valDimensions" class="metric-value">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Mean Pixel Intensity</div>
+              <div id="valBrightness" class="metric-value">—</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Intensity Std Deviation</div>
+              <div id="valContrast" class="metric-value">—</div>
+            </div>
+          </div>
+
+          <div id="qualityIndicatorBox" class="status-alert" style="margin-top: 20px;">
+            Awaiting retinal image upload to run <code>app.py</code> quality analysis...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATION 02: check_demo_api.py -->
+    <section id="station-api" class="glass-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <span class="script-badge">MODULE 02 // check_demo_api.py</span>
+          <h2>Remote Gradio Space Schema Inspector</h2>
+          <p>Connects to <code>bhimrazy/diabetic-retinopathy-detection</code> via <code>gradio_client.Client</code> and runs <code>view_api()</code>.</p>
+        </div>
+        <button id="runCheckApiBtn" class="btn-neu">
+          <span>🛰️ Run check_demo_api.py</span>
+        </button>
+      </div>
+
+      <div class="neu-well">
+        <pre id="apiOutputTerminal" class="terminal">Click "Run check_demo_api.py" to query the remote Hugging Face Space API signature...</pre>
+      </div>
+    </section>
+
+    <!-- STATION 03: test_prediction.py -->
+    <section id="station-predict" class="glass-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <span class="script-badge">MODULE 03 // test_prediction.py</span>
+          <h2>Neural Retinopathy Inference Engine</h2>
+          <p>Dispatches your uploaded retinal image to the <code>/predict</code> endpoint via <code>test_prediction.py</code>.</p>
+        </div>
+        <button id="runPredictBtn" class="btn-neu" disabled>
+          <span>🧠 Execute test_prediction.py</span>
+        </button>
+      </div>
+
+      <div class="neu-well">
+        <pre id="predictOutputTerminal" class="terminal">Upload a retinal image in Module 01 first, then click "Execute test_prediction.py" to run remote AI screening...</pre>
+      </div>
+    </section>
+
+    <!-- STATION 04: Embedded Hugging Face Space (from original app.py) -->
+    <section id="station-space" class="glass-panel">
+      <div class="panel-header">
+        <div class="panel-title-group">
+          <span class="script-badge">MODULE 04 // EMBEDDED HUGGING FACE SPACE</span>
+          <h2>AI Diabetic Retinopathy Screening Space</h2>
+          <p>Experimental demonstration only. Not a medical diagnosis.</p>
+        </div>
+      </div>
+
+      <div class="iframe-shell">
+        <iframe
+          class="hf-frame"
+          src="https://bhimrazy-diabetic-retinopathy-detection.hf.space"
+          title="Diabetic Retinopathy Detection Space"
+        ></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="luxury-footer">
+    AETHER OPHTHALMIC EXECUTION HUB • POWERED BY LOCAL PYTHON KERNEL (app.py, check_demo_api.py, test_prediction.py)
+  </footer>
+
+  <script>
+    const fileInput = document.getElementById('retinalFileInput');
+    const dropZone = document.getElementById('dropZone');
+    const previewContainer = document.getElementById('previewContainer');
+    const retinalPreview = document.getElementById('retinalPreview');
+    const runInspectBtn = document.getElementById('runInspectBtn');
+    const runCheckApiBtn = document.getElementById('runCheckApiBtn');
+    const runPredictBtn = document.getElementById('runPredictBtn');
+    const backendDot = document.getElementById('backendDot');
+    const backendStatusText = document.getElementById('backendStatusText');
+
+    let selectedFile = null;
+
+    // 1. Check Python Server Health
+    async function checkServerHealth() {
+      try {
+        const res = await fetch('/api/health');
+        if (res.ok) {
+          backendDot.classList.add('online');
+          backendStatusText.textContent = 'PYTHON KERNEL ONLINE';
+        }
+      } catch (err) {
+        backendDot.classList.remove('online');
+        backendStatusText.textContent = 'RUN: python app.py';
+      }
+    }
+    checkServerHealth();
+
+    // 2. Handle File Selection & Drag-and-Drop
+    function handleFileSelected(file) {
+      if (!file) return;
+      selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        retinalPreview.src = e.target.result;
+        previewContainer.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+
+      runInspectBtn.disabled = false;
+      runPredictBtn.disabled = false;
+
+      // Automatically trigger app.py inspection on upload
+      runAppPyInspection();
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) handleFileSelected(e.target.files[0]);
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        handleFileSelected(e.dataTransfer.files[0]);
+      }
+    });
+
+    // 3. Execute app.py Inspection
+    async function runAppPyInspection() {
+      if (!selectedFile) return;
+      const qualityBox = document.getElementById('qualityIndicatorBox');
+      qualityBox.className = 'status-alert';
+      qualityBox.textContent = 'Executing app.py image analysis...';
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      try {
+        const response = await fetch('/api/inspect', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+
+        if (!response.ok || data.error) {
+          qualityBox.className = 'status-alert error';
+          qualityBox.textContent = data.error || 'Failed to inspect image.';
+          return;
+        }
+
+        document.getElementById('valFileName').textContent = data.file_name;
+        document.getElementById('valFileSize').textContent = `${data.file_size.toLocaleString()} bytes`;
+        document.getElementById('valFormatMode').textContent = `${data.format} / ${data.mode}`;
+        document.getElementById('valDimensions').textContent = `${data.dimensions[0]}×${data.dimensions[1]} (${data.shape.join('×')})`;
+        document.getElementById('valBrightness').textContent = data.brightness;
+        document.getElementById('valContrast').textContent = data.contrast;
+
+        qualityBox.className = data.low_brightness ? 'status-alert warning' : 'status-alert';
+        qualityBox.innerHTML = `<strong>${data.quality_message}</strong><br/><span style="opacity:0.8">${data.disclaimer}</span>`;
+      } catch (err) {
+        qualityBox.className = 'status-alert error';
+        qualityBox.textContent = 'Could not reach Python backend. Make sure you started the server with: python app.py';
+      }
+    }
+
+    runInspectBtn.addEventListener('click', runAppPyInspection);
+
+    // 4. Execute check_demo_api.py
+    runCheckApiBtn.addEventListener('click', async () => {
+      const term = document.getElementById('apiOutputTerminal');
+      term.textContent = 'Connecting to bhimrazy/diabetic-retinopathy-detection via check_demo_api.py...';
+      runCheckApiBtn.disabled = true;
+
+      try {
+        const response = await fetch('/api/check-api');
+        const data = await response.json();
+        if (!response.ok || data.error) {
+          term.textContent = 'Error: ' + (data.error || 'Could not inspect remote API.');
+        } else {
+          term.textContent = data.api_info;
+        }
+      } catch (err) {
+        term.textContent = 'Connection error: Ensure python app.py is running.';
+      } finally {
+        runCheckApiBtn.disabled = false;
+      }
+    });
+
+    // 5. Execute test_prediction.py
+    runPredictBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+      const term = document.getElementById('predictOutputTerminal');
+      term.textContent = 'Uploading image and running test_prediction.py against /predict endpoint...';
+      runPredictBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      try {
+        const response = await fetch('/api/predict', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+        if (!response.ok || data.error) {
+          term.textContent = 'Error: ' + (data.error || 'Prediction failed.');
+        } else {
+          term.textContent = 'Prediction result:\n' + JSON.stringify(data.result, null, 2);
+        }
+      } catch (err) {
+        term.textContent = 'Connection error: Ensure python app.py is running.';
+      } finally {
+        runPredictBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
