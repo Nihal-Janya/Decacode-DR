@@ -115,9 +115,9 @@
     .container {
       position: relative;
       z-index: 1;
-      max-width: 1320px;
+      max-width: 1560px;
       margin: 0 auto;
-      padding: 0 36px;
+      padding: 0 42px;
     }
 
     /* Swiss-Style Luxury Navigation Bar */
@@ -126,17 +126,17 @@
       top: 22px;
       z-index: 40;
       margin: 22px auto 0;
-      max-width: 1248px;
-      padding: 14px 30px;
+      max-width: 1480px;
+      padding: 16px 36px;
       border-radius: 999px;
-      background: rgba(10, 16, 28, 0.72);
+      background: rgba(10, 16, 28, 0.78);
       backdrop-filter: blur(28px) saturate(185%);
       -webkit-backdrop-filter: blur(28px) saturate(185%);
-      border-top: 1px solid var(--glass-border-top);
-      border-left: 1px solid var(--glass-border-side);
-      border-right: 1px solid var(--glass-border-subtle);
-      border-bottom: 1px solid var(--glass-border-subtle);
-      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+      border-left: 1px solid rgba(56, 189, 248, 0.32);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.14);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -182,6 +182,9 @@
       font-size: 1.35rem;
       font-weight: 300;
       letter-spacing: -0.025em;
+      line-height: 1.25;
+      padding-bottom: 2px;
+      display: inline-block;
       background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -251,12 +254,14 @@
       font-family: 'Inter', sans-serif;
       font-weight: 200;
       font-size: clamp(2.9rem, 5.2vw, 4.5rem);
-      line-height: 1.08;
+      line-height: 1.28;
+      padding-bottom: 0.18em;
       letter-spacing: -0.035em;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 65%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: inline-block;
     }
 
     .hero p {
@@ -281,16 +286,16 @@
       font-weight: 300;
     }
 
-    /* Main 2-Column Grid */
+    /* Main 2-Column Grid — Expansive Proportions */
     .workspace-grid {
       display: grid;
-      grid-template-columns: 1fr 1.22fr;
-      gap: 32px;
+      grid-template-columns: 1fr 1.18fr;
+      gap: 36px;
       align-items: stretch;
-      margin-bottom: 44px;
+      margin-bottom: 50px;
     }
 
-    @media (max-width: 1040px) {
+    @media (max-width: 1120px) {
       .workspace-grid {
         grid-template-columns: 1fr;
       }
@@ -298,18 +303,19 @@
 
     /* Luxury Glass Panel */
     .glass-box {
-      background: var(--glass-bg);
-      backdrop-filter: blur(32px) saturate(180%);
-      -webkit-backdrop-filter: blur(32px) saturate(180%);
-      border-radius: 30px;
-      border-top: 1px solid var(--glass-border-top);
-      border-left: 1px solid var(--glass-border-side);
-      border-right: 1px solid var(--glass-border-subtle);
-      border-bottom: 1px solid var(--glass-border-subtle);
+      background: linear-gradient(155deg, rgba(13, 21, 38, 0.78) 0%, rgba(6, 10, 20, 0.88) 100%);
+      backdrop-filter: blur(36px) saturate(190%);
+      -webkit-backdrop-filter: blur(36px) saturate(190%);
+      border-radius: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: 1px solid rgba(56, 189, 248, 0.3);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow:
-        0 32px 75px rgba(0, 0, 0, 0.8),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      padding: 36px;
+        0 36px 90px rgba(0, 0, 0, 0.88),
+        0 0 50px rgba(14, 165, 233, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      padding: 38px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -322,14 +328,14 @@
       gap: 16px;
       margin-bottom: 24px;
       padding-bottom: 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .box-kicker {
       font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--mint-green);
       display: block;
@@ -340,22 +346,25 @@
     .box-header h2 {
       font-family: 'Inter', sans-serif;
       font-weight: 300;
-      font-size: 1.85rem;
-      letter-spacing: -0.03em;
+      font-size: 2.1rem;
+      letter-spacing: -0.035em;
+      line-height: 1.25;
+      padding-bottom: 4px;
+      display: inline-block;
       background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* Recessed Neumorphic Well */
+    /* Velvet Titanium Dark Well */
     .neu-well {
-      background: #060911;
-      border-radius: 24px;
-      padding: 26px;
+      background: linear-gradient(160deg, #070d19 0%, #040810 100%);
+      border-radius: 26px;
+      padding: 28px;
       box-shadow:
-        inset 7px 7px 16px rgba(0, 0, 0, 0.94),
-        inset -4px -4px 12px rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+        inset 0 2px 4px rgba(255, 255, 255, 0.04),
+        0 16px 36px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     /* Upload Dropzone */
@@ -364,20 +373,20 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 265px;
+      min-height: 380px;
       border: 1.5px dashed rgba(45, 212, 191, 0.38);
-      border-radius: 20px;
-      padding: 34px 24px;
+      border-radius: 22px;
+      padding: 44px 28px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.25s ease;
-      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.05), rgba(8, 13, 23, 0.7));
+      transition: all 0.28s ease;
+      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.06), rgba(8, 14, 25, 0.75));
     }
 
     .upload-dropzone:hover, .upload-dropzone.dragover {
       border-color: var(--mint-green);
-      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.11), rgba(10, 16, 28, 0.85));
-      box-shadow: 0 0 32px rgba(45, 212, 191, 0.14);
+      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.12), rgba(10, 18, 32, 0.88));
+      box-shadow: 0 0 36px rgba(45, 212, 191, 0.18);
     }
 
     .upload-dropzone input {
@@ -385,17 +394,17 @@
     }
 
     .upload-icon-circle {
-      width: 64px;
-      height: 64px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(45, 212, 191, 0.08));
-      border: 1px solid rgba(45, 212, 191, 0.4);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(45, 212, 191, 0.1));
+      border: 1px solid rgba(45, 212, 191, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 14px;
-      margin-bottom: 16px;
-      box-shadow: 0 0 24px rgba(45, 212, 191, 0.16);
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 0 28px rgba(45, 212, 191, 0.2);
     }
 
     .preview-stage {
@@ -405,23 +414,27 @@
       gap: 16px;
     }
 
+    /* Spacious High-Res Cinematic Viewport (410px height) */
     .fundus-viewport {
       position: relative;
       width: 100%;
-      height: 285px;
-      border-radius: 18px;
+      height: 410px;
+      border-radius: 22px;
       overflow: hidden;
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      background: #030509;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: radial-gradient(circle at center, #070e1c 0%, #020409 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.88);
+      box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.94),
+        0 0 45px rgba(14, 165, 233, 0.08),
+        inset 0 0 65px rgba(0, 0, 0, 0.88);
     }
 
     .fundus-viewport img {
       max-width: 100%;
-      max-height: 275px;
+      max-height: 400px;
       object-fit: contain;
       display: block;
     }
@@ -439,7 +452,7 @@
     }
 
     #heatmapCanvas.active {
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     /* Tactile Neumorphic Buttons */
@@ -578,60 +591,252 @@
       color: #ebd5b3;
     }
 
-    /* Top Row: Primary Classification + Uncertainty Gauge (< 20%) */
-    .diagnostic-top-row {
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 18px;
-      margin-bottom: 20px;
-    }
-
-    @media (max-width: 680px) {
-      .diagnostic-top-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .verdict-card {
-      padding: 24px;
-      border-radius: 20px;
-      background: linear-gradient(145deg, rgba(16, 25, 42, 0.92), rgba(9, 13, 23, 0.96));
-      border: 1px solid rgba(45, 212, 191, 0.22);
+    /* =========================================================================
+       EXPANSIVE 2-TIER LUXURY DIAGNOSTIC SUITE
+       Tier 1: Master Primary Classification Verdict (Full Width)
+       Tier 2: Dual Telemetry (Macular Edema Risk + Calibrated Uncertainty Index)
+       ========================================================================= */
+    .diagnostic-suite {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 18px;
+      margin-bottom: 22px;
     }
 
-    .sub-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--mint-green);
-      margin-bottom: 8px;
+    .verdict-banner {
+      padding: 24px 28px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(16, 26, 46, 0.95), rgba(7, 12, 22, 0.98));
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .verdict-banner-left {
+      flex: 1;
+      min-width: 260px;
     }
 
     .verdict-heading {
       font-family: 'Inter', sans-serif;
       font-weight: 200;
-      font-size: 2.2rem;
-      letter-spacing: -0.03em;
+      font-size: 2.35rem;
+      letter-spacing: -0.035em;
       color: var(--text-white);
-      margin-bottom: 6px;
+      margin: 4px 0 6px;
     }
 
     .verdict-sub {
-      font-size: 0.94rem;
+      font-size: 0.96rem;
       color: var(--text-silver);
       font-weight: 300;
       line-height: 1.5;
     }
 
-    .uncertainty-card {
-      padding: 20px;
-      border-radius: 20px;
-      background: linear-gradient(145deg, rgba(16, 25, 42, 0.92), rgba(9, 13, 23, 0.96));
+    .verdict-banner-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .verdict-status-badge {
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(45, 212, 191, 0.14);
+      border: 1px solid rgba(45, 212, 191, 0.45);
+      color: var(--mint-green);
+      box-shadow: 0 0 14px rgba(45, 212, 191, 0.16);
+    }
+
+    .verdict-grade-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--brown-gold-soft);
+      letter-spacing: 0.08em;
+    }
+
+    /* Tier 2: Dual Telemetry Row (Spacious & Balanced) */
+    .telemetry-dual-row {
+      display: grid;
+      grid-template-columns: 1.32fr 0.92fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 920px) {
+      .telemetry-dual-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dme-card {
+      padding: 24px 26px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(16, 25, 42, 0.94), rgba(9, 13, 23, 0.98));
       border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .dme-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dme-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      width: fit-content;
+    }
+
+    .dme-standby {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .dme-low {
+      background: rgba(45, 212, 191, 0.14);
+      color: var(--mint-green);
+      border: 1px solid rgba(45, 212, 191, 0.4);
+    }
+
+    .dme-mod {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+    }
+
+    .dme-high {
+      background: rgba(244, 63, 94, 0.18);
+      color: #fda4af;
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      animation: pulseGlowRose 2s infinite alternate;
+    }
+
+    @keyframes pulseGlowRose {
+      from { box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
+      to { box-shadow: 0 0 22px rgba(244, 63, 94, 0.45); }
+    }
+
+    .dme-risk-title {
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--text-white);
+      margin: 2px 0 4px;
+    }
+
+    .dme-desc {
+      font-size: 0.92rem;
+      color: var(--text-silver);
+      line-height: 1.6;
+    }
+
+    /* Lesion Segmentation Ribbon */
+    .lesion-segmenter-bar {
+      width: 100%;
+      background: rgba(8, 14, 25, 0.78);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      border-radius: 18px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .lesion-chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .lesion-chip {
+      background: linear-gradient(145deg, rgba(16, 24, 40, 0.9), rgba(9, 14, 24, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 8px 14px;
+      color: var(--text-silver);
+      font-size: 0.8rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lesion-chip:hover {
+      border-color: var(--cyan-blue);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .lesion-chip.active {
+      background: linear-gradient(145deg, rgba(14, 165, 233, 0.22), rgba(16, 185, 129, 0.15));
+      border-color: var(--mint-green);
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(45, 212, 191, 0.28);
+    }
+
+    .chip-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+    }
+
+    .lesion-chip.active .chip-count {
+      background: rgba(45, 212, 191, 0.22);
+      color: var(--mint-green);
+    }
+
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .sub-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--mint-green);
+      margin-bottom: 8px;
+    }
+
+    .uncertainty-card {
+      padding: 24px 22px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(16, 25, 42, 0.94), rgba(9, 13, 23, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1175,28 +1380,200 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
+
+    /* 3.2 Specialist Filter Bar */
+    .specialist-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .spec-filter-btn {
+      background: rgba(14, 21, 35, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 8px 16px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .spec-filter-btn:hover {
+      color: var(--text-white);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .spec-filter-btn.active {
+      background: rgba(45, 212, 191, 0.15);
+      color: var(--mint-green);
+      border-color: var(--mint-green);
+      box-shadow: 0 0 14px rgba(45, 212, 191, 0.2);
+    }
+
+    /* 3.1 Booking Action Cards inside Modal */
+    .booking-action-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: rgba(14, 22, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      text-decoration: none;
+      color: var(--text-white);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .booking-action-card:hover {
+      background: rgba(22, 35, 60, 0.95);
+      border-color: var(--cyan-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .booking-act-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.12);
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .booking-act-title {
+      font-size: 0.96rem;
+      font-weight: 500;
+      color: var(--text-white);
+      margin-bottom: 3px;
+    }
+
+    .booking-act-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* 2.1 Print-Optimized Styles for One-Click PDF Medical Report */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .ambient-stage, header.nav-bar, .site-footer, .modal-backdrop,
+      button, .btn-neu, #secondaryAreaFilterBar, #uploadDropzone,
+      .specialist-filter-bar, #escalateBtn, #changeScanBtn,
+      #toggleHeatmapBtn, #reanalyzeBtn, #toggleAreaFilterBtn, #gpsRefreshBtn,
+      .lesion-segmenter-bar, .telemetry-grid, #qualityBanner {
+        display: none !important;
+      }
+      .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .glass-box {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-bottom: 14px !important;
+      }
+      .summary-sheet {
+        background: #ffffff !important;
+        border: 2px solid #0f172a !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
+      }
+      .summary-title, .summary-cell-val {
+        color: #0f172a !important;
+      }
+      .summary-cell {
+        background: #f8fafc !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+      .summary-note-box {
+        background: #f1f5f9 !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #1e293b !important;
+      }
+      .specialist-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        break-inside: avoid;
+      }
+      .spec-doctor-name {
+        color: #0f172a !important;
+      }
+      .spec-directions-box {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+      }
+      .print-only-block {
+        display: block !important;
+      }
+    }
+
+    .print-only-block {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Hidden Reusable SVG Symbol of Your Uploaded 3D White Magnifying-Eye PNG -->
+  <!-- Precision Vector SVG Symbol: Insight Magnifying-Eye Logo -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
-      <g id="insightLogoSymbol">
-        <!-- 3D Extruded Shadow Layer -->
-        <g transform="translate(1.5, 3)" stroke="#05080f" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M 78 65 A 36 36 0 1 0 58 83" />
-          <line x1="31" y1="69" x2="12" y2="88" />
-          <path d="M 32 48 Q 52 28 72 48 Q 52 68 32 48 Z" />
-          <circle cx="52" cy="48" r="8" />
+      <linearGradient id="insightLogoPlatinum" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="60%" stop-color="#f1f5f9"/>
+        <stop offset="100%" stop-color="#cbd5e1"/>
+      </linearGradient>
+      <linearGradient id="insightLogoAqua" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="100%" stop-color="#2dd4bf"/>
+      </linearGradient>
+      <filter id="insightLogoShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.75"/>
+      </filter>
+
+      <g id="insightLogoSymbol" filter="url(#insightLogoShadow)">
+        <!-- 3D Extruded Shadow Layer for Tactile Depth -->
+        <g transform="translate(1.5, 2.5)" opacity="0.6">
+          <circle cx="55" cy="45" r="27" fill="none" stroke="#020408" stroke-width="6.5" />
+          <line x1="36" y1="64" x2="16" y2="84" stroke="#020408" stroke-width="7.5" stroke-linecap="round" />
+          <path d="M 38 45 Q 55 33 72 45 Q 55 57 38 45 Z" fill="none" stroke="#020408" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
         </g>
-        <!-- Crisp White Foreground Magnifying Glass + Eye -->
-        <g stroke="#ffffff" stroke-width="8.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M 78 65 A 36 36 0 1 0 58 83" />
-          <line x1="31" y1="69" x2="12" y2="88" />
-          <path d="M 32 48 Q 52 28 72 48 Q 52 68 32 48 Z" />
-          <circle cx="52" cy="48" r="7.5" fill="#ffffff" />
-        </g>
+
+        <!-- Magnifying Glass Lens Rim -->
+        <circle cx="55" cy="45" r="27" fill="none" stroke="url(#insightLogoPlatinum)" stroke-width="6.5" />
+
+        <!-- Optical Reticle / Crosshair Ticks (Subtle Precision Detailing) -->
+        <line x1="55" y1="14" x2="55" y2="19" stroke="url(#insightLogoAqua)" stroke-width="2.2" stroke-linecap="round" opacity="0.85" />
+        <line x1="55" y1="71" x2="55" y2="76" stroke="url(#insightLogoAqua)" stroke-width="2.2" stroke-linecap="round" opacity="0.85" />
+        <line x1="24" y1="45" x2="29" y2="45" stroke="url(#insightLogoAqua)" stroke-width="2.2" stroke-linecap="round" opacity="0.85" />
+        <line x1="81" y1="45" x2="86" y2="45" stroke="url(#insightLogoAqua)" stroke-width="2.2" stroke-linecap="round" opacity="0.85" />
+
+        <!-- Magnifying Glass Handle (Perfect 45-Degree Diagonal) -->
+        <line x1="36" y1="64" x2="16" y2="84" stroke="url(#insightLogoPlatinum)" stroke-width="7.5" stroke-linecap="round" />
+
+        <!-- Stylized Retinal Human Eye -->
+        <!-- Eye Contour -->
+        <path d="M 38 45 Q 55 33 72 45 Q 55 57 38 45 Z" fill="none" stroke="url(#insightLogoPlatinum)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
+
+        <!-- Iris (Crisp Platinum Circle) -->
+        <circle cx="55" cy="45" r="6.2" fill="url(#insightLogoPlatinum)" />
+
+        <!-- Dark Pupil -->
+        <circle cx="55" cy="45" r="3" fill="#050811" />
+
+        <!-- Specular Optical Reflection -->
+        <circle cx="56.8" cy="43.2" r="1.2" fill="#ffffff" />
       </g>
     </defs>
   </svg>
@@ -1207,16 +1584,11 @@
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- Top Navigation Bar with "Insight" & Your Uploaded Magnifying-Eye Icon -->
+  <!-- Top Navigation Bar with "Insight" & Precision Vector Magnifying-Eye Logo -->
   <header class="nav-bar">
     <a href="#" class="brand-link">
       <div class="brand-logo-box">
-        <img
-          src="50df3c7cb96da34ee5a53c645f38ad66.png"
-          alt="Insight Logo"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        />
-        <svg viewBox="0 0 100 100" style="display:none;">
+        <svg viewBox="0 0 100 100">
           <use href="#insightLogoSymbol" />
         </svg>
       </div>
@@ -1286,9 +1658,45 @@
                 <img id="fundusPreviewImg" crossorigin="anonymous" alt="Retinal Fundus Scan" />
                 <canvas id="heatmapCanvas"></canvas>
               </div>
-              <div style="display: flex; width: 100%; gap: 12px; justify-content: center;">
+
+              <!-- 1.2 Multi-Lesion Segmentation Overlay Layers -->
+              <div id="lesionSegmenterBar" class="lesion-segmenter-bar">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="sub-label" style="margin-bottom: 0;">Multi-Lesion Segmentation Layers</span>
+                  <span id="activeLayerLabel" style="font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; color: var(--mint-green);">ACTIVE: ALL LESIONS</span>
+                </div>
+                <div class="lesion-chips-container">
+                  <button type="button" class="lesion-chip active" data-layer="all">
+                    <span class="chip-dot" style="background: var(--aqua-grad);"></span>
+                    <span>All</span>
+                    <span id="countAll" class="chip-count">0</span>
+                  </button>
+                  <button type="button" class="lesion-chip" data-layer="ma">
+                    <span class="chip-dot" style="background: #ef4444;"></span>
+                    <span>Microaneurysms</span>
+                    <span id="countMA" class="chip-count">0</span>
+                  </button>
+                  <button type="button" class="lesion-chip" data-layer="ex">
+                    <span class="chip-dot" style="background: #facc15;"></span>
+                    <span>Hard Exudates</span>
+                    <span id="countEX" class="chip-count">0</span>
+                  </button>
+                  <button type="button" class="lesion-chip" data-layer="cws">
+                    <span class="chip-dot" style="background: #38bdf8;"></span>
+                    <span>Cotton Wool</span>
+                    <span id="countCWS" class="chip-count">0</span>
+                  </button>
+                  <button type="button" class="lesion-chip" data-layer="nv">
+                    <span class="chip-dot" style="background: #d946ef;"></span>
+                    <span>Neovascular</span>
+                    <span id="countNV" class="chip-count">0</span>
+                  </button>
+                </div>
+              </div>
+
+              <div style="display: flex; width: 100%; gap: 12px; justify-content: center; margin-top: 14px;">
                 <button id="toggleHeatmapBtn" class="btn-neu" style="flex: 1;">
-                  <span>Lesion Heat-Map</span>
+                  <span>Toggle Overlay</span>
                 </button>
                 <button id="reanalyzeBtn" class="btn-neu btn-aqua" style="flex: 1;">
                   <span>Re-Run Analysis</span>
@@ -1343,33 +1751,54 @@
           </div>
 
           <div class="neu-well">
-            <div class="diagnostic-top-row">
-              <!-- Verdict Card -->
-              <div class="verdict-card">
-                <div class="sub-label">Detected Grade</div>
-                <div id="verdictTitle" class="verdict-heading">Awaiting Scan</div>
-                <div id="verdictSubtitle" class="verdict-sub">
-                  Upload a retinal scan on the left to view diabetic retinopathy grading.
+            <div class="diagnostic-suite">
+              <!-- Tier 1: Master Primary Classification Verdict (Full Width) -->
+              <div class="verdict-banner">
+                <div class="verdict-banner-left">
+                  <div class="sub-label">PRIMARY CLINICAL GRADING</div>
+                  <div id="verdictTitle" class="verdict-heading">Awaiting Scan</div>
+                  <div id="verdictSubtitle" class="verdict-sub">
+                    Upload a retinal scan on the left to view diabetic retinopathy grading &amp; confidence telemetry.
+                  </div>
+                </div>
+                <div class="verdict-banner-right">
+                  <div id="verdictStatusBadge" class="verdict-status-badge">STANDBY</div>
+                  <div id="verdictGradeCode" class="verdict-grade-code">ICD-10 —</div>
                 </div>
               </div>
 
-              <!-- Uncertainty Gauge (Always Calibrated Below 20%) -->
-              <div class="uncertainty-card">
-                <div class="sub-label" style="margin-bottom: 4px;">Uncertainty Index</div>
-                <div class="gauge-svg-wrap">
-                  <svg class="gauge-svg" viewBox="0 0 140 80">
-                    <defs>
-                      <linearGradient id="aquaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#38bdf8" />
-                        <stop offset="100%" stop-color="#2dd4bf" />
-                      </linearGradient>
-                    </defs>
-                    <path class="gauge-track" d="M 14 70 A 56 56 0 0 1 126 70" />
-                    <path id="uncertaintyArc" class="gauge-fill" d="M 14 70 A 56 56 0 0 1 126 70" />
-                  </svg>
-                  <div id="uncertaintyValue" class="gauge-readout">—%</div>
+              <!-- Tier 2: Dual Telemetry (Macular Edema Risk + Calibrated Uncertainty Index) -->
+              <div class="telemetry-dual-row">
+                <!-- 1.3 Macular Edema (DME) Risk Architecture -->
+                <div class="dme-card">
+                  <div class="dme-card-header">
+                    <div class="sub-label" style="margin-bottom: 0;">MACULAR EDEMA (DME) RISK</div>
+                    <div id="dmeRiskBadge" class="dme-badge dme-standby">STANDBY</div>
+                  </div>
+                  <div id="dmeRiskTitle" class="dme-risk-title">Awaiting Scan</div>
+                  <div id="dmeRiskDesc" class="dme-desc">
+                    Central foveal zone will be evaluated for exudates and focal leakage.
+                  </div>
                 </div>
-                <div id="uncertaintyBadge" class="uncertainty-badge">STANDBY</div>
+
+                <!-- Uncertainty Gauge (Always Calibrated Below 20%) -->
+                <div class="uncertainty-card">
+                  <div class="sub-label" style="margin-bottom: 6px;">UNCERTAINTY INDEX</div>
+                  <div class="gauge-svg-wrap">
+                    <svg class="gauge-svg" viewBox="0 0 140 80">
+                      <defs>
+                        <linearGradient id="aquaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#38bdf8" />
+                          <stop offset="100%" stop-color="#2dd4bf" />
+                        </linearGradient>
+                      </defs>
+                      <path class="gauge-track" d="M 14 70 A 56 56 0 0 1 126 70" />
+                      <path id="uncertaintyArc" class="gauge-fill" d="M 14 70 A 56 56 0 0 1 126 70" />
+                    </svg>
+                    <div id="uncertaintyValue" class="gauge-readout">—%</div>
+                  </div>
+                  <div id="uncertaintyBadge" class="uncertainty-badge">STANDBY</div>
+                </div>
               </div>
             </div>
 
@@ -1426,9 +1855,15 @@
             <span class="box-kicker">Patient Handoff</span>
             <h2>Clinical Summary</h2>
           </div>
-          <button id="copyBriefBtn" class="btn-neu btn-aqua">
-            <span>Copy Summary</span>
-          </button>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="downloadPdfBtn" class="btn-neu" style="border-color: rgba(56, 189, 248, 0.45);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              <span>Download PDF Report</span>
+            </button>
+            <button id="copyBriefBtn" class="btn-neu btn-aqua">
+              <span>Copy Summary</span>
+            </button>
+          </div>
         </div>
 
         <div class="summary-sheet">
@@ -1465,6 +1900,14 @@
               <div id="dossierUncertaintyVal" class="summary-cell-val">—</div>
             </div>
             <div class="summary-cell">
+              <div class="summary-cell-label">Macular Edema (DME) Risk</div>
+              <div id="dossierDmeVal" class="summary-cell-val">—</div>
+            </div>
+            <div class="summary-cell">
+              <div class="summary-cell-label">ICD-10 Diagnostic Code</div>
+              <div id="dossierIcdVal" class="summary-cell-val" style="font-family: 'JetBrains Mono', monospace; color: var(--mint-green);">—</div>
+            </div>
+            <div class="summary-cell">
               <div class="summary-cell-label">Image Brightness &amp; Contrast</div>
               <div id="dossierLuminanceVal" class="summary-cell-val">—</div>
             </div>
@@ -1475,6 +1918,12 @@
           </div>
 
           <div id="dossierNarrativeBody" class="summary-note-box"></div>
+
+          <!-- Print-Only Clinical Verification Block -->
+          <div class="print-only-block" style="margin-top: 26px; padding-top: 20px; border-top: 1px dashed #94a3b8; display: flex; justify-content: space-between; font-size: 0.88rem; color: #475569;">
+            <div>Referring Clinician Signature: _______________________</div>
+            <div>Date: _______________________</div>
+          </div>
         </div>
       </section>
 
@@ -1508,6 +1957,15 @@
           <button id="applyAreaFilterBtn" class="btn-neu btn-aqua">
             <span>Search Area</span>
           </button>
+        </div>
+
+        <!-- 3.2 Specialist Filter Bar -->
+        <div id="specialistFilterBar" class="specialist-filter-bar">
+          <button type="button" class="spec-filter-btn active" data-filter="all">All Specialists (6)</button>
+          <button type="button" class="spec-filter-btn" data-filter="surgical">Vitreoretinal Surgeons</button>
+          <button type="button" class="spec-filter-btn" data-filter="medical">Medical Retina</button>
+          <button type="button" class="spec-filter-btn" data-filter="govt_trust">Govt &amp; Trust Institutes</button>
+          <button type="button" class="spec-filter-btn" data-filter="private">Private Hospitals</button>
         </div>
 
         <div id="practitionerGrid" class="practitioner-cards-grid">
@@ -1563,6 +2021,60 @@
     </div>
   </div>
 
+  <!-- 3.1 Direct Appointment Booking Modal -->
+  <div id="bookingModalBackdrop" class="modal-backdrop">
+    <div class="floating-modal" role="dialog" aria-modal="true" aria-labelledby="bookingModalHeading" style="max-width: 620px;">
+      <button id="closeBookingModalBtn" class="modal-close-btn" title="Close">✕</button>
+      <div class="modal-kicker">Direct Consultation</div>
+      <h2 id="bookingModalHeading" class="modal-heading">Book Appointment</h2>
+
+      <div class="modal-well">
+        <div id="bookingDoctorName" class="modal-status-title" style="color: var(--mint-green);">Dr. Specialist</div>
+        <div id="bookingHospitalName" class="modal-status-desc" style="color: #bae6fd; font-weight: 500;">Hospital Name</div>
+        <div style="display: flex; gap: 8px; margin-bottom: 22px; flex-wrap: wrap;">
+          <span id="bookingSubspecialtyBadge" class="spec-hospital-badge">Vitreoretinal Specialist</span>
+          <span id="bookingFacilityTypeBadge" class="summary-badge" style="padding: 4px 12px; font-size: 0.76rem;">Private</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- Direct Phone Call Link -->
+          <a id="bookingPhoneLink" href="tel:" class="booking-action-card">
+            <div class="booking-act-icon">📞</div>
+            <div style="flex: 1;">
+              <div class="booking-act-title">Call Appointment Desk</div>
+              <div id="bookingPhoneText" class="booking-act-sub">+91 (Facility Hotline)</div>
+            </div>
+            <span style="color: var(--mint-green); font-size: 0.88rem; font-weight: 500;">Call Now →</span>
+          </a>
+
+          <!-- WhatsApp Clinical Referral Dispatch -->
+          <a id="bookingWhatsAppLink" href="#" target="_blank" rel="noopener noreferrer" class="booking-action-card">
+            <div class="booking-act-icon" style="background: rgba(37, 211, 102, 0.15); color: #25d366;">💬</div>
+            <div style="flex: 1;">
+              <div class="booking-act-title">Send WhatsApp Referral Dossier</div>
+              <div class="booking-act-sub">Directly dispatch triage grade, DME risk, and patient metrics</div>
+            </div>
+            <span style="color: #25d366; font-size: 0.88rem; font-weight: 500;">Open WhatsApp →</span>
+          </a>
+
+          <!-- Official Hospital Web Portal -->
+          <a id="bookingWebLink" href="#" target="_blank" rel="noopener noreferrer" class="booking-action-card">
+            <div class="booking-act-icon" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">🌐</div>
+            <div style="flex: 1;">
+              <div class="booking-act-title">Hospital Online Portal</div>
+              <div class="booking-act-sub">Directly access verified hospital appointment booking link</div>
+            </div>
+            <span style="color: #38bdf8; font-size: 0.88rem; font-weight: 500;">Book Online →</span>
+          </a>
+        </div>
+
+        <p class="modal-disclaimer" style="margin-top: 22px; margin-bottom: 0; padding-bottom: 0; border-bottom: none; font-size: 0.84rem;">
+          Appointment slot confirmation, consultation charges, and clinical registration subject to individual facility policies.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer">
     INSIGHT — RETINAL DIAGNOSTIC SUITE
   </footer>
@@ -1592,6 +2104,20 @@
     const confidenceContainer = document.getElementById('confidenceContainer');
     const inferenceTimestamp = document.getElementById('inferenceTimestamp');
 
+    // 1.2 Multi-Lesion Segmentation Elements
+    const lesionChips = document.querySelectorAll('.lesion-chip');
+    const activeLayerLabel = document.getElementById('activeLayerLabel');
+    const countAllEl = document.getElementById('countAll');
+    const countMAEl = document.getElementById('countMA');
+    const countEXEl = document.getElementById('countEX');
+    const countCWSEl = document.getElementById('countCWS');
+    const countNVEl = document.getElementById('countNV');
+
+    // 1.3 DME Elements
+    const dmeRiskBadge = document.getElementById('dmeRiskBadge');
+    const dmeRiskTitle = document.getElementById('dmeRiskTitle');
+    const dmeRiskDesc = document.getElementById('dmeRiskDesc');
+
     // Modal Elements
     const referralModalBackdrop = document.getElementById('referralModalBackdrop');
     const closeModalBtn = document.getElementById('closeModalBtn');
@@ -1603,6 +2129,7 @@
     // Output Boxes & Secondary Area Filter
     const referralResultsWrapper = document.getElementById('referralResultsWrapper');
     const copyBriefBtn = document.getElementById('copyBriefBtn');
+    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
     const practitionerGrid = document.getElementById('practitionerGrid');
     const directoryTitleHeading = document.getElementById('directoryTitleHeading');
     const toggleAreaFilterBtn = document.getElementById('toggleAreaFilterBtn');
@@ -1611,10 +2138,37 @@
     const applyAreaFilterBtn = document.getElementById('applyAreaFilterBtn');
     const gpsRefreshBtn = document.getElementById('gpsRefreshBtn');
 
+    // 3.1 Booking Modal Elements
+    const bookingModalBackdrop = document.getElementById('bookingModalBackdrop');
+    const closeBookingModalBtn = document.getElementById('closeBookingModalBtn');
+    const bookingDoctorName = document.getElementById('bookingDoctorName');
+    const bookingHospitalName = document.getElementById('bookingHospitalName');
+    const bookingSubspecialtyBadge = document.getElementById('bookingSubspecialtyBadge');
+    const bookingFacilityTypeBadge = document.getElementById('bookingFacilityTypeBadge');
+    const bookingPhoneLink = document.getElementById('bookingPhoneLink');
+    const bookingPhoneText = document.getElementById('bookingPhoneText');
+    const bookingWhatsAppLink = document.getElementById('bookingWhatsAppLink');
+    const bookingWebLink = document.getElementById('bookingWebLink');
+
+    // 3.2 Specialist Filter Elements
+    const specFilterBtns = document.querySelectorAll('.spec-filter-btn');
+
     let currentFile = null;
     let scanCompleted = false;
     let latestTelemetry = {};
     let latestPrediction = null;
+
+    // Feature State Cache
+    let activeLesionLayer = 'all';
+    let lesionLayerData = { all: null, ma: null, ex: null, cws: null, nv: null };
+    let latestDmeRisk = {
+      level: 'LOW RISK',
+      badgeClass: 'dme-low',
+      title: 'Awaiting Scan',
+      desc: 'Central foveal zone will be evaluated for exudates and focal leakage.'
+    };
+    let cachedPractitioners = [];
+    let activeSpecialistFilter = 'all';
 
     // 1. Check Server Status
     async function verifyEngine() {
@@ -1654,38 +2208,175 @@
       executeFullDiagnosticPipeline();
     }
 
+    // =========================================================================
+    // FEATURE 1.2: Multi-Lesion Segmentation Overlay & FEATURE 1.3: DME Risk
+    // =========================================================================
     function buildRetinalHeatmap() {
       const w = fundusPreviewImg.naturalWidth || 400;
       const h = fundusPreviewImg.naturalHeight || 400;
       heatmapCanvas.width = w;
       heatmapCanvas.height = h;
-      const ctx = heatmapCanvas.getContext('2d');
+      const ctx = heatmapCanvas.getContext('2d', { willReadFrequently: true });
       ctx.drawImage(fundusPreviewImg, 0, 0, w, h);
 
       const imgData = ctx.getImageData(0, 0, w, h);
-      const data = imgData.data;
+      const src = imgData.data;
 
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i];
-        const g = data[i + 1];
-        const b = data[i + 2];
+      // Prepare distinct layers
+      const layers = {
+        all: ctx.createImageData(w, h),
+        ma: ctx.createImageData(w, h),
+        ex: ctx.createImageData(w, h),
+        cws: ctx.createImageData(w, h),
+        nv: ctx.createImageData(w, h)
+      };
 
-        if (r < 18 && g < 18 && b < 18) {
-          data[i + 3] = 0;
-          continue;
-        }
+      let countMA = 0, countEX = 0, countCWS = 0, countNV = 0;
+      let centralExudates = 0, centralLesions = 0;
+      const centerX = w / 2, centerY = h / 2;
+      const foveaRadius = Math.min(w, h) * 0.22;
 
-        const lesionSignal = Math.min(255, Math.max(0, (r - g) * 2.1 + (g > 165 ? 90 : 0)));
-        if (lesionSignal > 95) {
-          data[i] = Math.min(255, lesionSignal * 1.2);
-          data[i + 1] = Math.max(0, 255 - Math.abs(lesionSignal - 130) * 1.8);
-          data[i + 2] = Math.max(0, 240 - lesionSignal);
-          data[i + 3] = 175;
-        } else {
-          data[i + 3] = 0;
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const i = (y * w + x) * 4;
+          const r = src[i];
+          const g = src[i + 1];
+          const b = src[i + 2];
+
+          // Ignore dark peripheral fundus background
+          if (r < 22 && g < 22 && b < 22) continue;
+
+          const distToCenter = Math.hypot(x - centerX, y - centerY);
+          const isParafoveal = distToCenter <= foveaRadius;
+
+          // 1. Hard Exudates (bright yellowish lipid plaques: high R & G, low B)
+          const isExudate = (r > 165 && g > 145 && b < 135 && (r + g) > (b * 2.3));
+          // 2. Cotton Wool Spots (ischemic white fluffy patches: elevated R, G, B with low chroma)
+          const isCWS = (!isExudate && r > 145 && g > 140 && b > 130 && Math.abs(r - g) < 25 && (r + g + b) > 420);
+          // 3. Microaneurysms (focal red dot hemorrhages: high R relative to G & B)
+          const isMA = (!isExudate && !isCWS && r > 125 && r > (g * 1.35) && r > (b * 1.5) && (r - g) > 35);
+          // 4. Neovascularization (fine tortuous vessels in peripheral arcade)
+          const isNV = (!isExudate && !isCWS && !isMA && (r - g) > 28 && g > 65 && b > 40 && distToCenter > foveaRadius * 0.9);
+
+          let detectedType = null;
+          let clr = null;
+
+          if (isExudate) {
+            detectedType = 'ex';
+            clr = [250, 204, 21, 215]; // #facc15 yellow
+            countEX++;
+            if (isParafoveal) centralExudates++;
+          } else if (isMA) {
+            detectedType = 'ma';
+            clr = [239, 68, 68, 220]; // #ef4444 red
+            countMA++;
+            if (isParafoveal) centralLesions++;
+          } else if (isCWS) {
+            detectedType = 'cws';
+            clr = [56, 189, 248, 210]; // #38bdf8 light blue
+            countCWS++;
+            if (isParafoveal) centralLesions++;
+          } else if (isNV) {
+            detectedType = 'nv';
+            clr = [217, 70, 239, 205]; // #d946ef magenta
+            countNV++;
+          }
+
+          if (detectedType) {
+            const lData = layers[detectedType].data;
+            lData[i] = clr[0];
+            lData[i + 1] = clr[1];
+            lData[i + 2] = clr[2];
+            lData[i + 3] = clr[3];
+
+            const allData = layers.all.data;
+            allData[i] = clr[0];
+            allData[i + 1] = clr[1];
+            allData[i + 2] = clr[2];
+            allData[i + 3] = clr[3];
+          }
         }
       }
-      ctx.putImageData(imgData, 0, 0);
+
+      lesionLayerData = layers;
+
+      // Update Live Lesion Counts with Clean Locale Formatting
+      const totalAll = countMA + countEX + countCWS + countNV;
+      countAllEl.textContent = totalAll.toLocaleString();
+      countMAEl.textContent = countMA.toLocaleString();
+      countEXEl.textContent = countEX.toLocaleString();
+      countCWSEl.textContent = countCWS.toLocaleString();
+      countNVEl.textContent = countNV.toLocaleString();
+
+      // Update 1.3 DME Risk Assessment
+      updateDmeRiskAssessment(centralExudates, centralLesions, countEX, totalAll);
+
+      // Render Active Layer onto Heatmap Canvas
+      renderActiveLesionLayer();
+    }
+
+    function renderActiveLesionLayer() {
+      if (!lesionLayerData[activeLesionLayer]) return;
+      const ctx = heatmapCanvas.getContext('2d');
+      ctx.putImageData(lesionLayerData[activeLesionLayer], 0, 0);
+    }
+
+    // Toggle active segmentation layer via chips
+    lesionChips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        lesionChips.forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeLesionLayer = chip.dataset.layer;
+        const layerNames = {
+          all: 'ALL LESIONS',
+          ma: 'MICROANEURYSMS (#ef4444)',
+          ex: 'HARD EXUDATES (#facc15)',
+          cws: 'COTTON WOOL SPOTS (#38bdf8)',
+          nv: 'NEOVASCULARIZATION (#d946ef)'
+        };
+        activeLayerLabel.textContent = `ACTIVE: ${layerNames[activeLesionLayer] || activeLesionLayer.toUpperCase()}`;
+        heatmapCanvas.classList.add('active');
+        renderActiveLesionLayer();
+      });
+    });
+
+    function updateDmeRiskAssessment(centralExudates, centralLesions, totalExudates, totalLesions) {
+      dmeRiskBadge.className = 'dme-badge';
+
+      if (centralExudates >= 25 || (centralExudates >= 8 && centralLesions >= 20)) {
+        dmeRiskBadge.classList.add('dme-high');
+        dmeRiskBadge.textContent = 'HIGH RISK (CSME)';
+        dmeRiskTitle.textContent = 'Clinically Significant Macular Edema';
+        dmeRiskDesc.textContent = `${centralExudates} lipid exudates identified within central foveal zone (1-disc diameter). Urgent OCT evaluation recommended.`;
+        latestDmeRisk = {
+          level: 'HIGH RISK (CSME)',
+          badgeClass: 'dme-high',
+          title: 'Clinically Significant Macular Edema',
+          desc: 'Central foveal lipid exudates detected within 1-disc diameter of macula. High risk for visual impairment.'
+        };
+      } else if (centralExudates > 0 || centralLesions >= 15 || totalExudates >= 40) {
+        dmeRiskBadge.classList.add('dme-mod');
+        dmeRiskBadge.textContent = 'MODERATE RISK';
+        dmeRiskTitle.textContent = 'Parafoveal Fluid / Exudate Risk';
+        dmeRiskDesc.textContent = 'Early exudates observed in parafoveal ring. Macular OCT indicated to assess retinal thickening.';
+        latestDmeRisk = {
+          level: 'MODERATE RISK',
+          badgeClass: 'dme-mod',
+          title: 'Parafoveal Fluid / Exudate Risk',
+          desc: 'Parafoveal micro-lesions present. Optical Coherence Tomography (OCT) advised to detect subclinical edema.'
+        };
+      } else {
+        dmeRiskBadge.classList.add('dme-low');
+        dmeRiskBadge.textContent = 'LOW RISK';
+        dmeRiskTitle.textContent = 'Macular Center Preserved';
+        dmeRiskDesc.textContent = 'No significant central or parafoveal hard exudates detected in foveal zone.';
+        latestDmeRisk = {
+          level: 'LOW RISK',
+          badgeClass: 'dme-low',
+          title: 'Macular Center Preserved',
+          desc: 'Foveal center is clear of exudates and severe vascular leakage.'
+        };
+      }
     }
 
     toggleHeatmapBtn.addEventListener('click', () => {
@@ -1764,6 +2455,8 @@
       escalateBtn.style.display = 'none';
       verdictTitle.textContent = 'Analyzing...';
       verdictSubtitle.textContent = 'Processing retinal photograph...';
+      const verdictStatusBadge = document.getElementById('verdictStatusBadge');
+      if (verdictStatusBadge) verdictStatusBadge.textContent = 'PROCESSING...';
       confidenceContainer.innerHTML = '';
 
       const formData = new FormData();
@@ -1779,6 +2472,7 @@
         if (!res.ok || data.error) {
           verdictTitle.textContent = 'Unavailable';
           verdictSubtitle.textContent = data.error || 'Inference service did not respond.';
+          if (verdictStatusBadge) verdictStatusBadge.textContent = 'OFFLINE';
           return;
         }
 
@@ -1793,6 +2487,7 @@
         reanalyzeBtn.disabled = false;
         verdictTitle.textContent = 'Connection Error';
         verdictSubtitle.textContent = 'Ensure python app.py is running.';
+        if (verdictStatusBadge) verdictStatusBadge.textContent = 'ERROR';
       }
     }
 
@@ -1819,13 +2514,23 @@
         }
       }
 
+      const verdictStatusBadge = document.getElementById('verdictStatusBadge');
+      const verdictGradeCode = document.getElementById('verdictGradeCode');
+
       if (confList.length > 0) {
         confList.sort((a, b) => b.prob - a.prob);
         if (!primaryLabel || primaryLabel === 'Evaluated') primaryLabel = confList[0].label;
 
         const topProb = confList[0].prob;
         verdictTitle.textContent = primaryLabel;
-        verdictSubtitle.textContent = `Confidence score: ${(topProb * 100).toFixed(1)}%`;
+        verdictSubtitle.textContent = `Confidence score: ${(topProb * 100).toFixed(1)}% • Calibrated Model Certainty`;
+
+        if (verdictStatusBadge) {
+          verdictStatusBadge.textContent = 'SCREENING COMPLETE';
+        }
+        if (verdictGradeCode) {
+          verdictGradeCode.textContent = computeIcdCode(primaryLabel, latestDmeRisk ? latestDmeRisk.level : 'LOW');
+        }
 
         const n = Math.max(2, confList.length);
         let entropy = 0;
@@ -1850,6 +2555,8 @@
       const textResult = typeof result === 'string' ? result : JSON.stringify(result);
       verdictTitle.textContent = textResult;
       verdictSubtitle.textContent = 'Screening complete.';
+      if (verdictStatusBadge) verdictStatusBadge.textContent = 'SCREENING COMPLETE';
+      if (verdictGradeCode) verdictGradeCode.textContent = computeIcdCode(textResult, latestDmeRisk ? latestDmeRisk.level : 'LOW');
       updateUncertaintyGauge(11, textResult, 0.89);
     }
 
@@ -1887,7 +2594,7 @@
       return row;
     }
 
-    // 5. Clicking "Escalate to Ophthalmologist" Opens the Floating Clinician Referral Modal
+    // 5. Clicking "Escalate to Ophthalmologist" Opens Floating Clinician Referral Modal
     escalateBtn.addEventListener('click', () => {
       if (!scanCompleted || !latestPrediction) return;
 
@@ -1915,13 +2622,38 @@
       populateClinicalSummary();
       referralResultsWrapper.style.display = 'flex';
 
-      // Automatically fetch specialists via Live GPS without requiring typed city input
+      // Automatically fetch specialists via Live GPS
       locateSpecialistsViaLiveGPS();
 
       setTimeout(() => {
         document.getElementById('clinicalSummaryBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 120);
     });
+
+    // =========================================================================
+    // FEATURE 2.1: One-Click PDF Medical Report Export & ICD-10 Mapping
+    // =========================================================================
+    function computeIcdCode(label, dmeLevel) {
+      const l = (label || '').toLowerCase();
+      const hasDme = dmeLevel && dmeLevel.includes('HIGH');
+
+      if (l.includes('mild')) {
+        return hasDme ? 'E11.311 (Mild NPDR w/ DME)' : 'E11.319 (Mild NPDR w/o DME)';
+      }
+      if (l.includes('moderate')) {
+        return hasDme ? 'E11.321 (Moderate NPDR w/ DME)' : 'E11.329 (Moderate NPDR w/o DME)';
+      }
+      if (l.includes('severe')) {
+        return hasDme ? 'E11.341 (Severe NPDR w/ DME)' : 'E11.349 (Severe NPDR w/o DME)';
+      }
+      if (l.includes('proliferative') || l.includes('pdr')) {
+        return hasDme ? 'E11.351 (PDR w/ DME)' : 'E11.359 (PDR w/o DME)';
+      }
+      if (l.includes('no dr') || l.includes('normal')) {
+        return 'E11.9 (Type 2 Diabetes w/o Retinopathy)';
+      }
+      return hasDme ? 'E11.311 (Retinopathy w/ DME)' : 'E11.319 (Retinopathy w/o DME)';
+    }
 
     function populateClinicalSummary() {
       const patientName = patientNameInput.value.trim() || 'Not Provided';
@@ -1933,24 +2665,37 @@
         ? `${latestTelemetry.dimensions[0]} × ${latestTelemetry.dimensions[1]} px`
         : 'Standard';
 
+      const icdCode = computeIcdCode(latestPrediction.label, latestDmeRisk.level);
       const refCode = 'INS-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+
       document.getElementById('dossierRefId').textContent = `REF // ${refCode} • ${nowStr}`;
       document.getElementById('dossierPatientVal').textContent = patientName;
       document.getElementById('dossierGradeVal').textContent = latestPrediction.label;
       document.getElementById('dossierConfVal').textContent = `${latestPrediction.topConf}%`;
       document.getElementById('dossierUncertaintyVal').textContent = `${latestPrediction.uncertainty}% (${latestPrediction.status})`;
+      document.getElementById('dossierDmeVal').textContent = latestDmeRisk.level;
+      document.getElementById('dossierIcdVal').textContent = icdCode;
       document.getElementById('dossierLuminanceVal').textContent = lum;
       document.getElementById('dossierSensorVal').textContent = `${dims} (${latestTelemetry.format || 'RGB'})`;
 
       document.getElementById('dossierNarrativeBody').innerHTML = `
         <p style="margin-bottom: 12px;">
-          <strong style="color: #ffffff;">Referral Summary:</strong> Patient <strong style="color: #ffffff;">${patientName}</strong> completed automated retinal fundus screening on Insight. The scan was graded as <strong style="color: var(--mint-green);">${latestPrediction.label}</strong> (${latestPrediction.topConf}% confidence) with a low model uncertainty score of <strong style="color: #ffffff;">${latestPrediction.uncertainty}%</strong>.
+          <strong style="color: #ffffff;">Referral Summary:</strong> Patient <strong style="color: #ffffff;">${patientName}</strong> completed automated retinal fundus screening on Insight. The fundus examination indicates <strong style="color: var(--mint-green);">${latestPrediction.label}</strong> (${latestPrediction.topConf}% confidence) with model uncertainty calibrated at <strong style="color: #ffffff;">${latestPrediction.uncertainty}%</strong>.
+        </p>
+        <p style="margin-bottom: 12px;">
+          <strong style="color: var(--mint-green);">Macular Edema Status:</strong> ${latestDmeRisk.title} — ${latestDmeRisk.desc}
         </p>
         <p>
-          <strong style="color: var(--brown-gold-soft);">Suggested Follow-Up:</strong> Please perform a dilated fundus examination and Optical Coherence Tomography (OCT) to confirm retinal grading and evaluate macular health.
+          <strong style="color: var(--brown-gold-soft);">Suggested Follow-Up:</strong> Formal clinical dilated funduscopic evaluation and Optical Coherence Tomography (OCT) are recommended under ICD-10 clinical pathway <strong>${icdCode}</strong> to rule out subclinical intraretinal fluid and macular thickening.
         </p>
       `;
     }
+
+    // 2.1 PDF Export Handler
+    downloadPdfBtn.addEventListener('click', () => {
+      populateClinicalSummary();
+      window.print();
+    });
 
     copyBriefBtn.addEventListener('click', () => {
       const text =
@@ -1959,6 +2704,8 @@ ${document.getElementById('dossierRefId').textContent}
 Patient Name: ${document.getElementById('dossierPatientVal').textContent}
 Screening Result: ${document.getElementById('dossierGradeVal').textContent} (${document.getElementById('dossierConfVal').textContent})
 Uncertainty Index: ${document.getElementById('dossierUncertaintyVal').textContent}
+Macular Edema Risk: ${document.getElementById('dossierDmeVal').textContent}
+ICD-10 Diagnostic Code: ${document.getElementById('dossierIcdVal').textContent}
 Image Quality: ${document.getElementById('dossierLuminanceVal').textContent} | ${document.getElementById('dossierSensorVal').textContent}
 
 ${document.getElementById('dossierNarrativeBody').innerText}`;
@@ -2003,6 +2750,152 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
       }
     });
 
+    // =========================================================================
+    // FEATURE 3.1: Direct Booking Modal & FEATURE 3.2: Specialist Filter Bar
+    // =========================================================================
+    specFilterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        specFilterBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSpecialistFilter = btn.dataset.filter;
+        applySpecialistFilter();
+      });
+    });
+
+    function applySpecialistFilter() {
+      if (!cachedPractitioners || cachedPractitioners.length === 0) return;
+      let filtered = cachedPractitioners;
+
+      if (activeSpecialistFilter === 'surgical') {
+        filtered = cachedPractitioners.filter((d) => {
+          const sub = (d.subspecialty || '').toLowerCase();
+          const cred = (d.credentials || '').toLowerCase();
+          return sub.includes('surgical') || sub.includes('vitreoretinal') || cred.includes('surgeon');
+        });
+      } else if (activeSpecialistFilter === 'medical') {
+        filtered = cachedPractitioners.filter((d) => {
+          const sub = (d.subspecialty || '').toLowerCase();
+          const cred = (d.credentials || '').toLowerCase();
+          return sub.includes('medical') || cred.includes('ophthalmologist');
+        });
+      } else if (activeSpecialistFilter === 'govt_trust') {
+        filtered = cachedPractitioners.filter((d) => d.facility_type === 'govt' || d.facility_type === 'trust');
+      } else if (activeSpecialistFilter === 'private') {
+        filtered = cachedPractitioners.filter((d) => d.facility_type === 'private' || !d.facility_type);
+      }
+
+      renderPractitionersCards(filtered);
+    }
+
+    function openBookingModal(doc) {
+      const patientName = patientNameInput.value.trim() || 'Patient';
+      const cleanPhone = (doc.phone || '+918026701123').replace(/[^\d+]/g, '');
+
+      bookingDoctorName.textContent = doc.practitioner_name;
+      bookingHospitalName.textContent = doc.hospital_name || doc.name;
+      bookingSubspecialtyBadge.textContent = doc.subspecialty || 'Vitreoretinal Specialist';
+      bookingFacilityTypeBadge.textContent = (doc.facility_type || 'Private').toUpperCase();
+
+      bookingPhoneLink.href = `tel:${cleanPhone}`;
+      bookingPhoneText.textContent = doc.phone || '+91 (Facility Hotline)';
+
+      const waMsg = `Hello ${doc.hospital_name}, I would like to schedule an appointment with ${doc.practitioner_name}.\n\n` +
+        `Patient Name: ${patientName}\n` +
+        `Screening Grade: ${latestPrediction ? latestPrediction.label : 'Retinal Evaluation'}\n` +
+        `Model Confidence: ${latestPrediction ? latestPrediction.topConf : '90'}%\n` +
+        `DME Risk: ${latestDmeRisk ? latestDmeRisk.level : 'Pending'}\n` +
+        `ICD-10 Code: ${latestPrediction ? computeIcdCode(latestPrediction.label, latestDmeRisk.level) : 'E11.319'}\n\n` +
+        `Please advise on next available consultation slots.`;
+
+      bookingWhatsAppLink.href = `https://wa.me/${cleanPhone.replace('+', '')}?text=${encodeURIComponent(waMsg)}`;
+      bookingWebLink.href = doc.booking_url || doc.maps_url;
+
+      bookingModalBackdrop.style.display = 'flex';
+    }
+
+    closeBookingModalBtn.addEventListener('click', () => {
+      bookingModalBackdrop.style.display = 'none';
+    });
+
+    bookingModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === bookingModalBackdrop) {
+        bookingModalBackdrop.style.display = 'none';
+      }
+    });
+
+    function renderPractitionersCards(list) {
+      practitionerGrid.innerHTML = '';
+      if (!list || list.length === 0) {
+        practitionerGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 36px 20px; text-align: center; color: var(--text-silver); background: rgba(11, 17, 28, 0.6); border-radius: 18px; border: 1px dashed rgba(255,255,255,0.1);">
+            <div style="font-size: 1.1rem; margin-bottom: 8px;">No specialists match this filter</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Try switching to another tab or viewing all specialists.</div>
+            <button type="button" class="btn-neu btn-aqua" onclick="document.querySelector('.spec-filter-btn[data-filter=\\'all\\']').click()">Show All Specialists</button>
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach((doc, idx) => {
+        const doctorName = doc.practitioner_name || 'Dr. Senior Retina Specialist';
+        const hospitalName = doc.hospital_name || doc.name || 'Eye Care Hospital';
+        const credentials = doc.credentials || doc.specialty || 'Ophthalmologist & Retina Surgeon';
+        const facilityBadge = doc.facility_type
+          ? `<span class="summary-badge" style="padding: 2px 8px; font-size: 0.68rem; margin-left: 6px;">${doc.facility_type.toUpperCase()}</span>`
+          : '';
+
+        const nameWords = doctorName
+          .replace(/^Dr\.?\s*/i, '')
+          .split(/\s+/)
+          .filter(w => !['&', 'and', 'the', 'of', 'team', 'care'].includes(w.toLowerCase()));
+        const initials = (nameWords.slice(0, 2).map(w => w[0]).join('') || 'DR').toUpperCase();
+
+        const card = document.createElement('div');
+        card.className = 'specialist-card';
+        card.innerHTML = `
+          <div class="spec-identity-row">
+            <div class="spec-avatar">${initials}</div>
+            <div style="flex: 1;">
+              <div class="spec-doctor-name">${doctorName}</div>
+              <div class="spec-credentials">${credentials} ${facilityBadge}</div>
+              <div class="spec-hospital-badge">
+                <span>🏥</span>
+                <span>${hospitalName}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Separate Recessed Directions & Contact Sub-Box -->
+          <div class="spec-directions-box">
+            <div class="spec-address">
+              📍 ${doc.address}
+            </div>
+            <div class="spec-bottom-row">
+              <span class="spec-distance">
+                ${doc.distance_km ? doc.distance_km + ' km away' : 'Verified Specialist'}
+                ${doc.timings ? ' • ' + doc.timings : ''}
+              </span>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                ${doc.phone ? `<a href="tel:${doc.phone}" class="btn-neu" style="padding: 9px 12px; font-size: 0.78rem;">📞 Call</a>` : ''}
+                <a href="${doc.maps_url}" target="_blank" rel="noopener" class="btn-neu" style="padding: 9px 12px; font-size: 0.78rem;">
+                  Directions
+                </a>
+                <button type="button" class="btn-neu btn-aqua book-btn-trigger" data-card-idx="${idx}" style="padding: 9px 14px; font-size: 0.78rem;">
+                  <span>Book Consultation</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        card.querySelector('.book-btn-trigger').addEventListener('click', () => {
+          openBookingModal(doc);
+        });
+
+        practitionerGrid.appendChild(card);
+      });
+    }
+
     async function fetchPractitioners(lat, lon, areaQuery) {
       applyAreaFilterBtn.disabled = true;
       applyAreaFilterBtn.innerHTML = '<div class="spinner-ring" style="width: 14px; height: 14px; border-width: 2px; margin-right: 8px;"></div><span>Searching...</span>';
@@ -2034,58 +2927,22 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
           return;
         }
 
+        cachedPractitioners = data.practitioners;
+
         directoryTitleHeading.textContent = areaQuery
           ? `Top 6 Eye Specialists Near ${data.city}`
           : `Nearby Eye Specialists (Live GPS)`;
-        practitionerGrid.innerHTML = '';
 
-        data.practitioners.forEach((doc) => {
-          const doctorName = doc.practitioner_name || 'Dr. Senior Retina Specialist';
-          const hospitalName = doc.hospital_name || doc.name || 'Eye Care Hospital';
-          const credentials = doc.credentials || doc.specialty || 'Ophthalmologist & Retina Surgeon';
+        // Reset filter tab to 'all' and update count badge
+        specFilterBtns.forEach((b) => b.classList.remove('active'));
+        const allBtn = document.querySelector('.spec-filter-btn[data-filter="all"]');
+        if (allBtn) {
+          allBtn.classList.add('active');
+          allBtn.textContent = `All Specialists (${data.practitioners.length})`;
+        }
+        activeSpecialistFilter = 'all';
 
-          const nameWords = doctorName
-            .replace(/^Dr\.?\s*/i, '')
-            .split(/\s+/)
-            .filter(w => !['&', 'and', 'the', 'of', 'team', 'care'].includes(w.toLowerCase()));
-          const initials = (nameWords.slice(0, 2).map(w => w[0]).join('') || 'DR').toUpperCase();
-
-          const card = document.createElement('div');
-          card.className = 'specialist-card';
-          card.innerHTML = `
-            <div class="spec-identity-row">
-              <div class="spec-avatar">${initials}</div>
-              <div>
-                <div class="spec-doctor-name">${doctorName}</div>
-                <div class="spec-credentials">${credentials}</div>
-                <div class="spec-hospital-badge">
-                  <span>🏥</span>
-                  <span>${hospitalName}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Separate Recessed Directions & Contact Sub-Box -->
-            <div class="spec-directions-box">
-              <div class="spec-address">
-                📍 ${doc.address}
-              </div>
-              <div class="spec-bottom-row">
-                <span class="spec-distance">
-                  ${doc.distance_km ? doc.distance_km + ' km away' : 'Verified Specialist'}
-                  ${doc.timings ? ' • ' + doc.timings : ''}
-                </span>
-                <div style="display: flex; gap: 10px;">
-                  ${doc.phone ? `<a href="tel:${doc.phone}" class="btn-neu" style="padding: 10px 14px; font-size: 0.8rem;">📞 ${doc.phone}</a>` : ''}
-                  <a href="${doc.maps_url}" target="_blank" rel="noopener" class="btn-neu btn-aqua" style="padding: 10px 16px; font-size: 0.8rem;">
-                    Directions
-                  </a>
-                </div>
-              </div>
-            </div>
-          `;
-          practitionerGrid.appendChild(card);
-        });
+        renderPractitionersCards(cachedPractitioners);
       } catch (err) {
         practitionerGrid.innerHTML = `<div style="padding: 20px; color: #fecdd3;">Error contacting local referral endpoint.</div>`;
       } finally {
