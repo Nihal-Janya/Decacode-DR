@@ -2014,13 +2014,11 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
           const hospitalName = doc.hospital_name || doc.name || 'Eye Care Hospital';
           const credentials = doc.credentials || doc.specialty || 'Ophthalmologist & Retina Surgeon';
 
-          const initials = doctorName
+          const nameWords = doctorName
             .replace(/^Dr\.?\s*/i, '')
-            .split(' ')
-            .slice(0, 2)
-            .map(w => w[0])
-            .join('')
-            .toUpperCase();
+            .split(/\s+/)
+            .filter(w => !['&', 'and', 'the', 'of', 'team', 'care'].includes(w.toLowerCase()));
+          const initials = (nameWords.slice(0, 2).map(w => w[0]).join('') || 'DR').toUpperCase();
 
           const card = document.createElement('div');
           card.className = 'specialist-card';
