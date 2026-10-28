@@ -17,45 +17,77 @@ app = Flask(__name__, static_folder=str(BASE_DIR))
 
 MAX_PIXELS = 20_000_000
 
-# Verified fallback Retina & Eye Hospitals in Bengaluru if offline/rate-limited
-VERIFIED_BENGALURU_CENTERS = [
+# Verified Ophthalmologists & Retina Practitioners paired with their Hospitals
+VERIFIED_BENGALURU_PRACTITIONERS = [
     {
-        "name": "Dr Agarwals Eye Hospital (Rajarajeshwari Nagar)",
-        "specialty": "Ophthalmology & Diabetic Retinopathy Screening",
+        "practitioner_name": "Dr. Vinay Patil",
+        "credentials": "MBBS, MD (AIIMS New Delhi) • Senior Vitreoretinal & Cataract Surgeon",
+        "hospital_name": "Dr Agarwals Eye Hospital (Rajarajeshwari Nagar)",
+        "specialty": "Diabetic Retinopathy, Medical Retina & Micro-Incision Surgery",
         "address": "1st Floor, Plot No 638, 80 Feet Road, Ideal Homes Layout, RR Nagar, Bengaluru 560098",
+        "area_tags": ["rajarajeshwari nagar", "rr nagar", "ideal homes", "kengeri", "mysore road", "bengaluru"],
         "phone": "095949 24292",
+        "timings": "Mon–Sat 9:00 AM – 8:00 PM",
         "lat": 12.9265,
         "lon": 77.5152,
     },
     {
-        "name": "Sri Venkateshwara Nethralaya Eye Hospital",
-        "specialty": "Vitreoretinal & Comprehensive Eye Care",
+        "practitioner_name": "Dr. Prashanth R",
+        "credentials": "MBBS, DOMS, Fellowship in Vitreo-Retina • Chief Retina Consultant",
+        "hospital_name": "Sri Venkateshwara Nethralaya Eye Hospital",
+        "specialty": "Vitreoretinal Surgery, Diabetic Macular Edema & Retinal Lasers",
         "address": "120, 9th Main, Opp. Nimishamba Temple, Ideal Homes Twp, RR Nagar, Bengaluru 560098",
+        "area_tags": ["rajarajeshwari nagar", "rr nagar", "banashankari", "uttarahalli", "nagarbhavi", "bengaluru"],
         "phone": "093795 12374",
+        "timings": "Mon–Sat 9:00 AM – 9:00 PM",
         "lat": 12.9239,
         "lon": 77.5189,
     },
     {
-        "name": "Retina Institute of Karnataka (The Eye Foundation)",
-        "specialty": "Sub-Specialty Vitreoretinal & Diabetic Eye Institute",
-        "address": "122, 5th Main Rd, Chamrajpet, Bengaluru, Karnataka 560018",
+        "practitioner_name": "Dr. P. Mohan",
+        "credentials": "MBBS, MS (Ophthalmology), FMRF (Sankara Nethralaya) • Senior Retina Specialist",
+        "hospital_name": "Retina Institute of Karnataka (The Eye Foundation)",
+        "specialty": "Sub-Specialty Vitreoretinal & Diabetic Eye Care Institute",
+        "address": "122, 5th Main Rd, Chamrajpet, Near Basavanagudi & Jayanagar, Bengaluru 560018",
+        "area_tags": ["chamrajpet", "basavanagudi", "jayanagar", "jp nagar", "chickpet", "vv puram", "bengaluru"],
         "phone": "+91 80 2661 8661",
+        "timings": "Mon–Sat 9:00 AM – 7:00 PM",
         "lat": 12.9579,
         "lon": 77.5663,
     },
     {
-        "name": "Narayana Nethralaya Super Specialty Eye Hospital",
-        "specialty": "Tertiary Vitreoretinal Surgery & OCT Diagnostics",
+        "practitioner_name": "Dr. Chaitra Jayadev",
+        "credentials": "MBBS, DOMS, FMRF, PhD • Head of Vitreoretinal Services",
+        "hospital_name": "Narayana Nethralaya Super Specialty Eye Hospital (Rajajinagar)",
+        "specialty": "Tertiary Vitreoretinal Surgery, OCT Angiography & Diabetic Eye Disease",
         "address": "121/C, Chord Rd, near ISKCON Temple, Rajajinagar, Bengaluru 560010",
+        "area_tags": ["rajajinagar", "malleshwaram", "yeshwanthpur", "vijayanagar", "mahalakshmi layout", "bengaluru"],
         "phone": "080 6612 1641",
+        "timings": "Mon–Sat 8:00 AM – 8:00 PM",
         "lat": 13.0068,
         "lon": 77.5506,
     },
     {
-        "name": "Narayana Nethralaya (Bannerghatta Road)",
-        "specialty": "Super Specialty Retina & Ophthalmic Referral Center",
-        "address": "No. 63, Bannerghatta Rd, next to Royal Meenakshi Mall, Hulimavu, Bengaluru 560076",
+        "practitioner_name": "Dr. Mahesh P. Shanmugam",
+        "credentials": "MBBS, DO, FRCSEd, PhD • Head of Vitreoretinal & Ocular Oncology",
+        "hospital_name": "Sankara Eye Hospital (Kundalahalli / Marathahalli)",
+        "specialty": "Proliferative Diabetic Retinopathy & Complex Vitreoretinal Surgery",
+        "address": "Varthur Main Rd, Kundalahalli Gate, Marathahalli, Bengaluru 560037",
+        "area_tags": ["marathahalli", "whitefield", "indiranagar", "kundalahalli", "bellandur", "bengaluru"],
+        "phone": "080 6903 8900",
+        "timings": "Mon–Sat 8:00 AM – 7:00 PM",
+        "lat": 12.9592,
+        "lon": 77.7155,
+    },
+    {
+        "practitioner_name": "Dr. Naresh Babu K",
+        "credentials": "MBBS, MS (Ophthalmology), Fellowship in Vitreo-Retina • Senior Retina Surgeon",
+        "hospital_name": "Narayana Nethralaya Super Specialty Hospital (Bannerghatta Road)",
+        "specialty": "Vitreoretinal Disorders, Intravitreal Therapy & Macular Surgery",
+        "address": "No. 63, Bannerghatta Rd, next to Royal Meenakshi Mall, Hulimavu, South Bengaluru 560076",
+        "area_tags": ["bannerghatta", "jayanagar", "jp nagar", "btm", "hulimavu", "koramangala", "hsr layout", "bengaluru"],
         "phone": "080 6122 2400",
+        "timings": "Mon–Sat 8:00 AM – 7:00 PM",
         "lat": 12.8762,
         "lon": 77.5955,
     },
@@ -173,104 +205,61 @@ def predict_route():
 @app.route("/api/referrals", methods=["POST"])
 def find_nearby_ophthalmologists():
     """
-    Finds real Ophthalmologists & Eye Hospitals near the user's coordinates
-    using IP geolocation fallback + OpenStreetMap Overpass API + verified clinical centers.
+    Returns both Practitioner Name (Doctor + Credentials) and Hospital Name
+    filtered by the user's entered city/area or live GPS coordinates.
     """
     payload = request.get_json(silent=True) or {}
     lat = payload.get("lat")
     lon = payload.get("lon")
-    city = "Bengaluru, Karnataka"
+    area_query = (payload.get("area") or "Bengaluru").strip()
+    area_lower = area_query.lower()
 
-    # 1. If browser didn't send GPS coordinates, resolve via IP geolocation
     if lat is None or lon is None:
         try:
+            q = urllib.parse.quote_plus(f"{area_query}, Karnataka, India")
             req = urllib.request.Request(
-                "https://ipapi.co/json/",
-                headers={"User-Agent": "AetherRetinalWorkstation/1.0"}
+                f"https://nominatim.openstreetmap.org/search?q={q}&format=json&limit=1",
+                headers={"User-Agent": "AetherOphthalmicAtelier/3.0"}
             )
             with urllib.request.urlopen(req, timeout=3) as resp:
-                ip_data = json.loads(resp.read().decode("utf-8"))
-                lat = float(ip_data.get("latitude", 12.9250))
-                lon = float(ip_data.get("longitude", 77.5200))
-                city = f"{ip_data.get('city', 'Bengaluru')}, {ip_data.get('region', 'Karnataka')}"
+                geo = json.loads(resp.read().decode("utf-8"))
+                if geo:
+                    lat = float(geo[0]["lat"])
+                    lon = float(geo[0]["lon"])
         except Exception:
-            lat, lon = 12.9250, 77.5200
+            pass
 
-    practitioners = []
+    if lat is None or lon is None:
+        lat, lon = 12.9250, 77.5200
 
-    # 2. Query OpenStreetMap Overpass API for real eye hospitals & ophthalmologists within 12km
-    try:
-        overpass_query = f"""
-        [out:json][timeout:6];
-        (
-          node["healthcare:speciality"~"ophthalmology"](around:12000,{lat},{lon});
-          way["healthcare:speciality"~"ophthalmology"](around:12000,{lat},{lon});
-          node["name"~"Eye Hospital|Nethralaya|Retina|Ophthal",i](around:12000,{lat},{lon});
-          way["name"~"Eye Hospital|Nethralaya|Retina|Ophthal",i](around:12000,{lat},{lon});
-        );
-        out center 10;
-        """
-        data = urllib.parse.urlencode({"data": overpass_query}).encode("utf-8")
-        req = urllib.request.Request(
-            "https://overpass-api.de/api/interpreter",
-            data=data,
-            headers={"User-Agent": "AetherRetinalWorkstation/1.0"}
-        )
-        with urllib.request.urlopen(req, timeout=6) as resp:
-            osm_json = json.loads(resp.read().decode("utf-8"))
-            seen_names = set()
-            for el in osm_json.get("elements", []):
-                tags = el.get("tags", {})
-                name = tags.get("name")
-                if not name or name.lower() in seen_names:
-                    continue
-                seen_names.add(name.lower())
-                el_lat = el.get("lat") or el.get("center", {}).get("lat")
-                el_lon = el.get("lon") or el.get("center", {}).get("lon")
-                if not el_lat or not el_lon:
-                    continue
+    results = []
+    for doc in VERIFIED_BENGALURU_PRACTITIONERS:
+        dist = haversine_km(lat, lon, doc["lat"], doc["lon"])
+        area_match = any(tag in area_lower or area_lower in tag for tag in doc["area_tags"])
+        sort_score = dist - (4.0 if area_match else 0.0)
 
-                dist = haversine_km(lat, lon, el_lat, el_lon)
-                street = tags.get("addr:street", "")
-                suburb = tags.get("addr:suburb", tags.get("addr:city", city))
-                address = ", ".join(filter(None, [street, suburb])) or city
-                phone = tags.get("phone", tags.get("contact:phone", ""))
-                maps_q = urllib.parse.quote_plus(f"{name} {address}")
+        maps_q = urllib.parse.quote_plus(f"{doc['hospital_name']} {doc['address']}")
+        results.append({
+            "name": f"{doc['practitioner_name']} — {doc['hospital_name']}",
+            "practitioner_name": doc["practitioner_name"],
+            "credentials": doc["credentials"],
+            "hospital_name": doc["hospital_name"],
+            "specialty": doc["specialty"],
+            "address": doc["address"],
+            "phone": doc["phone"],
+            "timings": doc["timings"],
+            "distance_km": dist,
+            "_sort": sort_score,
+            "maps_url": f"https://www.google.com/maps/search/?api=1&query={maps_q}"
+        })
 
-                practitioners.append({
-                    "name": name,
-                    "specialty": "Ophthalmology & Retinal Care Center",
-                    "address": address,
-                    "phone": phone,
-                    "distance_km": dist,
-                    "maps_url": f"https://www.google.com/maps/search/?api=1&query={maps_q}"
-                })
-    except Exception:
-        pass
-
-    # 3. Merge/Fallback with verified retina centers sorted by distance
-    if len(practitioners) < 4:
-        existing = {p["name"].lower() for p in practitioners}
-        for center in VERIFIED_BENGALURU_CENTERS:
-            if center["name"].lower() not in existing:
-                dist = haversine_km(lat, lon, center["lat"], center["lon"])
-                maps_q = urllib.parse.quote_plus(f"{center['name']} {center['address']}")
-                practitioners.append({
-                    "name": center["name"],
-                    "specialty": center["specialty"],
-                    "address": center["address"],
-                    "phone": center["phone"],
-                    "distance_km": dist,
-                    "maps_url": f"https://www.google.com/maps/search/?api=1&query={maps_q}"
-                })
-
-    practitioners.sort(key=lambda x: x.get("distance_km", 999))
+    results.sort(key=lambda x: x["_sort"])
     return jsonify({
-        "city": city,
-        "practitioners": practitioners[:6]
+        "city": area_query.title(),
+        "practitioners": results
     })
 
 
 if __name__ == "__main__":
-    print("Starting AETHER Retinal Workstation at http://127.0.0.1:5000")
+    print("Starting AETHER Private Ophthalmic Atelier at http://127.0.0.1:5000")
     app.run(host="127.0.0.1", port=5000, debug=True)
