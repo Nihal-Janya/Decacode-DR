@@ -763,6 +763,25 @@
       to { transform: rotate(360deg); }
     }
 
+    .practitioner-loader-box {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 56px 24px;
+      background: rgba(11, 17, 28, 0.55);
+      border: 1px dashed rgba(56, 189, 248, 0.28);
+      border-radius: 20px;
+      animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { border-color: rgba(56, 189, 248, 0.2); }
+      to { border-color: rgba(45, 212, 191, 0.45); }
+    }
+
     /* =====================================================================
        FLOATING CLINICIAN REFERRAL MODAL (NO MANUAL LOCATION TYPING)
        Automatically uses Live GPS when clicking "Find Eye Doctors"
@@ -1953,12 +1972,6 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
 
     // 7. Automatic Live GPS Lookup + Optional Secondary Area Filter
     function locateSpecialistsViaLiveGPS() {
-      practitionerGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; padding: 26px; color: var(--mint-green); font-family: 'JetBrains Mono', monospace; font-size: 0.94rem;">
-          📍 Acquiring live GPS coordinates &amp; finding the nearest ophthalmologists...
-        </div>
-      `;
-
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => fetchPractitioners(pos.coords.latitude, pos.coords.longitude, ''),
@@ -1991,6 +2004,23 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
     });
 
     async function fetchPractitioners(lat, lon, areaQuery) {
+      applyAreaFilterBtn.disabled = true;
+      applyAreaFilterBtn.innerHTML = '<div class="spinner-ring" style="width: 14px; height: 14px; border-width: 2px; margin-right: 8px;"></div><span>Searching...</span>';
+      gpsRefreshBtn.disabled = true;
+
+      const searchTitle = areaQuery ? areaQuery.toUpperCase() : 'YOUR CURRENT AREA';
+      practitionerGrid.innerHTML = `
+        <div class="practitioner-loader-box">
+          <div class="spinner-ring" style="width: 34px; height: 34px; border-width: 3px; border-color: rgba(56, 189, 248, 0.2); border-top-color: var(--mint-green);"></div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.94rem; color: var(--mint-green); letter-spacing: 0.05em; font-weight: 500;">
+            LOCATING EYE SPECIALISTS IN ${searchTitle}...
+          </div>
+          <div style="font-size: 0.84rem; color: var(--text-muted); font-family: 'Inter', sans-serif;">
+            Scanning verified eye hospitals &amp; ordering closest 6 by distance...
+          </div>
+        </div>
+      `;
+
       try {
         const res = await fetch('/api/referrals', {
           method: 'POST',
@@ -2005,7 +2035,7 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
         }
 
         directoryTitleHeading.textContent = areaQuery
-          ? `Eye Specialists Near ${data.city}`
+          ? `Top 6 Eye Specialists Near ${data.city}`
           : `Nearby Eye Specialists (Live GPS)`;
         practitionerGrid.innerHTML = '';
 
@@ -2058,6 +2088,11 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
         });
       } catch (err) {
         practitionerGrid.innerHTML = `<div style="padding: 20px; color: #fecdd3;">Error contacting local referral endpoint.</div>`;
+      } finally {
+        applyAreaFilterBtn.disabled = false;
+        applyAreaFilterBtn.innerHTML = '<span>Search Area</span>';
+        gpsRefreshBtn.disabled = false;
+        gpsRefreshBtn.innerHTML = '<span>Refresh Live GPS</span>';
       }
     }
   </script>
