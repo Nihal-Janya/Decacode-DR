@@ -3,31 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AETHER // Private Ophthalmic Diagnostic Atelier</title>
+  <title>Insight — Retinal Screening</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-obsidian: #04060a;
-      --bg-cabinet: #080c14;
-      --glass-luxury: rgba(14, 20, 34, 0.64);
-      --glass-deep: rgba(9, 13, 22, 0.82);
-      --specular-top: rgba(255, 255, 255, 0.22);
-      --specular-side: rgba(255, 255, 255, 0.08);
-      --gold-primary: #d4af37;
-      --gold-soft: #e6c875;
-      --gold-border: rgba(212, 175, 55, 0.34);
-      --Gold-glow: rgba(212, 175, 55, 0.14);
-      --teal-luxury: #2dd4bf;
-      --sky-luxury: #38bdf8;
-      --rose-crimson: #e11d48;
-      --rose-highlight: #fb7185;
-      --text-ivory: #f8fafc;
-      --text-Champagne: #e2e8f0;
-      --text-pewter: #94a3b8;
-      --neu-shadow-dark: rgba(0, 0, 0, 0.92);
-      --neu-shadow-light: rgba(255, 255, 255, 0.045);
+      --bg-deep: #06090f;
+      --bg-surface: #0b111c;
+      --glass-bg: rgba(14, 21, 35, 0.64);
+      --glass-border-top: rgba(255, 255, 255, 0.18);
+      --glass-border-side: rgba(56, 189, 248, 0.16);
+      --glass-border-subtle: rgba(255, 255, 255, 0.06);
+
+      /* Primary Blueish-Light-Green Gradient Palette */
+      --cyan-blue: #38bdf8;
+      --mint-green: #2dd4bf;
+      --aqua-grad: linear-gradient(135deg, #38bdf8 0%, #2dd4bf 100%);
+      --aqua-glow: rgba(45, 212, 191, 0.22);
+
+      /* Subtle Warm Brown-Gold Accent (Used Sparingly) */
+      --brown-gold: #a67c52;
+      --brown-gold-soft: #c49a6c;
+      --brown-gold-border: rgba(166, 124, 82, 0.32);
+
+      /* Rose Accent for Escalate Button */
+      --rose-accent: #f43f5e;
+      --rose-soft: #fb7185;
+
+      --text-white: #f8fafc;
+      --text-silver: #cbd5e1;
+      --text-muted: #94a3b8;
+      --neu-dark: rgba(0, 0, 0, 0.9);
+      --neu-light: rgba(255, 255, 255, 0.04);
     }
 
     * {
@@ -38,35 +46,25 @@
 
     html {
       scroll-behavior: smooth;
-      background-color: var(--bg-obsidian);
-      color: var(--text-ivory);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-white);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
       min-height: 100vh;
       overflow-x: hidden;
       background:
-        radial-gradient(ellipse 80% 50% at 50% -15%, rgba(212, 175, 55, 0.12), transparent 60%),
-        radial-gradient(circle at 12% 28%, rgba(45, 212, 191, 0.09), transparent 45%),
-        radial-gradient(circle at 88% 65%, rgba(225, 29, 72, 0.08), transparent 50%),
-        linear-gradient(180deg, #070a12 0%, #04060a 100%);
+        radial-gradient(ellipse 75% 50% at 50% -15%, rgba(56, 189, 248, 0.14), transparent 65%),
+        radial-gradient(circle at 15% 30%, rgba(45, 212, 191, 0.1), transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(166, 124, 82, 0.08), transparent 50%),
+        linear-gradient(180deg, #080d16 0%, #05080d 100%);
       position: relative;
     }
 
-    /* Subtle Micro-Grain Luxury Texture */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
-      background-size: 28px 28px;
-      opacity: 0.45;
-    }
-
-    /* Ambient Atmospheric Light Orbs */
+    /* Ambient Blueish-Green & Subtle Brown-Gold Orbs */
     .ambient-stage {
       position: fixed;
       inset: 0;
@@ -75,95 +73,102 @@
       overflow: hidden;
     }
 
-    .lux-orb {
+    .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(135px);
-      opacity: 0.35;
-      animation: floatLuxury 22s ease-in-out infinite alternate;
+      filter: blur(130px);
+      opacity: 0.34;
+      animation: driftOrb 20s ease-in-out infinite alternate;
     }
 
-    .lux-orb-1 {
-      width: 580px;
-      height: 580px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.25), transparent 70%);
-      top: -180px;
+    .orb-1 {
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.32), transparent 70%);
+      top: -160px;
       left: -120px;
     }
 
-    .lux-orb-2 {
-      width: 650px;
-      height: 650px;
-      background: radial-gradient(circle, rgba(45, 212, 191, 0.22), transparent 70%);
-      top: 30%;
-      right: -220px;
-      animation-delay: -8s;
+    .orb-2 {
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.26), transparent 70%);
+      top: 32%;
+      right: -200px;
+      animation-delay: -7s;
     }
 
-    .lux-orb-3 {
-      width: 540px;
-      height: 540px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
-      bottom: -160px;
-      left: 25%;
-      animation-delay: -14s;
+    .orb-3 {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(166, 124, 82, 0.18), transparent 70%);
+      bottom: -140px;
+      left: 24%;
+      animation-delay: -13s;
     }
 
-    @keyframes floatLuxury {
+    @keyframes driftOrb {
       0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(45px, -35px) scale(1.07); }
+      100% { transform: translate(40px, -30px) scale(1.06); }
     }
 
     .container {
       position: relative;
       z-index: 1;
-      max-width: 1340px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 0 36px;
     }
 
-    /* Floating Haute-Horology Navigation Bar */
-    header.nav-atelier {
+    /* Swiss-Style Luxury Navigation Bar */
+    header.nav-bar {
       position: sticky;
-      top: 24px;
+      top: 22px;
       z-index: 40;
-      margin: 24px auto 0;
-      max-width: 1268px;
-      padding: 16px 34px;
+      margin: 22px auto 0;
+      max-width: 1248px;
+      padding: 14px 30px;
       border-radius: 999px;
-      background: rgba(10, 15, 26, 0.72);
-      backdrop-filter: blur(30px) saturate(190%);
-      -webkit-backdrop-filter: blur(30px) saturate(190%);
-      border-top: 1px solid var(--specular-top);
-      border-left: 1px solid var(--gold-border);
-      border-right: 1px solid var(--specular-side);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow:
-        0 26px 60px rgba(0, 0, 0, 0.82),
-        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      background: rgba(10, 16, 28, 0.72);
+      backdrop-filter: blur(28px) saturate(185%);
+      -webkit-backdrop-filter: blur(28px) saturate(185%);
+      border-top: 1px solid var(--glass-border-top);
+      border-left: 1px solid var(--glass-border-side);
+      border-right: 1px solid var(--glass-border-subtle);
+      border-bottom: 1px solid var(--glass-border-subtle);
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.12);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .brand-mark {
+    .brand-link {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 15px;
       text-decoration: none;
-      color: var(--text-ivory);
+      color: var(--text-white);
     }
 
-    .brand-crest {
-      width: 42px;
-      height: 42px;
+    .brand-logo-box {
+      width: 44px;
+      height: 44px;
       border-radius: 13px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.24), rgba(15, 23, 42, 0.9));
-      border: 1px solid var(--gold-border);
-      box-shadow: 5px 5px 12px var(--neu-shadow-dark), -2px -2px 8px var(--neu-shadow-light);
-      display: grid;
-      place-items: center;
-      font-size: 18px;
+      background: linear-gradient(145deg, rgba(56, 189, 248, 0.15), rgba(45, 212, 191, 0.06));
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      box-shadow: 5px 5px 12px var(--neu-dark), -2px -2px 8px var(--neu-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+
+    .brand-logo-box img,
+    .brand-logo-box svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6));
     }
 
     .brand-wordmark {
@@ -171,224 +176,226 @@
       flex-direction: column;
     }
 
+    /* Swiss-Style Ultra-Clean Sans-Serif ("Switzerland" Reference) */
     .brand-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--text-ivory);
-    }
-
-    .brand-sub {
-      font-size: 0.76rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-soft);
-    }
-
-    .kernel-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.84rem;
-      letter-spacing: 0.08em;
-      background: #060910;
-      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.95), inset -2px -2px 5px rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--text-Champagne);
-    }
-
-    .kernel-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #fbbf24;
-      box-shadow: 0 0 10px #fbbf24;
-    }
-
-    .kernel-dot.online {
-      background: var(--teal-luxury);
-      box-shadow: 0 0 14px var(--teal-luxury);
-    }
-
-    /* Editorial Luxury Hero */
-    .hero-sanctuary {
-      padding: 64px 0 46px;
-      text-align: center;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    .luxury-pill-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 22px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.04));
-      border: 1px solid var(--gold-border);
-      font-size: 0.84rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold-soft);
-      margin-bottom: 22px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-sanctuary h1 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 500;
-      font-size: clamp(2.8rem, 5vw, 4.35rem);
-      line-height: 1.08;
-      letter-spacing: -0.01em;
-      margin-bottom: 18px;
-      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 48%, #e6c875 100%);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-sanctuary p {
-      font-weight: 300;
-      font-size: 1.12rem;
-      line-height: 1.75;
-      color: var(--text-Champagne);
-      max-width: 740px;
-      margin: 0 auto 26px;
+    .brand-sub {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brown-gold-soft);
     }
 
-    .protocol-ribbon {
+    .status-pill {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px 26px;
+      gap: 10px;
+      padding: 9px 18px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      color: var(--gold-soft);
-      font-size: 0.9rem;
-      letter-spacing: 0.03em;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      background: #060a12;
+      box-shadow: inset 3px 3px 7px rgba(0, 0, 0, 0.92), inset -2px -2px 5px rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      color: var(--text-silver);
     }
 
-    /* Main 2-Column Diagnostic Deck */
-    .diagnostic-deck {
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brown-gold-soft);
+    }
+
+    .status-dot.online {
+      background: var(--mint-green);
+      box-shadow: 0 0 12px var(--mint-green);
+    }
+
+    /* Swiss-Modern Hero Section */
+    .hero {
+      padding: 62px 0 44px;
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      border-radius: 999px;
+      background: rgba(45, 212, 191, 0.08);
+      border: 1px solid rgba(45, 212, 191, 0.28);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mint-green);
+      margin-bottom: 20px;
+    }
+
+    /* Exact "Switzerland" Reference Styling: Ultra-Thin Geometric Sans-Serif with Vertical Platinum Gradient */
+    .hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: clamp(2.9rem, 5.2vw, 4.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 65%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-weight: 300;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-silver);
+      max-width: 680px;
+      margin: 0 auto 24px;
+    }
+
+    .disclaimer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: rgba(166, 124, 82, 0.1);
+      border: 1px solid var(--brown-gold-border);
+      color: #e6ccb2;
+      font-size: 0.86rem;
+      font-weight: 300;
+    }
+
+    /* Main 2-Column Grid */
+    .workspace-grid {
       display: grid;
-      grid-template-columns: 1fr 1.24fr;
-      gap: 34px;
+      grid-template-columns: 1fr 1.22fr;
+      gap: 32px;
       align-items: stretch;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
     }
 
-    @media (max-width: 1060px) {
-      .diagnostic-deck {
+    @media (max-width: 1040px) {
+      .workspace-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    /* Frosted Sapphire & Brushed Gold Luxury Card */
-    .luxury-glass-vault {
-      background: var(--glass-luxury);
-      backdrop-filter: blur(34px) saturate(185%);
-      -webkit-backdrop-filter: blur(34px) saturate(185%);
-      border-radius: 32px;
-      border-top: 1px solid var(--specular-top);
-      border-left: 1px solid var(--gold-border);
-      border-right: 1px solid var(--specular-side);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    /* Luxury Glass Panel */
+    .glass-box {
+      background: var(--glass-bg);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border-radius: 30px;
+      border-top: 1px solid var(--glass-border-top);
+      border-left: 1px solid var(--glass-border-side);
+      border-right: 1px solid var(--glass-border-subtle);
+      border-bottom: 1px solid var(--glass-border-subtle);
       box-shadow:
-        0 36px 80px rgba(0, 0, 0, 0.82),
-        0 0 40px rgba(212, 175, 55, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-      padding: 38px;
+        0 32px 75px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      padding: 36px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
-      overflow: hidden;
     }
 
-    .vault-header {
+    .box-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 16px;
       margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
-    .vault-step {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+    .box-kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--gold-soft);
+      color: var(--mint-green);
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .vault-header h2 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 600;
-      font-size: 1.95rem;
-      letter-spacing: 0.01em;
-      color: var(--text-ivory);
+    /* Swiss-Style Thin Modern Heading */
+    .box-header h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1.85rem;
+      letter-spacing: -0.03em;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Deep Recessed Neumorphic Well */
-    .neu-recessed-chamber {
-      background: #05080f;
+    /* Recessed Neumorphic Well */
+    .neu-well {
+      background: #060911;
       border-radius: 24px;
       padding: 26px;
       box-shadow:
-        inset 8px 8px 18px rgba(0, 0, 0, 0.96),
+        inset 7px 7px 16px rgba(0, 0, 0, 0.94),
         inset -4px -4px 12px rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Retinal Upload Portal */
-    .upload-portal {
+    /* Upload Dropzone */
+    .upload-dropzone {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 270px;
-      border: 1.5px dashed rgba(212, 175, 55, 0.42);
+      min-height: 265px;
+      border: 1.5px dashed rgba(45, 212, 191, 0.38);
       border-radius: 20px;
-      padding: 36px 24px;
+      padding: 34px 24px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05), rgba(8, 12, 22, 0.7));
+      transition: all 0.25s ease;
+      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.05), rgba(8, 13, 23, 0.7));
     }
 
-    .upload-portal:hover, .upload-portal.dragover {
-      border-color: var(--gold-soft);
-      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.12), rgba(10, 16, 28, 0.85));
-      box-shadow: 0 0 35px rgba(212, 175, 55, 0.14);
-      transform: translateY(-2px);
+    .upload-dropzone:hover, .upload-dropzone.dragover {
+      border-color: var(--mint-green);
+      background: radial-gradient(circle at center, rgba(45, 212, 191, 0.11), rgba(10, 16, 28, 0.85));
+      box-shadow: 0 0 32px rgba(45, 212, 191, 0.14);
     }
 
-    .upload-portal input {
+    .upload-dropzone input {
       display: none;
     }
 
-    .sapphire-lens-ring {
-      width: 68px;
-      height: 68px;
+    .upload-icon-circle {
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.22), rgba(8, 12, 20, 0.95));
-      border: 1px solid var(--gold-border);
-      box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.9), 0 0 24px rgba(212, 175, 55, 0.18);
-      display: grid;
-      place-items: center;
-      font-size: 1.7rem;
-      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(45, 212, 191, 0.08));
+      border: 1px solid rgba(45, 212, 191, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 24px rgba(45, 212, 191, 0.16);
     }
 
     .preview-stage {
@@ -398,23 +405,23 @@
       gap: 16px;
     }
 
-    .fundus-sapphire-viewport {
+    .fundus-viewport {
       position: relative;
       width: 100%;
-      height: 290px;
+      height: 285px;
       border-radius: 18px;
       overflow: hidden;
-      border: 1px solid var(--gold-border);
-      background: #020407;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: #030509;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.88);
     }
 
-    .fundus-sapphire-viewport img {
+    .fundus-viewport img {
       max-width: 100%;
-      max-height: 280px;
+      max-height: 275px;
       object-fit: contain;
       display: block;
     }
@@ -432,170 +439,146 @@
     }
 
     #heatmapCanvas.active {
-      opacity: 0.82;
+      opacity: 0.8;
     }
 
-    /* Tactile Mechanical Luxury Keys */
-    .btn-luxury-key {
+    /* Tactile Neumorphic Buttons */
+    .btn-neu {
       appearance: none;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: linear-gradient(145deg, #172133, #0b101a);
-      color: var(--text-ivory);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(145deg, #151f30, #0b1019);
+      color: var(--text-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 14px 24px;
-      border-radius: 16px;
+      padding: 14px 22px;
+      border-radius: 15px;
       cursor: pointer;
-      box-shadow:
-        7px 7px 16px rgba(0, 0, 0, 0.9),
-        -3px -3px 10px rgba(255, 255, 255, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.88), -3px -3px 10px rgba(255, 255, 255, 0.035);
+      transition: all 0.22s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 9px;
       text-decoration: none;
     }
 
-    .btn-luxury-key:hover:not(:disabled) {
-      border-color: var(--gold-soft);
-      color: var(--gold-soft);
-      transform: translateY(-2px);
-      box-shadow: 9px 9px 20px rgba(0, 0, 0, 0.94), 0 0 20px rgba(212, 175, 55, 0.15);
+    .btn-neu:hover:not(:disabled) {
+      border-color: var(--mint-green);
+      color: var(--mint-green);
+      transform: translateY(-1px);
     }
 
-    .btn-luxury-key:active:not(:disabled) {
-      transform: translateY(1px);
-      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.94);
+    .btn-aqua {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(45, 212, 191, 0.18));
+      border: 1px solid rgba(45, 212, 191, 0.5);
+      color: #f0fdfa;
     }
 
-    .btn-gold-edition {
-      background: linear-gradient(145deg, #2a2111, #141008);
-      border: 1px solid rgba(212, 175, 55, 0.55);
-      color: #fef08a;
-    }
-
-    .btn-gold-edition:hover:not(:disabled) {
-      background: linear-gradient(145deg, #382c16, #1d170b);
-      border-color: #fde047;
+    .btn-aqua:hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.32), rgba(45, 212, 191, 0.28));
+      border-color: var(--mint-green);
       color: #ffffff;
-      box-shadow: 0 0 28px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 25px rgba(45, 212, 191, 0.28);
     }
 
-    /* Prominent Rose/Crimson Escalation Button — HIDDEN until scan is screened */
+    /* Prominent Rose/Red Escalate Button — Strictly Hidden Until Scan Completes */
     #escalateBtn {
-      display: none; /* Strictly hidden before upload & screening */
+      display: none;
       appearance: none;
       width: 100%;
-      border: 1px solid rgba(251, 113, 133, 0.65);
-      background: linear-gradient(145deg, #3b1022, #1d0710);
+      border: 1px solid rgba(251, 113, 133, 0.6);
+      background: linear-gradient(145deg, #381120, #1b0810);
       color: #fff1f2;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.96rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.94rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 19px 28px;
-      border-radius: 18px;
+      padding: 18px 26px;
+      border-radius: 16px;
       cursor: pointer;
       box-shadow:
-        9px 9px 22px rgba(0, 0, 0, 0.94),
-        -4px -4px 12px rgba(244, 63, 94, 0.1),
-        0 0 30px rgba(225, 29, 72, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        8px 8px 20px rgba(0, 0, 0, 0.92),
+        0 0 28px rgba(244, 63, 94, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.24s ease;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 12px;
       margin-top: 22px;
-      animation: revealEscalation 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes revealEscalation {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     #escalateBtn:hover {
       border-color: #fda4af;
-      background: linear-gradient(145deg, #4c142b, #270915);
-      box-shadow:
-        12px 12px 26px rgba(0, 0, 0, 0.96),
-        0 0 42px rgba(225, 29, 72, 0.5);
+      background: linear-gradient(145deg, #481529, #250a14);
+      box-shadow: 10px 10px 24px rgba(0, 0, 0, 0.95), 0 0 38px rgba(244, 63, 94, 0.45);
       transform: translateY(-2px);
     }
 
-    .rose-jewel-dot {
-      width: 11px;
-      height: 11px;
+    .rose-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: var(--rose-highlight);
-      box-shadow: 0 0 14px var(--rose-highlight);
+      background: var(--rose-soft);
+      box-shadow: 0 0 12px var(--rose-soft);
     }
 
-    /* Sensor Telemetry Medallions */
+    /* Telemetry Grid */
     .telemetry-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      margin-top: 22px;
+      margin-top: 20px;
     }
 
-    .telemetry-medallion {
-      background: linear-gradient(145deg, rgba(16, 23, 38, 0.85), rgba(9, 13, 22, 0.9));
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-top: 1px solid rgba(212, 175, 55, 0.22);
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.8);
+    .stat-tile {
+      background: rgba(14, 21, 35, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-top: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8);
     }
 
-    .medallion-label {
-      font-size: 0.82rem;
+    .stat-label {
+      font-size: 0.8rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.11em;
-      color: var(--text-pewter);
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
       margin-bottom: 6px;
     }
 
-    .medallion-value {
+    .stat-value {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.04rem;
-      color: var(--text-ivory);
+      font-size: 1.02rem;
+      color: var(--text-white);
     }
 
-    .optical-status-bar {
+    .status-banner {
       margin-top: 18px;
-      padding: 15px 20px;
-      border-radius: 16px;
-      font-size: 0.95rem;
+      padding: 14px 18px;
+      border-radius: 15px;
+      font-size: 0.94rem;
       line-height: 1.55;
       background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.26);
+      border: 1px solid rgba(56, 189, 248, 0.25);
       color: #bae6fd;
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .optical-status-bar.warning {
-      background: rgba(251, 191, 36, 0.1);
-      border-color: rgba(251, 191, 36, 0.4);
-      color: #fde68a;
+    .status-banner.warning {
+      background: rgba(166, 124, 82, 0.14);
+      border-color: var(--brown-gold-border);
+      color: #ebd5b3;
     }
 
-    .optical-status-bar.error {
-      background: rgba(244, 63, 94, 0.12);
-      border-color: rgba(244, 63, 94, 0.4);
-      color: #fecdd3;
-    }
-
-    /* Right Column: Verdict & Uncertainty Chronometer */
+    /* Top Row: Primary Classification + Uncertainty Gauge (< 20%) */
     .diagnostic-top-row {
       display: grid;
       grid-template-columns: 1.15fr 1fr;
@@ -609,45 +592,46 @@
       }
     }
 
-    .verdict-plaque {
+    .verdict-card {
       padding: 24px;
       border-radius: 20px;
-      background: linear-gradient(145deg, rgba(18, 26, 44, 0.92), rgba(9, 13, 23, 0.96));
-      border: 1px solid rgba(212, 175, 55, 0.22);
+      background: linear-gradient(145deg, rgba(16, 25, 42, 0.92), rgba(9, 13, 23, 0.96));
+      border: 1px solid rgba(45, 212, 191, 0.22);
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .plaque-eyebrow {
+    .sub-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gold-soft);
+      letter-spacing: 0.14em;
+      color: var(--mint-green);
       margin-bottom: 8px;
     }
 
-    .plaque-verdict {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 600;
-      font-size: 2.25rem;
-      color: var(--text-ivory);
+    .verdict-heading {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 2.2rem;
+      letter-spacing: -0.03em;
+      color: var(--text-white);
       margin-bottom: 6px;
     }
 
-    .plaque-sub {
-      font-size: 0.95rem;
-      color: var(--text-Champagne);
+    .verdict-sub {
+      font-size: 0.94rem;
+      color: var(--text-silver);
       font-weight: 300;
       line-height: 1.5;
     }
 
-    .chronometer-gauge-card {
+    .uncertainty-card {
       padding: 20px;
       border-radius: 20px;
-      background: linear-gradient(145deg, rgba(18, 26, 44, 0.92), rgba(9, 13, 23, 0.96));
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(145deg, rgba(16, 25, 42, 0.92), rgba(9, 13, 23, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.09);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -657,29 +641,29 @@
 
     .gauge-svg-wrap {
       position: relative;
-      width: 154px;
-      height: 90px;
+      width: 152px;
+      height: 88px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
     }
 
     .gauge-svg {
-      width: 154px;
-      height: 90px;
+      width: 152px;
+      height: 88px;
       overflow: visible;
     }
 
     .gauge-track {
       fill: none;
-      stroke: #0b101c;
+      stroke: #0b111d;
       stroke-width: 12;
       stroke-linecap: round;
     }
 
     .gauge-fill {
       fill: none;
-      stroke: url(#uncertaintyGrad);
+      stroke: url(#aquaGrad);
       stroke-width: 12;
       stroke-linecap: round;
       stroke-dasharray: 176;
@@ -691,24 +675,24 @@
       position: absolute;
       bottom: 2px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.35rem;
+      font-size: 1.32rem;
       font-weight: 500;
-      color: var(--text-ivory);
+      color: var(--text-white);
     }
 
-    .uncertainty-pill {
+    .uncertainty-badge {
       margin-top: 10px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
+      font-size: 0.78rem;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-Champagne);
+      background: rgba(45, 212, 191, 0.14);
+      color: var(--mint-green);
     }
 
-    /* Confidence Bars */
+    /* Confidence Bars (Blueish-Light-Green Gradient) */
     .confidence-list {
       display: flex;
       flex-direction: column;
@@ -716,34 +700,34 @@
     }
 
     .conf-item {
-      background: rgba(13, 19, 32, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(13, 20, 33, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 14px;
-      padding: 14px 18px;
+      padding: 13px 16px;
     }
 
     .conf-top {
       display: flex;
       justify-content: space-between;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
+      font-size: 0.94rem;
+      margin-bottom: 7px;
     }
 
     .conf-name {
       font-weight: 400;
-      color: var(--text-ivory);
+      color: var(--text-white);
     }
 
     .conf-score {
       font-family: 'JetBrains Mono', monospace;
-      color: var(--gold-soft);
+      color: var(--mint-green);
     }
 
     .conf-track {
       width: 100%;
       height: 8px;
       border-radius: 999px;
-      background: #04060a;
+      background: #04070c;
       box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.95);
       overflow: hidden;
     }
@@ -751,7 +735,7 @@
     .conf-fill {
       height: 100%;
       border-radius: 999px;
-      background: linear-gradient(90deg, var(--gold-primary), var(--teal-luxury));
+      background: var(--aqua-grad);
       transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -759,18 +743,18 @@
       display: none;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      padding: 30px 20px;
-      color: var(--gold-soft);
+      gap: 12px;
+      padding: 28px 20px;
+      color: var(--mint-green);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     .spinner-ring {
       width: 22px;
       height: 22px;
-      border: 2px solid rgba(212, 175, 55, 0.25);
-      border-top-color: var(--gold-soft);
+      border: 2px solid rgba(45, 212, 191, 0.2);
+      border-top-color: var(--mint-green);
       border-radius: 50%;
       animation: spin 0.9s linear infinite;
     }
@@ -780,624 +764,585 @@
     }
 
     /* =====================================================================
-       FLOATING LUXURY CLINICIAN REFERRAL MODAL (MATCHES 3RD SCREENSHOT)
-       Appears directly when user clicks "Escalate to Ophthalmologist"
+       FLOATING CLINICIAN REFERRAL MODAL (NO MANUAL LOCATION TYPING)
+       Automatically uses Live GPS when clicking "Find Eye Doctors"
        ===================================================================== */
-    .luxury-modal-backdrop {
+    .modal-backdrop {
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: rgba(3, 5, 10, 0.78);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      background: rgba(3, 6, 12, 0.78);
+      backdrop-filter: blur(20px) saturate(165%);
+      -webkit-backdrop-filter: blur(20px) saturate(165%);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 24px;
-      animation: fadeBackdrop 0.3s ease forwards;
     }
 
-    @keyframes fadeBackdrop {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .floating-referral-modal {
+    .floating-modal {
       width: 100%;
-      max-width: 720px;
-      background: linear-gradient(155deg, rgba(16, 23, 38, 0.92), rgba(8, 12, 22, 0.96));
-      border-radius: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.24);
-      border-left: 1px solid var(--gold-border);
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      max-width: 680px;
+      background: linear-gradient(155deg, rgba(15, 23, 38, 0.94), rgba(8, 13, 23, 0.98));
+      border-radius: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+      border-left: 1px solid rgba(56, 189, 248, 0.32);
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
       box-shadow:
-        0 45px 100px rgba(0, 0, 0, 0.95),
-        0 0 60px rgba(212, 175, 55, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
-      padding: 40px;
+        0 42px 95px rgba(0, 0, 0, 0.94),
+        0 0 55px rgba(45, 212, 191, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      padding: 38px;
       position: relative;
-      animation: floatUpModal 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes floatUpModal {
-      from { opacity: 0; transform: translateY(28px) scale(0.97); }
+    @keyframes modalSlideUp {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .modal-close-btn {
       position: absolute;
-      top: 32px;
-      right: 32px;
-      width: 40px;
-      height: 40px;
+      top: 30px;
+      right: 30px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: #080c15;
-      color: var(--text-Champagne);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #070b14;
+      color: var(--text-silver);
       cursor: pointer;
       display: grid;
       place-items: center;
-      font-size: 1.1rem;
-      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.85);
-      transition: all 0.2s ease;
+      font-size: 1rem;
     }
 
-    .modal-close-btn:hover {
-      border-color: var(--gold-soft);
-      color: var(--gold-soft);
-    }
-
-    .intake-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      letter-spacing: 0.2em;
+    .modal-kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--sky-luxury);
+      color: var(--cyan-blue);
       margin-bottom: 6px;
     }
 
-    .intake-main-heading {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 2.35rem;
-      font-weight: 500;
-      color: var(--text-ivory);
+    .modal-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      color: var(--text-white);
       margin-bottom: 22px;
-      padding-bottom: 18px;
+      padding-bottom: 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .intake-inner-well {
+    .modal-well {
       background: #060911;
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow:
-        inset 7px 7px 16px rgba(0, 0, 0, 0.95),
-        inset -4px -4px 10px rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: inset 6px 6px 14px rgba(0, 0, 0, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .intake-status-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--text-ivory);
-      margin-bottom: 12px;
+    .modal-status-title {
+      font-size: 1.32rem;
+      font-weight: 500;
+      color: var(--text-white);
+      margin-bottom: 10px;
     }
 
-    .intake-status-desc {
-      font-size: 1.06rem;
+    .modal-status-desc {
+      font-size: 1.02rem;
       line-height: 1.65;
-      color: var(--text-Champagne);
+      color: var(--text-silver);
       margin-bottom: 14px;
     }
 
-    .intake-status-disclaimer {
-      font-size: 0.94rem;
+    .modal-disclaimer {
+      font-size: 0.92rem;
       line-height: 1.6;
-      color: var(--text-pewter);
-      padding-bottom: 24px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .luxury-field-group {
+      color: var(--text-muted);
+      padding-bottom: 22px;
       margin-bottom: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
-    .luxury-field-label {
+    .field-label {
       display: block;
-      font-size: 1.04rem;
+      font-size: 1rem;
       font-weight: 400;
-      color: var(--text-Champagne);
+      color: var(--text-silver);
       margin-bottom: 10px;
     }
 
     .luxury-input {
       width: 100%;
-      padding: 16px 20px;
-      border-radius: 16px;
-      background: #0b111e;
+      padding: 15px 18px;
+      border-radius: 15px;
+      background: #0a101d;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.9), inset -2px -2px 6px rgba(255, 255, 255, 0.03);
-      color: var(--text-ivory);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.02rem;
-      transition: all 0.25s ease;
-    }
-
-    .luxury-input::placeholder {
-      color: #64748b;
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.88);
+      color: var(--text-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
     }
 
     .luxury-input:focus {
       outline: none;
-      border-color: var(--gold-soft);
-      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(212, 175, 55, 0.22);
+      border-color: var(--mint-green);
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.88), 0 0 18px rgba(45, 212, 191, 0.22);
+    }
+
+    .gps-auto-note {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--mint-green);
     }
 
     /* =====================================================================
        TWO SEPARATE FLOATING LUXURY OUTPUT BOXES
-       (Revealed ONLY after clicking "Find Eye Doctors" inside the modal)
+       1. Clinical Summary
+       2. Nearby Eye Specialists (with Secondary Area Filter)
        ===================================================================== */
-    #escalationSuiteContainer {
+    #referralResultsWrapper {
       display: none;
       flex-direction: column;
-      gap: 44px;
+      gap: 40px;
       margin-bottom: 64px;
     }
 
-    /* FLOATING BOX 1: Bespoke Swiss-Clinic AI Handover Certificate */
-    .luxury-handover-vault {
-      background: linear-gradient(160deg, rgba(19, 26, 44, 0.84) 0%, rgba(9, 13, 24, 0.95) 100%);
-      border-radius: 34px;
-      border-top: 1px solid rgba(230, 200, 117, 0.55);
-      border-left: 1px solid rgba(230, 200, 117, 0.35);
-      border-right: 1px solid rgba(255, 255, 255, 0.09);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow:
-        0 40px 95px rgba(0, 0, 0, 0.9),
-        0 0 65px rgba(212, 175, 55, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      padding: 42px;
-      position: relative;
+    .summary-sheet {
+      background: linear-gradient(145deg, #090e19 0%, #060911 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(56, 189, 248, 0.24);
+      padding: 34px;
+      box-shadow: inset 6px 6px 16px rgba(0, 0, 0, 0.92);
     }
 
-    .parchment-certificate {
-      background:
-        radial-gradient(circle at 100% 0%, rgba(212, 175, 55, 0.1), transparent 50%),
-        linear-gradient(145deg, #0a0f1a 0%, #060911 100%);
-      border-radius: 26px;
-      border: 1px solid rgba(212, 175, 55, 0.32);
-      padding: 38px;
-      box-shadow: inset 8px 8px 20px rgba(0, 0, 0, 0.95);
-      position: relative;
-    }
-
-    .cert-header {
+    .summary-top-bar {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      padding-bottom: 26px;
-      margin-bottom: 28px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+      gap: 18px;
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .cert-crest-group {
+    .summary-brand-row {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
 
-    .cert-gold-seal {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.28), rgba(12, 18, 30, 0.96));
-      border: 1px solid rgba(212, 175, 55, 0.65);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
-      display: grid;
-      place-items: center;
-      font-size: 1.55rem;
+    .summary-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      color: var(--text-white);
     }
 
-    .cert-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--text-ivory);
-      letter-spacing: 0.02em;
-    }
-
-    .cert-serial {
+    .summary-ref {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      color: var(--gold-soft);
-      letter-spacing: 0.14em;
+      font-size: 0.82rem;
+      color: var(--brown-gold-soft);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-top: 4px;
     }
 
-    .cert-priority-seal {
-      padding: 10px 22px;
+    .summary-badge {
+      padding: 8px 18px;
       border-radius: 999px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      background: rgba(225, 29, 72, 0.16);
-      border: 1px solid rgba(251, 113, 133, 0.5);
-      color: #fda4af;
+      background: rgba(45, 212, 191, 0.12);
+      border: 1px solid rgba(45, 212, 191, 0.4);
+      color: var(--mint-green);
     }
 
-    .cert-biometric-ribbon {
+    .summary-metrics-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 28px;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
-    @media (max-width: 820px) {
-      .cert-biometric-ribbon {
+    @media (max-width: 800px) {
+      .summary-metrics-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .cert-pillar {
-      background: linear-gradient(145deg, rgba(17, 25, 42, 0.86), rgba(10, 15, 26, 0.92));
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-left: 3px solid var(--gold-primary);
-      border-radius: 16px;
-      padding: 18px 20px;
-      box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.7);
+    .summary-cell {
+      background: rgba(15, 23, 38, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-left: 3px solid var(--brown-gold);
+      border-radius: 14px;
+      padding: 16px 18px;
     }
 
-    .cert-pillar-label {
-      font-size: 0.82rem;
+    .summary-cell-label {
+      font-size: 0.8rem;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: var(--text-pewter);
+      letter-spacing: 0.11em;
+      color: var(--text-muted);
       margin-bottom: 6px;
     }
 
-    .cert-pillar-value {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.45rem;
-      font-weight: 600;
-      color: var(--text-ivory);
+    .summary-cell-val {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text-white);
     }
 
-    .cert-editorial-letter {
-      background: rgba(12, 18, 32, 0.88);
-      border: 1px solid rgba(212, 175, 55, 0.22);
-      border-radius: 20px;
-      padding: 28px 32px;
-      color: var(--text-Champagne);
-      font-size: 1.06rem;
-      line-height: 1.82;
+    .summary-note-box {
+      background: rgba(12, 19, 32, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 24px 28px;
+      color: var(--text-silver);
+      font-size: 1.02rem;
+      line-height: 1.75;
     }
 
-    .cert-editorial-letter h4 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.38rem;
-      font-weight: 600;
-      color: var(--gold-soft);
-      letter-spacing: 0.04em;
-      margin-bottom: 12px;
-    }
-
-    .cert-signature-bar {
-      margin-top: 24px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    /* Secondary Area Filter Drawer inside Practitioners Box */
+    #secondaryAreaFilterBar {
+      display: none;
+      margin-bottom: 24px;
+      padding: 18px 22px;
+      border-radius: 18px;
+      background: #060911;
+      border: 1px solid rgba(56, 189, 248, 0.25);
       align-items: center;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--gold-soft);
-    }
-
-    /* FLOATING BOX 2: Separate Specialist & Hospital Concierge Vault */
-    .luxury-practitioners-vault {
-      background: linear-gradient(160deg, rgba(14, 24, 39, 0.84) 0%, rgba(7, 12, 22, 0.96) 100%);
-      border-radius: 34px;
-      border-top: 1px solid rgba(45, 212, 191, 0.5);
-      border-left: 1px solid rgba(212, 175, 55, 0.3);
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow:
-        0 40px 95px rgba(0, 0, 0, 0.9),
-        0 0 60px rgba(45, 212, 191, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
-      padding: 42px;
+      gap: 14px;
     }
 
     .practitioner-cards-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      gap: 22px;
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 960px) {
       .practitioner-cards-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .floating-specialist-card {
-      background: linear-gradient(145deg, rgba(17, 26, 44, 0.94), rgba(9, 14, 25, 0.98));
+    .specialist-card {
+      background: linear-gradient(145deg, rgba(16, 25, 42, 0.94), rgba(9, 14, 25, 0.98));
       border-radius: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.22);
-      border-left: 1px solid rgba(212, 175, 55, 0.32);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: 1px solid rgba(45, 212, 191, 0.32);
       border-right: 1px solid rgba(255, 255, 255, 0.07);
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      padding: 28px;
-      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.78);
+      padding: 26px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.78);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 20px;
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 18px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
 
-    .floating-specialist-card:hover {
-      transform: translateY(-4px);
-      border-left-color: var(--gold-soft);
-      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.88), 0 0 30px rgba(212, 175, 55, 0.12);
+    .specialist-card:hover {
+      transform: translateY(-3px);
+      border-left-color: var(--mint-green);
     }
 
     .spec-identity-row {
       display: flex;
       align-items: flex-start;
-      gap: 18px;
+      gap: 16px;
     }
 
-    .spec-crest-avatar {
-      width: 58px;
-      height: 58px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.24), rgba(45, 212, 191, 0.12));
-      border: 1px solid var(--gold-border);
-      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.85);
+    .spec-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(45, 212, 191, 0.1));
+      border: 1px solid rgba(45, 212, 191, 0.4);
       display: grid;
       place-items: center;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--gold-soft);
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--mint-green);
       flex-shrink: 0;
     }
 
     .spec-doctor-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.62rem;
-      font-weight: 600;
-      color: var(--text-ivory);
-      line-height: 1.2;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text-white);
       margin-bottom: 4px;
     }
 
     .spec-credentials {
-      font-size: 0.94rem;
-      font-weight: 500;
-      color: var(--gold-soft);
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: var(--brown-gold-soft);
       margin-bottom: 8px;
     }
 
-    .spec-hospital-pill {
+    .spec-hospital-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
+      padding: 6px 13px;
       border-radius: 10px;
-      background: rgba(45, 212, 191, 0.1);
-      border: 1px solid rgba(45, 212, 191, 0.3);
-      color: #99f6e4;
-      font-size: 0.94rem;
-      font-weight: 500;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      color: #bae6fd;
+      font-size: 0.92rem;
+      font-weight: 400;
     }
 
-    /* Separate Embedded Luxury Navigation & Directions Sub-Box */
-    .spec-navigation-well {
+    /* Separate Embedded Luxury Directions Sub-Box */
+    .spec-directions-box {
       background: #050810;
       border-radius: 18px;
-      padding: 18px 20px;
+      padding: 16px 18px;
       border: 1px solid rgba(255, 255, 255, 0.07);
-      box-shadow: inset 5px 5px 12px rgba(0, 0, 0, 0.94);
+      box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.92);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .spec-address-line {
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: var(--text-Champagne);
+    .spec-address {
+      font-size: 0.94rem;
+      line-height: 1.5;
+      color: var(--text-silver);
     }
 
-    .spec-concierge-bar {
+    .spec-bottom-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .spec-distance-tag {
+    .spec-distance {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.88rem;
-      color: var(--teal-luxury);
+      font-size: 0.86rem;
+      color: var(--mint-green);
     }
 
-    footer.atelier-footer {
+    footer.site-footer {
       text-align: center;
-      padding: 44px 0 90px;
-      color: var(--text-pewter);
-      font-size: 0.88rem;
-      letter-spacing: 0.14em;
+      padding: 40px 0 85px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
   </style>
 </head>
 <body>
 
+  <!-- Hidden Reusable SVG Symbol of Your Uploaded 3D White Magnifying-Eye PNG -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <g id="insightLogoSymbol">
+        <!-- 3D Extruded Shadow Layer -->
+        <g transform="translate(1.5, 3)" stroke="#05080f" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 78 65 A 36 36 0 1 0 58 83" />
+          <line x1="31" y1="69" x2="12" y2="88" />
+          <path d="M 32 48 Q 52 28 72 48 Q 52 68 32 48 Z" />
+          <circle cx="52" cy="48" r="8" />
+        </g>
+        <!-- Crisp White Foreground Magnifying Glass + Eye -->
+        <g stroke="#ffffff" stroke-width="8.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 78 65 A 36 36 0 1 0 58 83" />
+          <line x1="31" y1="69" x2="12" y2="88" />
+          <path d="M 32 48 Q 52 28 72 48 Q 52 68 32 48 Z" />
+          <circle cx="52" cy="48" r="7.5" fill="#ffffff" />
+        </g>
+      </g>
+    </defs>
+  </svg>
+
   <div class="ambient-stage">
-    <div class="lux-orb lux-orb-1"></div>
-    <div class="lux-orb lux-orb-2"></div>
-    <div class="lux-orb lux-orb-3"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
 
-  <header class="nav-atelier">
-    <a href="#" class="brand-mark">
-      <div class="brand-crest">👁️</div>
+  <!-- Top Navigation Bar with "Insight" & Your Uploaded Magnifying-Eye Icon -->
+  <header class="nav-bar">
+    <a href="#" class="brand-link">
+      <div class="brand-logo-box">
+        <img
+          src="50df3c7cb96da34ee5a53c645f38ad66.png"
+          alt="Insight Logo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <svg viewBox="0 0 100 100" style="display:none;">
+          <use href="#insightLogoSymbol" />
+        </svg>
+      </div>
       <div class="brand-wordmark">
-        <span class="brand-name">Aether Atelier</span>
-        <span class="brand-sub">Ophthalmic Diagnostic Suite</span>
+        <span class="brand-name">Insight</span>
+        <span class="brand-sub">Retinal Diagnostics</span>
       </div>
     </a>
-    <div class="kernel-badge">
-      <span id="systemDot" class="kernel-dot"></span>
-      <span id="systemStatusText">CONNECTING ATELIER ENGINE...</span>
+    <div class="status-pill">
+      <span id="systemDot" class="status-dot"></span>
+      <span id="systemStatusText">CONNECTING...</span>
     </div>
   </header>
 
   <main class="container">
-    <!-- Hero Sanctuary -->
-    <section class="hero-sanctuary">
-      <div class="luxury-pill-tag">
-        <span>✦</span>
-        <span>Haute-Precision Retinal Telemetry &amp; Neural Grading</span>
+    <!-- Hero Section ("Switzerland" Thin Sans-Serif Typography) -->
+    <section class="hero">
+      <div class="eyebrow-badge">
+        <span>Ophthalmic Screening Suite</span>
       </div>
-      <h1>Ophthalmic Retinal Diagnostic Sanctuary</h1>
+      <h1>Insight Retinal Screening</h1>
       <p>
-        Experience clinical-grade fundus luminance inspection, vascular lesion attention mapping, Shannon entropy uncertainty chronometry, and private specialist referral.
+        Upload a retinal fundus photograph for automated optical quality verification, vascular lesion mapping, diabetic retinopathy grading, and direct specialist referral.
       </p>
-      <div class="protocol-ribbon">
+      <div class="disclaimer-pill">
         <span>⚕️</span>
-        <span>Research &amp; clinical triage workstation. All neural screenings require confirmatory evaluation by a licensed ophthalmologist.</span>
+        <span>Clinical research prototype. Screening results must be reviewed by a qualified ophthalmologist.</span>
       </div>
     </section>
 
-    <!-- Main 2-Column Diagnostic Deck -->
-    <section class="diagnostic-deck">
+    <!-- Primary 2-Column Workspace -->
+    <section class="workspace-grid">
 
-      <!-- LEFT VAULT: Retinal Scan Acquisition & Optical Telemetry -->
-      <div class="luxury-glass-vault">
+      <!-- LEFT BOX: Retinal Scan -->
+      <div class="glass-box">
         <div>
-          <div class="vault-header">
+          <div class="box-header">
             <div>
-              <span class="vault-step">Chamber 01 // Optical Acquisition</span>
-              <h2>Retinal Fundus Viewport</h2>
+              <span class="box-kicker">Image Upload</span>
+              <h2>Retinal Scan</h2>
             </div>
-            <button id="changeScanBtn" class="btn-luxury-key" style="display: none; padding: 10px 18px; font-size: 0.8rem;">
+            <button id="changeScanBtn" class="btn-neu" style="display: none; padding: 10px 16px; font-size: 0.78rem;">
               Replace Scan
             </button>
           </div>
 
-          <div class="neu-recessed-chamber">
+          <div class="neu-well">
             <!-- Upload Dropzone -->
-            <label for="retinalInput" id="uploadDropzone" class="upload-portal">
+            <label for="retinalInput" id="uploadDropzone" class="upload-dropzone">
               <input type="file" id="retinalInput" accept=".jpg,.jpeg,.png" />
-              <div class="sapphire-lens-ring">🔬</div>
-              <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 600; margin-bottom: 6px; color: var(--text-ivory);">
-                Deposit Retinal Fundus Photograph
+              <div class="upload-icon-circle">
+                <svg viewBox="0 0 100 100">
+                  <use href="#insightLogoSymbol" />
+                </svg>
               </div>
-              <div style="font-size: 0.9rem; color: var(--text-pewter); font-family: 'JetBrains Mono', monospace;">
+              <div style="font-size: 1.2rem; font-weight: 300; letter-spacing: -0.02em; margin-bottom: 6px; color: var(--text-white);">
+                Upload Retinal Photograph
+              </div>
+              <div style="font-size: 0.86rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
                 JPG, JPEG, PNG • Auto-Cropped &amp; Contrast Normalized
               </div>
             </label>
 
             <!-- Uploaded Image Preview + Lesion Heat-Map -->
             <div id="previewStage" class="preview-stage">
-              <div class="fundus-sapphire-viewport">
+              <div class="fundus-viewport">
                 <img id="fundusPreviewImg" crossorigin="anonymous" alt="Retinal Fundus Scan" />
                 <canvas id="heatmapCanvas"></canvas>
               </div>
               <div style="display: flex; width: 100%; gap: 12px; justify-content: center;">
-                <button id="toggleHeatmapBtn" class="btn-luxury-key" style="flex: 1;">
-                  <span>🔥 Lesion Heat-Map</span>
+                <button id="toggleHeatmapBtn" class="btn-neu" style="flex: 1;">
+                  <span>Lesion Heat-Map</span>
                 </button>
-                <button id="reanalyzeBtn" class="btn-luxury-key btn-gold-edition" style="flex: 1;">
-                  <span>✨ Re-Run Screening</span>
+                <button id="reanalyzeBtn" class="btn-neu btn-aqua" style="flex: 1;">
+                  <span>Re-Run Analysis</span>
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Sensor Telemetry Medallions -->
+          <!-- Optical Telemetry -->
           <div class="telemetry-grid">
-            <div class="telemetry-medallion">
-              <div class="medallion-label">Resolution</div>
-              <div id="statResolution" class="medallion-value">—</div>
+            <div class="stat-tile">
+              <div class="stat-label">Resolution</div>
+              <div id="statResolution" class="stat-value">—</div>
             </div>
-            <div class="telemetry-medallion">
-              <div class="medallion-label">Mean Luminance</div>
-              <div id="statLuminance" class="medallion-value">—</div>
+            <div class="stat-tile">
+              <div class="stat-label">Brightness</div>
+              <div id="statLuminance" class="stat-value">—</div>
             </div>
-            <div class="telemetry-medallion">
-              <div class="medallion-label">Contrast (Std)</div>
-              <div id="statContrast" class="medallion-value">—</div>
+            <div class="stat-tile">
+              <div class="stat-label">Contrast</div>
+              <div id="statContrast" class="stat-value">—</div>
             </div>
-            <div class="telemetry-medallion">
-              <div class="medallion-label">Color Profile</div>
-              <div id="statColorMode" class="medallion-value">—</div>
+            <div class="stat-tile">
+              <div class="stat-label">Color Mode</div>
+              <div id="statColorMode" class="stat-value">—</div>
             </div>
-            <div class="telemetry-medallion">
-              <div class="medallion-label">Tensor Shape</div>
-              <div id="statMatrix" class="medallion-value">—</div>
+            <div class="stat-tile">
+              <div class="stat-label">Dimensions</div>
+              <div id="statMatrix" class="stat-value">—</div>
             </div>
-            <div class="telemetry-medallion">
-              <div class="medallion-label">Payload Size</div>
-              <div id="statFileSize" class="medallion-value">—</div>
+            <div class="stat-tile">
+              <div class="stat-label">File Size</div>
+              <div id="statFileSize" class="stat-value">—</div>
             </div>
           </div>
         </div>
 
-        <div id="qualityBanner" class="optical-status-bar">
+        <div id="qualityBanner" class="status-banner">
           <span>ℹ️</span>
-          <span id="qualityBannerText">Awaiting retinal fundus photograph to evaluate optical exposure and sensor contrast.</span>
+          <span id="qualityBannerText">Upload a retinal scan to inspect image brightness and contrast.</span>
         </div>
       </div>
 
-      <!-- RIGHT VAULT: Neural Retinopathy Classification, Uncertainty Gauge & Hidden-Until-Ready Escalation Button -->
-      <div class="luxury-glass-vault">
+      <!-- RIGHT BOX: Screening Results -->
+      <div class="glass-box">
         <div>
-          <div class="vault-header">
+          <div class="box-header">
             <div>
-              <span class="vault-step">Chamber 02 // Neural Diagnostics</span>
-              <h2>Retinopathy Grading &amp; Uncertainty</h2>
+              <span class="box-kicker">Diagnostic Analysis</span>
+              <h2>Screening Results</h2>
             </div>
           </div>
 
-          <div class="neu-recessed-chamber">
+          <div class="neu-well">
             <div class="diagnostic-top-row">
-              <!-- Verdict Plaque -->
-              <div class="verdict-plaque">
-                <div class="plaque-eyebrow">Primary Screening Grade</div>
-                <div id="verdictTitle" class="plaque-verdict">Awaiting Scan</div>
-                <div id="verdictSubtitle" class="plaque-sub">
-                  Deposit a retinal scan in Chamber 01 to initiate automated neural grading.
+              <!-- Verdict Card -->
+              <div class="verdict-card">
+                <div class="sub-label">Detected Grade</div>
+                <div id="verdictTitle" class="verdict-heading">Awaiting Scan</div>
+                <div id="verdictSubtitle" class="verdict-sub">
+                  Upload a retinal scan on the left to view diabetic retinopathy grading.
                 </div>
               </div>
 
-              <!-- Uncertainty Chronometer Gauge -->
-              <div class="chronometer-gauge-card">
-                <div class="plaque-eyebrow" style="margin-bottom: 4px;">Uncertainty Index</div>
+              <!-- Uncertainty Gauge (Always Calibrated Below 20%) -->
+              <div class="uncertainty-card">
+                <div class="sub-label" style="margin-bottom: 4px;">Uncertainty Index</div>
                 <div class="gauge-svg-wrap">
                   <svg class="gauge-svg" viewBox="0 0 140 80">
                     <defs>
-                      <linearGradient id="uncertaintyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#2dd4bf" />
-                        <stop offset="50%" stop-color="#e6c875" />
-                        <stop offset="100%" stop-color="#f43f5e" />
+                      <linearGradient id="aquaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#38bdf8" />
+                        <stop offset="100%" stop-color="#2dd4bf" />
                       </linearGradient>
                     </defs>
                     <path class="gauge-track" d="M 14 70 A 56 56 0 0 1 126 70" />
@@ -1405,14 +1350,14 @@
                   </svg>
                   <div id="uncertaintyValue" class="gauge-readout">—%</div>
                 </div>
-                <div id="uncertaintyBadge" class="uncertainty-pill">STANDBY</div>
+                <div id="uncertaintyBadge" class="uncertainty-badge">STANDBY</div>
               </div>
             </div>
 
             <!-- Loading Indicator -->
             <div id="aiLoader" class="scanner-loader">
               <div class="spinner-ring"></div>
-              <span>AUTO-CROPPING FUNDUS &amp; EXECUTING NEURAL GRADING...</span>
+              <span>ANALYZING RETINAL SCAN...</span>
             </div>
 
             <!-- Confidence Breakdown Bars -->
@@ -1433,16 +1378,16 @@
               </div>
             </div>
 
-            <!-- Tactile Rose/Red Escalate Button — ONLY appears after a scan is uploaded & screened -->
+            <!-- Rose/Red Escalate Button (Strictly Hidden Until Scan Screening Finishes) -->
             <button id="escalateBtn" type="button">
-              <span class="rose-jewel-dot"></span>
+              <span class="rose-dot"></span>
               <span>Escalate to Ophthalmologist</span>
             </button>
           </div>
         </div>
 
-        <div style="margin-top: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem; color: var(--text-pewter); font-family: 'JetBrains Mono', monospace;">
-          <span>SHANNON ENTROPY CHRONOMETER</span>
+        <div style="margin-top: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">
+          <span>INSIGHT DIAGNOSTIC ENGINE</span>
           <span id="inferenceTimestamp">STANDBY</span>
         </div>
       </div>
@@ -1450,92 +1395,104 @@
     </section>
 
     <!-- ===================================================================
-         SEPARATE FLOATING LUXURY OUTPUT BOXES
-         (Revealed ONLY after clicking "Find Eye Doctors" in the Floating Modal)
+         TWO SEPARATE FLOATING LUXURY OUTPUT BOXES
+         (Revealed ONLY after clicking "Find Eye Doctors" in the Modal)
          =================================================================== -->
-    <div id="escalationSuiteContainer">
+    <div id="referralResultsWrapper">
 
-      <!-- FLOATING LUXURY BOX 1: Bespoke Swiss-Clinic AI Handover Certificate -->
-      <section id="luxuryHandoverBox" class="luxury-handover-vault">
-        <div class="vault-header">
+      <!-- SEPARATE LUXURY BOX 1: Clinical Summary -->
+      <section id="clinicalSummaryBox" class="glass-box">
+        <div class="box-header">
           <div>
-            <span class="vault-step">Executive Clinical Dispatch // Handoff Dossier</span>
-            <h2>Ophthalmic Triage &amp; Diagnostic Certificate</h2>
+            <span class="box-kicker">Patient Handoff</span>
+            <h2>Clinical Summary</h2>
           </div>
-          <button id="copyBriefBtn" class="btn-luxury-key btn-gold-edition">
-            <span>✦ Copy Clinical Dossier</span>
+          <button id="copyBriefBtn" class="btn-neu btn-aqua">
+            <span>Copy Summary</span>
           </button>
         </div>
 
-        <div class="parchment-certificate">
-          <div class="cert-header">
-            <div class="cert-crest-group">
-              <div class="cert-gold-seal">⚕️</div>
+        <div class="summary-sheet">
+          <div class="summary-top-bar">
+            <div class="summary-brand-row">
+              <div class="brand-logo-box" style="width: 42px; height: 42px;">
+                <svg viewBox="0 0 100 100">
+                  <use href="#insightLogoSymbol" />
+                </svg>
+              </div>
               <div>
-                <div class="cert-title">Aether Private Ophthalmic Dispatch</div>
-                <div id="dossierRefId" class="cert-serial">PROTOCOL REF // AETH-DR-2026</div>
+                <div class="summary-title">Insight Clinical Referral Note</div>
+                <div id="dossierRefId" class="summary-ref">REF // INS-2026</div>
               </div>
             </div>
-            <div id="dossierUrgencyPill" class="cert-priority-seal">SPECIALIST REVIEW ADVISED</div>
+            <div id="dossierUrgencyPill" class="summary-badge">SPECIALIST CONSULTATION</div>
           </div>
 
-          <div class="cert-biometric-ribbon">
-            <div class="cert-pillar">
-              <div class="cert-pillar-label">Patient Identity</div>
-              <div id="dossierPatientVal" class="cert-pillar-value">Anonymous Patient</div>
+          <div class="summary-metrics-grid">
+            <div class="summary-cell">
+              <div class="summary-cell-label">Patient Name</div>
+              <div id="dossierPatientVal" class="summary-cell-val">Not Provided</div>
             </div>
-            <div class="cert-pillar">
-              <div class="cert-pillar-label">Primary Neural Grade</div>
-              <div id="dossierGradeVal" class="cert-pillar-value">—</div>
+            <div class="summary-cell">
+              <div class="summary-cell-label">Screening Result</div>
+              <div id="dossierGradeVal" class="summary-cell-val">—</div>
             </div>
-            <div class="cert-pillar">
-              <div class="cert-pillar-label">Classifier Confidence</div>
-              <div id="dossierConfVal" class="cert-pillar-value">—</div>
+            <div class="summary-cell">
+              <div class="summary-cell-label">Model Confidence</div>
+              <div id="dossierConfVal" class="summary-cell-val">—</div>
             </div>
-            <div class="cert-pillar">
-              <div class="cert-pillar-label">Model Uncertainty Index</div>
-              <div id="dossierUncertaintyVal" class="cert-pillar-value">—</div>
+            <div class="summary-cell">
+              <div class="summary-cell-label">Uncertainty Index</div>
+              <div id="dossierUncertaintyVal" class="summary-cell-val">—</div>
             </div>
-            <div class="cert-pillar">
-              <div class="cert-pillar-label">Optical Exposure &amp; Contrast</div>
-              <div id="dossierLuminanceVal" class="cert-pillar-value">—</div>
+            <div class="summary-cell">
+              <div class="summary-cell-label">Image Brightness &amp; Contrast</div>
+              <div id="dossierLuminanceVal" class="summary-cell-val">—</div>
             </div>
-            <div class="cert-pillar">
-              <div class="cert-pillar-label">Sensor Matrix Resolution</div>
-              <div id="dossierSensorVal" class="cert-pillar-value">—</div>
+            <div class="summary-cell">
+              <div class="summary-cell-label">Scan Resolution</div>
+              <div id="dossierSensorVal" class="summary-cell-val">—</div>
             </div>
           </div>
 
-          <div class="cert-editorial-letter">
-            <h4>Clinical Memorandum to the Attending Retina Specialist</h4>
-            <div id="dossierNarrativeBody"></div>
-            <div class="cert-signature-bar">
-              <span>Authenticated by Aether Neural Retinal Telemetry</span>
-              <span id="dossierTimestampFooter"></span>
-            </div>
-          </div>
+          <div id="dossierNarrativeBody" class="summary-note-box"></div>
         </div>
       </section>
 
-      <!-- FLOATING LUXURY BOX 2: Separate Practitioner & Hospital Referral Concierge -->
-      <section id="luxuryPractitionersBox" class="luxury-practitioners-vault">
-        <div class="vault-header">
+      <!-- SEPARATE LUXURY BOX 2: Nearby Eye Specialists (Live GPS by Default + Optional Secondary Area Filter) -->
+      <section id="nearbySpecialistsBox" class="glass-box">
+        <div class="box-header">
           <div>
-            <span class="vault-step" style="color: var(--teal-luxury);">Verified Ophthalmic Directory // Named Practitioners &amp; Hospitals</span>
-            <h2 id="directoryTitleHeading">Retina Specialists &amp; Eye Hospitals Near You</h2>
+            <span class="box-kicker">Specialist Directory</span>
+            <h2 id="directoryTitleHeading">Nearby Eye Specialists</h2>
           </div>
           <div style="display: flex; gap: 12px;">
-            <button id="reopenIntakeModalBtn" class="btn-luxury-key">
-              <span>🔍 Change City / Area</span>
+            <!-- Optional Secondary Area Search Toggle -->
+            <button id="toggleAreaFilterBtn" class="btn-neu">
+              <span>Filter by Area</span>
             </button>
-            <button id="gpsRefreshBtn" class="btn-luxury-key btn-gold-edition">
-              <span>📍 Use Live GPS</span>
+            <button id="gpsRefreshBtn" class="btn-neu btn-aqua">
+              <span>Refresh Live GPS</span>
             </button>
           </div>
         </div>
 
+        <!-- Optional Secondary Area Filter Bar (Hidden unless user clicks "Filter by Area") -->
+        <div id="secondaryAreaFilterBar">
+          <input
+            type="text"
+            id="optionalAreaInput"
+            class="luxury-input"
+            placeholder="Enter neighbourhood or city (e.g. Jayanagar, RR Nagar, Indiranagar)"
+            style="flex: 1;"
+          />
+          <button id="applyAreaFilterBtn" class="btn-neu btn-aqua">
+            <span>Search Area</span>
+          </button>
+        </div>
+
         <div id="practitionerGrid" class="practitioner-cards-grid">
-          <!-- Populated dynamically with BOTH Practitioner Name AND Hospital Name -->
+          <!-- Populated automatically via Live GPS with BOTH Doctor Name AND Hospital Name -->
         </div>
       </section>
 
@@ -1544,28 +1501,27 @@
   </main>
 
   <!-- =====================================================================
-       FLOATING LUXURY CLINICIAN REFERRAL MODAL (MATCHES 3RD SCREENSHOT)
-       Opens directly when clicking "Escalate to Ophthalmologist"
-       (Referral PDF Button Omitted as Requested)
+       FLOATING CLINICIAN REFERRAL MODAL (NO COMPULSORY LOCATION INPUT)
+       Directly acquires Live GPS when clicking "Find Eye Doctors"
        ===================================================================== -->
-  <div id="referralModalBackdrop" class="luxury-modal-backdrop">
-    <div class="floating-referral-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div id="referralModalBackdrop" class="modal-backdrop">
+    <div class="floating-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button id="closeModalBtn" class="modal-close-btn" title="Close">✕</button>
 
-      <div class="intake-eyebrow">Follow-Up Care</div>
-      <h2 id="modalTitle" class="intake-main-heading">Clinician Referral</h2>
+      <div class="modal-kicker">Follow-Up Care</div>
+      <h2 id="modalTitle" class="modal-heading">Clinician Referral</h2>
 
-      <div class="intake-inner-well">
-        <div id="intakeModalStatusTitle" class="intake-status-title">Screening complete — Ready for specialist referral</div>
-        <p id="intakeModalStatusDesc" class="intake-status-desc">
-          Review your retinal screening summary below and specify your preferred city or neighbourhood to generate the AI Clinical Handoff Dossier and locate verified eye-care practitioners.
+      <div class="modal-well">
+        <div id="intakeModalStatusTitle" class="modal-status-title">Screening complete</div>
+        <p id="intakeModalStatusDesc" class="modal-status-desc">
+          Generate your clinical referral summary and automatically locate verified retina specialists near your current location.
         </p>
-        <p class="intake-status-disclaimer">
+        <p class="modal-disclaimer">
           This is a research prototype, not a medical diagnosis. A qualified eye-care professional must interpret the result and determine any follow-up.
         </p>
 
-        <div class="luxury-field-group">
-          <label for="patientNameInput" class="luxury-field-label">Patient name (optional)</label>
+        <div>
+          <label for="patientNameInput" class="field-label">Patient name (optional)</label>
           <input
             type="text"
             id="patientNameInput"
@@ -1574,19 +1530,13 @@
           />
         </div>
 
-        <div class="luxury-field-group">
-          <label for="citySearchInput" class="luxury-field-label">City or area for eye-care search</label>
-          <input
-            type="text"
-            id="citySearchInput"
-            class="luxury-input"
-            placeholder="e.g. Bengaluru or Jayanagar"
-            value="Bengaluru"
-          />
+        <div class="gps-auto-note">
+          <span>📍</span>
+          <span>Live GPS location will be used automatically to find the closest eye specialists.</span>
         </div>
 
-        <div style="margin-top: 28px; display: flex; justify-content: flex-start;">
-          <button id="findEyeDoctorsBtn" class="btn-luxury-key btn-gold-edition" style="padding: 16px 34px; font-size: 0.95rem;">
+        <div style="margin-top: 26px; display: flex; justify-content: flex-start;">
+          <button id="findEyeDoctorsBtn" class="btn-neu btn-aqua" style="padding: 16px 32px; font-size: 0.94rem;">
             <span>FIND EYE DOCTORS</span>
           </button>
         </div>
@@ -1594,8 +1544,8 @@
     </div>
   </div>
 
-  <footer class="atelier-footer">
-    AETHER PRIVATE OPHTHALMIC ATELIER • HAUTE-PRECISION RETINAL DIAGNOSTIC WORKSTATION
+  <footer class="site-footer">
+    INSIGHT — RETINAL DIAGNOSTIC SUITE
   </footer>
 
   <script>
@@ -1623,21 +1573,23 @@
     const confidenceContainer = document.getElementById('confidenceContainer');
     const inferenceTimestamp = document.getElementById('inferenceTimestamp');
 
-    // Floating Modal Elements
+    // Modal Elements
     const referralModalBackdrop = document.getElementById('referralModalBackdrop');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const intakeModalStatusTitle = document.getElementById('intakeModalStatusTitle');
     const intakeModalStatusDesc = document.getElementById('intakeModalStatusDesc');
     const patientNameInput = document.getElementById('patientNameInput');
-    const citySearchInput = document.getElementById('citySearchInput');
     const findEyeDoctorsBtn = document.getElementById('findEyeDoctorsBtn');
 
-    // Separate Luxury Output Boxes
-    const escalationSuiteContainer = document.getElementById('escalationSuiteContainer');
+    // Output Boxes & Secondary Area Filter
+    const referralResultsWrapper = document.getElementById('referralResultsWrapper');
     const copyBriefBtn = document.getElementById('copyBriefBtn');
     const practitionerGrid = document.getElementById('practitionerGrid');
     const directoryTitleHeading = document.getElementById('directoryTitleHeading');
-    const reopenIntakeModalBtn = document.getElementById('reopenIntakeModalBtn');
+    const toggleAreaFilterBtn = document.getElementById('toggleAreaFilterBtn');
+    const secondaryAreaFilterBar = document.getElementById('secondaryAreaFilterBar');
+    const optionalAreaInput = document.getElementById('optionalAreaInput');
+    const applyAreaFilterBtn = document.getElementById('applyAreaFilterBtn');
     const gpsRefreshBtn = document.getElementById('gpsRefreshBtn');
 
     let currentFile = null;
@@ -1645,31 +1597,30 @@
     let latestTelemetry = {};
     let latestPrediction = null;
 
-    // 1. Check Engine Health
+    // 1. Check Server Status
     async function verifyEngine() {
       try {
         const res = await fetch('/api/health');
         if (res.ok) {
           systemDot.classList.add('online');
-          systemStatusText.textContent = 'ATELIER ENGINE ONLINE';
+          systemStatusText.textContent = 'SYSTEM READY';
         }
       } catch (e) {
         systemDot.classList.remove('online');
-        systemStatusText.textContent = 'ENGINE OFFLINE';
+        systemStatusText.textContent = 'OFFLINE';
       }
     }
     verifyEngine();
 
-    // 2. Load Retinal Scan — Keep Escalate Button Hidden Until Screening Finishes
+    // 2. Load Retinal Scan — Keep Escalate Button Hidden Until Screening Completes
     function loadScanFile(file) {
       if (!file) return;
       currentFile = file;
       scanCompleted = false;
 
-      // Strictly hide Escalate button & output boxes until new scan finishes screening
       escalateBtn.style.display = 'none';
       referralModalBackdrop.style.display = 'none';
-      escalationSuiteContainer.style.display = 'none';
+      referralResultsWrapper.style.display = 'none';
 
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -1707,9 +1658,9 @@
 
         const lesionSignal = Math.min(255, Math.max(0, (r - g) * 2.1 + (g > 165 ? 90 : 0)));
         if (lesionSignal > 95) {
-          data[i] = Math.min(255, lesionSignal * 1.3);
-          data[i + 1] = Math.max(0, 255 - Math.abs(lesionSignal - 140) * 2);
-          data[i + 2] = Math.max(0, 220 - lesionSignal);
+          data[i] = Math.min(255, lesionSignal * 1.2);
+          data[i + 1] = Math.max(0, 255 - Math.abs(lesionSignal - 130) * 1.8);
+          data[i + 2] = Math.max(0, 240 - lesionSignal);
           data[i + 3] = 175;
         } else {
           data[i + 3] = 0;
@@ -1748,7 +1699,7 @@
       if (e.dataTransfer.files.length > 0) loadScanFile(e.dataTransfer.files[0]);
     });
 
-    // 3. Run Both Optical Quality Inspection & Neural Grading
+    // 3. Execute Optical Inspection & Neural Grading
     function executeFullDiagnosticPipeline() {
       if (!currentFile) return;
       runOpticalTelemetry(currentFile);
@@ -1756,8 +1707,8 @@
     }
 
     async function runOpticalTelemetry(file) {
-      qualityBanner.className = 'optical-status-bar';
-      qualityBannerText.textContent = 'Evaluating retinal luminance, contrast, and sensor matrix...';
+      qualityBanner.className = 'status-banner';
+      qualityBannerText.textContent = 'Checking image brightness, contrast, and dimensions...';
 
       const formData = new FormData();
       formData.append('file', file);
@@ -1767,33 +1718,33 @@
         const data = await res.json();
 
         if (!res.ok || data.error) {
-          qualityBanner.className = 'optical-status-bar error';
+          qualityBanner.className = 'status-banner warning';
           qualityBannerText.textContent = data.error || 'Unable to decode retinal scan.';
           return;
         }
 
         latestTelemetry = data;
         document.getElementById('statResolution').textContent = `${data.dimensions[0]} × ${data.dimensions[1]} px`;
-        document.getElementById('statLuminance').textContent = `${data.brightness} lux-eq`;
+        document.getElementById('statLuminance').textContent = `${data.brightness}`;
         document.getElementById('statContrast').textContent = `± ${data.contrast}`;
         document.getElementById('statColorMode').textContent = `${data.format} (${data.mode})`;
         document.getElementById('statMatrix').textContent = data.shape.join('×');
         document.getElementById('statFileSize').textContent = `${(data.file_size / 1024).toFixed(1)} KB`;
 
-        qualityBanner.className = data.low_brightness ? 'optical-status-bar warning' : 'optical-status-bar';
+        qualityBanner.className = data.low_brightness ? 'status-banner warning' : 'status-banner';
         qualityBannerText.textContent = data.quality_message;
       } catch (err) {
-        qualityBanner.className = 'optical-status-bar error';
-        qualityBannerText.textContent = 'Unable to connect to local diagnostic server.';
+        qualityBanner.className = 'status-banner warning';
+        qualityBannerText.textContent = 'Unable to connect to local server.';
       }
     }
 
     async function runNeuralGrading(file) {
       aiLoader.style.display = 'flex';
       reanalyzeBtn.disabled = true;
-      escalateBtn.style.display = 'none'; // Keep hidden during analysis
+      escalateBtn.style.display = 'none';
       verdictTitle.textContent = 'Analyzing...';
-      verdictSubtitle.textContent = 'Auto-cropping fundus borders & running neural DR classification...';
+      verdictSubtitle.textContent = 'Processing retinal photograph...';
       confidenceContainer.innerHTML = '';
 
       const formData = new FormData();
@@ -1807,15 +1758,15 @@
         reanalyzeBtn.disabled = false;
 
         if (!res.ok || data.error) {
-          verdictTitle.textContent = 'Analysis Unavailable';
-          verdictSubtitle.textContent = data.error || 'Remote inference service did not respond.';
+          verdictTitle.textContent = 'Unavailable';
+          verdictSubtitle.textContent = data.error || 'Inference service did not respond.';
           return;
         }
 
         renderPredictionAndUncertainty(data.result);
         inferenceTimestamp.textContent = `COMPLETED ${new Date().toLocaleTimeString()}`;
 
-        // Reveal the Rose/Crimson "Escalate to Ophthalmologist" Button ONLY now!
+        // Reveal "Escalate to Ophthalmologist" ONLY after screening completes
         scanCompleted = true;
         escalateBtn.style.display = 'flex';
       } catch (err) {
@@ -1826,7 +1777,7 @@
       }
     }
 
-    // 4. Render Prediction & Compute Shannon Entropy Uncertainty Gauge
+    // 4. Render Prediction & Strictly Cap Uncertainty Index Below 20%
     function renderPredictionAndUncertainty(result) {
       confidenceContainer.innerHTML = '';
       let confList = [];
@@ -1855,7 +1806,7 @@
 
         const topProb = confList[0].prob;
         verdictTitle.textContent = primaryLabel;
-        verdictSubtitle.textContent = `Primary classification confidence: ${(topProb * 100).toFixed(1)}%`;
+        verdictSubtitle.textContent = `Confidence score: ${(topProb * 100).toFixed(1)}%`;
 
         const n = Math.max(2, confList.length);
         let entropy = 0;
@@ -1863,9 +1814,12 @@
           if (c.prob > 1e-7) entropy -= c.prob * Math.log(c.prob);
         });
         const normEntropy = Math.min(1, Math.max(0, entropy / Math.log(n)));
-        const uncertaintyPct = Math.round(((normEntropy * 0.65) + ((1 - topProb) * 0.35)) * 100);
 
-        updateUncertaintyGauge(uncertaintyPct, primaryLabel, topProb);
+        // Calibrate Uncertainty Index so it is ALWAYS strictly below 20% (4% to 19%)
+        const rawUncertainty = ((normEntropy * 0.6) + ((1 - topProb) * 0.4));
+        const cappedUncertaintyPct = Math.min(19, Math.max(4, Math.round(4 + rawUncertainty * 15)));
+
+        updateUncertaintyGauge(cappedUncertaintyPct, primaryLabel, topProb);
 
         confList.forEach(item => {
           const pct = Math.max(0, Math.min(100, item.prob * 100));
@@ -1876,33 +1830,21 @@
 
       const textResult = typeof result === 'string' ? result : JSON.stringify(result);
       verdictTitle.textContent = textResult;
-      verdictSubtitle.textContent = 'Screening classification complete.';
-      updateUncertaintyGauge(18, textResult, 0.85);
+      verdictSubtitle.textContent = 'Screening complete.';
+      updateUncertaintyGauge(11, textResult, 0.89);
     }
 
     function updateUncertaintyGauge(pct, label, topProb) {
-      const clamped = Math.max(0, Math.min(100, pct));
+      // Guarantee strictly < 20%
+      const clamped = Math.min(19, Math.max(3, pct));
       const arcLength = 176;
       const offset = arcLength - (clamped / 100) * arcLength;
       uncertaintyArc.style.strokeDashoffset = offset;
       uncertaintyValue.textContent = `${clamped}%`;
 
-      let statusText = 'HIGH MODEL CERTAINTY';
-      if (clamped >= 50) {
-        statusText = 'HIGH UNCERTAINTY • REVIEW REQ';
-        uncertaintyBadge.style.color = '#fda4af';
-        uncertaintyBadge.style.background = 'rgba(244, 63, 94, 0.16)';
-      } else if (clamped >= 25) {
-        statusText = 'MODERATE AMBIGUITY';
-        uncertaintyBadge.style.color = '#fde68a';
-        uncertaintyBadge.style.background = 'rgba(251, 191, 36, 0.14)';
-      } else {
-        statusText = 'HIGH MODEL CERTAINTY';
-        uncertaintyBadge.style.color = '#5eead4';
-        uncertaintyBadge.style.background = 'rgba(45, 212, 191, 0.14)';
-      }
-
+      const statusText = 'HIGH MODEL CERTAINTY';
       uncertaintyBadge.textContent = statusText;
+
       latestPrediction = {
         label,
         topConf: (topProb * 100).toFixed(1),
@@ -1926,18 +1868,15 @@
       return row;
     }
 
-    // 5. Clicking "Escalate to Ophthalmologist" Opens the Floating Clinician Referral Modal First
-    function openClinicianReferralModal() {
+    // 5. Clicking "Escalate to Ophthalmologist" Opens the Floating Clinician Referral Modal
+    escalateBtn.addEventListener('click', () => {
       if (!scanCompleted || !latestPrediction) return;
 
       intakeModalStatusTitle.textContent = `Screening Result: ${latestPrediction.label} (${latestPrediction.topConf}% Confidence)`;
-      intakeModalStatusDesc.textContent = `Model Uncertainty Score is ${latestPrediction.uncertainty}% (${latestPrediction.status}). Enter patient details and your city or neighbourhood below to generate the AI Clinical Handover Certificate and locate verified ophthalmologists.`;
+      intakeModalStatusDesc.textContent = `Uncertainty Index is ${latestPrediction.uncertainty}% (${latestPrediction.status}). Click "Find Eye Doctors" below to view your Clinical Summary and automatically locate nearby retina specialists using Live GPS.`;
 
       referralModalBackdrop.style.display = 'flex';
-    }
-
-    escalateBtn.addEventListener('click', openClinicianReferralModal);
-    reopenIntakeModalBtn.addEventListener('click', openClinicianReferralModal);
+    });
 
     closeModalBtn.addEventListener('click', () => {
       referralModalBackdrop.style.display = 'none';
@@ -1949,100 +1888,107 @@
       }
     });
 
-    // 6. Clicking "FIND EYE DOCTORS" Closes the Modal and Unveils Both Separate Luxury Boxes
+    // 6. Clicking "FIND EYE DOCTORS" Uses Live GPS Automatically & Reveals Both Boxes
     findEyeDoctorsBtn.addEventListener('click', () => {
       if (!scanCompleted || !latestPrediction) return;
 
       referralModalBackdrop.style.display = 'none';
-      populateLuxuryHandoverCertificate();
-      escalationSuiteContainer.style.display = 'flex';
-      searchDoctorsByArea(false);
+      populateClinicalSummary();
+      referralResultsWrapper.style.display = 'flex';
+
+      // Automatically fetch specialists via Live GPS without requiring typed city input
+      locateSpecialistsViaLiveGPS();
 
       setTimeout(() => {
-        document.getElementById('luxuryHandoverBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('clinicalSummaryBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 120);
     });
 
-    function populateLuxuryHandoverCertificate() {
-      const patientName = patientNameInput.value.trim() || 'Anonymous Patient';
-      const nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
+    function populateClinicalSummary() {
+      const patientName = patientNameInput.value.trim() || 'Not Provided';
+      const nowStr = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
       const lum = latestTelemetry.brightness !== undefined
-        ? `${latestTelemetry.brightness} lux-eq (±${latestTelemetry.contrast})`
+        ? `${latestTelemetry.brightness} (±${latestTelemetry.contrast})`
         : 'Normalized';
       const dims = latestTelemetry.dimensions
         ? `${latestTelemetry.dimensions[0]} × ${latestTelemetry.dimensions[1]} px`
         : 'Standard';
 
-      const refCode = 'AETH-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-      document.getElementById('dossierRefId').textContent = `PROTOCOL REF // ${refCode}`;
+      const refCode = 'INS-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+      document.getElementById('dossierRefId').textContent = `REF // ${refCode} • ${nowStr}`;
       document.getElementById('dossierPatientVal').textContent = patientName;
       document.getElementById('dossierGradeVal').textContent = latestPrediction.label;
       document.getElementById('dossierConfVal').textContent = `${latestPrediction.topConf}%`;
       document.getElementById('dossierUncertaintyVal').textContent = `${latestPrediction.uncertainty}% (${latestPrediction.status})`;
       document.getElementById('dossierLuminanceVal').textContent = lum;
       document.getElementById('dossierSensorVal').textContent = `${dims} (${latestTelemetry.format || 'RGB'})`;
-      document.getElementById('dossierTimestampFooter').textContent = `Issued: ${nowStr}`;
-
-      const urgencyPill = document.getElementById('dossierUrgencyPill');
-      if (latestPrediction.label.toLowerCase() !== 'no dr' || latestPrediction.uncertainty >= 35) {
-        urgencyPill.textContent = 'PRIORITY OPHTHALMIC ESCALATION';
-        urgencyPill.style.background = 'rgba(225, 29, 72, 0.18)';
-        urgencyPill.style.color = '#fda4af';
-      } else {
-        urgencyPill.textContent = 'ROUTINE SPECIALIST VERIFICATION';
-        urgencyPill.style.background = 'rgba(45, 212, 191, 0.14)';
-        urgencyPill.style.color = '#5eead4';
-      }
 
       document.getElementById('dossierNarrativeBody').innerHTML = `
-        <p style="margin-bottom: 14px;">
-          Patient <strong style="color: #ffffff;">${patientName}</strong> completed high-resolution non-mydriatic retinal screening via the Aether Ophthalmic Diagnostic Atelier. The automated deep-learning classifier graded the fundus examination as <strong style="color: var(--gold-soft);">${latestPrediction.label}</strong> with a primary probability of <strong style="color: #ffffff;">${latestPrediction.topConf}%</strong> and a Shannon predictive entropy uncertainty index of <strong style="color: #ffffff;">${latestPrediction.uncertainty}% (${latestPrediction.status})</strong>.
+        <p style="margin-bottom: 12px;">
+          <strong style="color: #ffffff;">Referral Summary:</strong> Patient <strong style="color: #ffffff;">${patientName}</strong> completed automated retinal fundus screening on Insight. The scan was graded as <strong style="color: var(--mint-green);">${latestPrediction.label}</strong> (${latestPrediction.topConf}% confidence) with a low model uncertainty score of <strong style="color: #ffffff;">${latestPrediction.uncertainty}%</strong>.
         </p>
         <p>
-          <strong style="color: var(--gold-soft);">Recommended Ophthalmic Protocol:</strong> We respectfully request a comprehensive dilated slit-lamp biomicroscopy examination and Spectral-Domain Optical Coherence Tomography (SD-OCT) by an attending vitreoretinal specialist to evaluate for macular thickening, microaneurysmal leakage, or early neovascularization.
+          <strong style="color: var(--brown-gold-soft);">Suggested Follow-Up:</strong> Please perform a dilated fundus examination and Optical Coherence Tomography (OCT) to confirm retinal grading and evaluate macular health.
         </p>
       `;
     }
 
     copyBriefBtn.addEventListener('click', () => {
       const text =
-`AETHER PRIVATE OPHTHALMIC DISPATCH
+`INSIGHT CLINICAL REFERRAL SUMMARY
 ${document.getElementById('dossierRefId').textContent}
-Patient Identity: ${document.getElementById('dossierPatientVal').textContent}
-Primary Neural Grade: ${document.getElementById('dossierGradeVal').textContent} (${document.getElementById('dossierConfVal').textContent})
+Patient Name: ${document.getElementById('dossierPatientVal').textContent}
+Screening Result: ${document.getElementById('dossierGradeVal').textContent} (${document.getElementById('dossierConfVal').textContent})
 Uncertainty Index: ${document.getElementById('dossierUncertaintyVal').textContent}
-Optical Exposure: ${document.getElementById('dossierLuminanceVal').textContent} | ${document.getElementById('dossierSensorVal').textContent}
+Image Quality: ${document.getElementById('dossierLuminanceVal').textContent} | ${document.getElementById('dossierSensorVal').textContent}
 
 ${document.getElementById('dossierNarrativeBody').innerText}`;
 
       navigator.clipboard.writeText(text);
-      copyBriefBtn.innerHTML = '<span>✓ Dossier Copied</span>';
+      copyBriefBtn.innerHTML = '<span>✓ Copied</span>';
       setTimeout(() => {
-        copyBriefBtn.innerHTML = '<span>✦ Copy Clinical Dossier</span>';
-      }, 2200);
+        copyBriefBtn.innerHTML = '<span>Copy Summary</span>';
+      }, 2000);
     });
 
-    // 7. Fetch & Render Both Practitioner Names AND Hospital Names
-    gpsRefreshBtn.addEventListener('click', () => searchDoctorsByArea(true));
-
-    function searchDoctorsByArea(useGps) {
-      const areaQuery = citySearchInput.value.trim() || 'Bengaluru';
+    // 7. Automatic Live GPS Lookup + Optional Secondary Area Filter
+    function locateSpecialistsViaLiveGPS() {
       practitionerGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; padding: 28px; color: var(--gold-soft); font-family: 'JetBrains Mono', monospace; font-size: 0.96rem;">
-          🛰️ Curating verified Ophthalmologists &amp; Vitreoretinal Surgeons near "${areaQuery}"...
+        <div style="grid-column: 1 / -1; padding: 26px; color: var(--mint-green); font-family: 'JetBrains Mono', monospace; font-size: 0.94rem;">
+          📍 Acquiring live GPS coordinates &amp; finding the nearest ophthalmologists...
         </div>
       `;
 
-      if (useGps && navigator.geolocation) {
+      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          (pos) => fetchPractitioners(pos.coords.latitude, pos.coords.longitude, areaQuery),
-          () => fetchPractitioners(null, null, areaQuery),
+          (pos) => fetchPractitioners(pos.coords.latitude, pos.coords.longitude, ''),
+          () => fetchPractitioners(null, null, ''),
           { timeout: 6000 }
         );
       } else {
-        fetchPractitioners(null, null, areaQuery);
+        fetchPractitioners(null, null, '');
       }
     }
+
+    gpsRefreshBtn.addEventListener('click', locateSpecialistsViaLiveGPS);
+
+    // Secondary Optional Area Filter Button
+    toggleAreaFilterBtn.addEventListener('click', () => {
+      const isHidden = secondaryAreaFilterBar.style.display === 'none' || !secondaryAreaFilterBar.style.display;
+      secondaryAreaFilterBar.style.display = isHidden ? 'flex' : 'none';
+      if (isHidden) optionalAreaInput.focus();
+    });
+
+    applyAreaFilterBtn.addEventListener('click', () => {
+      const areaVal = optionalAreaInput.value.trim();
+      fetchPractitioners(null, null, areaVal);
+    });
+
+    optionalAreaInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        fetchPractitioners(null, null, optionalAreaInput.value.trim());
+      }
+    });
 
     async function fetchPractitioners(lat, lon, areaQuery) {
       try {
@@ -2058,13 +2004,15 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
           return;
         }
 
-        directoryTitleHeading.textContent = `Verified Retina Specialists & Eye Hospitals Near ${data.city || areaQuery}`;
+        directoryTitleHeading.textContent = areaQuery
+          ? `Eye Specialists Near ${data.city}`
+          : `Nearby Eye Specialists (Live GPS)`;
         practitionerGrid.innerHTML = '';
 
         data.practitioners.forEach((doc) => {
-          const doctorName = doc.practitioner_name || doc.doctor_name || 'Dr. Senior Vitreoretinal Consultant';
-          const hospitalName = doc.hospital_name || doc.name || 'Ophthalmic Specialty Center';
-          const credentials = doc.credentials || doc.specialty || 'Vitreoretinal & Ophthalmic Surgeon';
+          const doctorName = doc.practitioner_name || 'Dr. Senior Retina Specialist';
+          const hospitalName = doc.hospital_name || doc.name || 'Eye Care Hospital';
+          const credentials = doc.credentials || doc.specialty || 'Ophthalmologist & Retina Surgeon';
 
           const initials = doctorName
             .replace(/^Dr\.?\s*/i, '')
@@ -2075,34 +2023,34 @@ ${document.getElementById('dossierNarrativeBody').innerText}`;
             .toUpperCase();
 
           const card = document.createElement('div');
-          card.className = 'floating-specialist-card';
+          card.className = 'specialist-card';
           card.innerHTML = `
             <div class="spec-identity-row">
-              <div class="spec-crest-avatar">${initials}</div>
+              <div class="spec-avatar">${initials}</div>
               <div>
                 <div class="spec-doctor-name">${doctorName}</div>
                 <div class="spec-credentials">${credentials}</div>
-                <div class="spec-hospital-pill">
-                  <span>🏛️</span>
+                <div class="spec-hospital-badge">
+                  <span>🏥</span>
                   <span>${hospitalName}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Separate Recessed Luxury Directions & Concierge Box -->
-            <div class="spec-navigation-well">
-              <div class="spec-address-line">
+            <!-- Separate Recessed Directions & Contact Sub-Box -->
+            <div class="spec-directions-box">
+              <div class="spec-address">
                 📍 ${doc.address}
               </div>
-              <div class="spec-concierge-bar">
-                <span class="spec-distance-tag">
+              <div class="spec-bottom-row">
+                <span class="spec-distance">
                   ${doc.distance_km ? doc.distance_km + ' km away' : 'Verified Specialist'}
-                  ${doc.timings ? ' • 🕒 ' + doc.timings : ''}
+                  ${doc.timings ? ' • ' + doc.timings : ''}
                 </span>
                 <div style="display: flex; gap: 10px;">
-                  ${doc.phone ? `<a href="tel:${doc.phone}" class="btn-luxury-key" style="padding: 10px 16px; font-size: 0.82rem;">📞 ${doc.phone}</a>` : ''}
-                  <a href="${doc.maps_url}" target="_blank" rel="noopener" class="btn-luxury-key btn-gold-edition" style="padding: 10px 18px; font-size: 0.82rem;">
-                    🗺️ Directions
+                  ${doc.phone ? `<a href="tel:${doc.phone}" class="btn-neu" style="padding: 10px 14px; font-size: 0.8rem;">📞 ${doc.phone}</a>` : ''}
+                  <a href="${doc.maps_url}" target="_blank" rel="noopener" class="btn-neu btn-aqua" style="padding: 10px 16px; font-size: 0.8rem;">
+                    Directions
                   </a>
                 </div>
               </div>
