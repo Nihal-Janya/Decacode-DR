@@ -15,14 +15,12 @@ SPACE_ID = "bhimrazy/diabetic-retinopathy-detection"
 
 def preprocess_retinal_scan(image_path: str) -> str:
     """
-    1. Crops out the dark/black rectangular borders around the circular fundus
-       so the retina fills the neural network's input frame without aspect distortion.
-    2. Applies gentle autocontrast and sharpness normalization if the scan is underexposed.
+    Crops dark rectangular borders around the circular fundus and normalizes
+    low-light exposure so microaneurysms and exudates are accurately graded.
     """
     img = Image.open(image_path).convert("RGB")
     arr = np.array(img)
 
-    # 1. Detect non-black fundus pixels (threshold > 15 across RGB channels)
     mask = arr.max(axis=2) > 15
     if np.any(mask):
         coords = np.argwhere(mask)
@@ -30,17 +28,14 @@ def preprocess_retinal_scan(image_path: str) -> str:
         y1, x1 = coords.max(axis=0) + 1
         img = img.crop((x0, y0, x1, y1))
 
-    # 2. Pad to a clean 1:1 square so the model doesn't squash the circular retina
     w, h = img.size
     side = max(w, h)
     square_img = Image.new("RGB", (side, side), (0, 0, 0))
     square_img.paste(img, ((side - w) // 2, (side - h) // 2))
 
-    # 3. Upscale low-resolution thumbnails (< 512px) using Lanczos resampling
     if side < 512:
         square_img = square_img.resize((512, 512), Image.Resampling.LANCZOS)
 
-    # 4. If the cropped image is still very dark, boost contrast & brightness slightly
     cropped_arr = np.array(square_img)
     if float(np.mean(cropped_arr)) < 65.0:
         square_img = ImageOps.autocontrast(square_img, cutoff=1)
@@ -59,7 +54,6 @@ def run_retinal_prediction(image_path: str):
     if not Path(resolved_path).is_file():
         raise FileNotFoundError(f"Error: Image file not found at {resolved_path}")
 
-    # Preprocess (auto-crop black borders & normalize dark exposure) before inference
     preprocessed_path = preprocess_retinal_scan(resolved_path)
 
     try:
